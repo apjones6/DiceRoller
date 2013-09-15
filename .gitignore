@@ -1,0 +1,10 @@
+# NuGet
+packages/
+
+# Visual Studio
+*.suo
+*.user
+
+# C#
+Bin/
+obj/
