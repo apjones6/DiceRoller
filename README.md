@@ -11,4 +11,4 @@ This is a dice roller application for tabletop role playing games, such as _Dung
 
 ## NuGet Packages ##
 
-Currently this project uses a single NuGet package which is not included in the GIT repository. This should be installed using the NuGet tools for now. I will work out how to get Visual Studio to install missing NuGet packages on build when I have time.
+Currently this project uses NuGet packages which are not included in the GIT repository. These should be installed using the NuGet tools for now. I will work out how to get Visual Studio to install missing NuGet packages on build when I have time.

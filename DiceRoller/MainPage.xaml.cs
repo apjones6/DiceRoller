@@ -29,10 +29,10 @@ namespace DiceRoller
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsInitialized)
-            {
-                App.ViewModel.Initialize();
-            }
+            //if (!App.ViewModel.IsInitialized)
+            //{
+            //    App.ViewModel.Initialize();
+            //}
         }
 
         private void Roll_Click(object sender, EventArgs e)

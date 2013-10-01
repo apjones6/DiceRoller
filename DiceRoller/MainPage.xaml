@@ -7,9 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tool="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:c="clr-namespace:DiceRoller.Controls;assembly=DiceRoller"
+    xmlns:v="clr-namespace:DiceRoller.Views"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -40,101 +39,12 @@
 
         <!--Pivot Control-->
         <phone:Pivot Title="DICE ROLLER">
-            <phone:PivotItem Header="pick" DataContext="{Binding Pool}">
-                <ScrollViewer>
-                    <tool:WrapPanel Orientation="Horizontal">
-                        <c:PoolTileButton
-                            Count="{Binding D4.Count}"
-                            DisplayName="{Binding D4.DisplayName}"
-                            Height="200"
-                            Width="200"
-                            Margin="15,0,0,15"
-                            />
-                        <c:PoolTileButton
-                            Count="{Binding D6.Count}"
-                            DisplayName="{Binding D6.DisplayName}"
-                            Height="200"
-                            Width="200"
-                            Margin="15,0,0,15"
-                            />
-                        <c:PoolTileButton
-                            Count="{Binding D8.Count}"
-                            DisplayName="{Binding D8.DisplayName}"
-                            Height="200"
-                            Width="200"
-                            Margin="15,0,0,15"
-                            />
-                        <c:PoolTileButton
-                            Count="{Binding D10.Count}"
-                            DisplayName="{Binding D10.DisplayName}"
-                            Height="200"
-                            Width="200"
-                            Margin="15,0,0,15"
-                            />
-                        <c:PoolTileButton
-                            Count="{Binding D12.Count}"
-                            DisplayName="{Binding D12.DisplayName}"
-                            Height="200"
-                            Width="200"
-                            Margin="15,0,0,15"
-                            />
-                        <c:PoolTileButton
-                            Count="{Binding D20.Count}"
-                            DisplayName="{Binding D20.DisplayName}"
-                            Height="200"
-                            Width="200"
-                            Margin="15,0,0,15"
-                            />
-                        <c:PoolTileButton
-                            Count="{Binding D100.Count}"
-                            DisplayName="{Binding D100.DisplayName}"
-                            Height="200"
-                            Width="200"
-                            Margin="15,0,0,15"
-                            />
-                    </tool:WrapPanel>
-                    <!--<Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="15" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="200" />
-                            <RowDefinition Height="15" />
-                            <RowDefinition Height="200" />
-                            <RowDefinition Height="15" />
-                            <RowDefinition Height="200" />
-                            <RowDefinition Height="15" />
-                        </Grid.RowDefinitions>
-
-                        <Border Background="{Binding PhoneAccentBrush}">
-                            <Grid>
-                                <TextBlock Text="D4" FontSize="72" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,-10" Opacity="0.5" />
-                                <TextBlock Text="2" FontSize="128" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" />
-                            </Grid>
-                        </Border>
-                        <Border Background="{Binding PhoneDisabledBrush}" Grid.Column="2">
-                            <TextBlock Text="D6" FontSize="72" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,-10" Opacity="0.5" />
-                        </Border>
-                        <Border Background="{Binding PhoneDisabledBrush}" Grid.Row="2">
-                            <TextBlock Text="D8" FontSize="72" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,-10" Opacity="0.5" />
-                        </Border>
-                        <Border Background="{Binding PhoneAccentBrush}" Grid.Column="2" Grid.Row="2">
-                            <Grid>
-                                <TextBlock Text="D10" FontSize="72" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,-10" Opacity="0.5" />
-                                <TextBlock Text="3" Grid.Column="2" Grid.Row="2" FontSize="128" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" />
-                            </Grid>
-                        </Border>
-                        <Border Background="{Binding PhoneDisabledBrush}" Grid.Row="4">
-                            <TextBlock Text="D12" FontSize="72" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,-10" Opacity="0.5" />
-                        </Border>
-                    </Grid>-->
-                </ScrollViewer>
+            <phone:PivotItem Header="pick">
+                <v:PoolEditorView DataContext="{Binding ActivePool}" d:DataContext="{d:DesignData Samples/PoolEditorViewModel.xaml}" />
             </phone:PivotItem>
 
             <phone:PivotItem Header="history">
-                <phone:LongListSelector Margin="0,-10,0,0" ItemsSource="{Binding History}">
+                <!--<phone:LongListSelector Margin="0,-10,0,0" ItemsSource="{Binding History}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,10,0,0" Background="{Binding BorderBrush}">
@@ -149,11 +59,11 @@
                             </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                </phone:LongListSelector>-->
             </phone:PivotItem>
 
             <phone:PivotItem Header="favorites">
-                <phone:LongListSelector Margin="0,-10,0,0" ItemsSource="{Binding Favorites}">
+                <!--<phone:LongListSelector Margin="0,-10,0,0" ItemsSource="{Binding Favorites}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,10,0,0" Background="{Binding BorderBrush}">
@@ -166,7 +76,7 @@
                             </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                </phone:LongListSelector>-->
             </phone:PivotItem>
         </phone:Pivot>
 
@@ -182,7 +92,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
 
-            <shell:ApplicationBarIconButton IconUri="/Assets/Images/check.png" Text="roll" Click="OnRoll" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/Images/check.png" Text="roll" />
             <shell:ApplicationBarIconButton IconUri="/Assets/Images/favs.addto.png" Text="favorite"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/Images/delete.png" Text="reset"/>
 

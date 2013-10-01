@@ -87,10 +87,10 @@ namespace DiceRoller
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
             // Ensure that application state is restored appropriately
-            if (!App.ViewModel.IsInitialized)
-            {
-                App.ViewModel.Initialize();
-            }
+            //if (!App.ViewModel.IsInitialized)
+            //{
+            //    App.ViewModel.Initialize();
+            //}
         }
 
         // Code to execute when the application is deactivated (sent to background)
