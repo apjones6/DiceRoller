@@ -2,37 +2,19 @@ using GalaSoft.MvvmLight;
 
 namespace DiceRoller.ViewModels
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        public PoolEditorViewModel ActivePool { get; set; }
+        private PoolEditorViewModel activePool;
+        private HistoryViewModel history;
 
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        public MainViewModel()
+        public PoolEditorViewModel ActivePool
         {
-            ActivePool = new PoolEditorViewModel();
+            get { return activePool ?? (activePool = new PoolEditorViewModel()); }
+        }
 
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+        public HistoryViewModel History
+        {
+            get { return history ?? (history = new HistoryViewModel()); }
         }
     }
 }

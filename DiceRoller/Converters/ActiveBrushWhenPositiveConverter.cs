@@ -12,7 +12,7 @@ namespace DiceRoller.Converters
             double number;
             if (value == null || !double.TryParse(value.ToString(), out number))
             {
-                number = 0.0;
+                return DependencyProperty.UnsetValue;
             }
 
             var key = number > 0.0 ? "PhoneAccentBrush" : "PhoneDisabledBrush";
@@ -21,7 +21,7 @@ namespace DiceRoller.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return DependencyProperty.UnsetValue;
         }
     }
 }

@@ -31,7 +31,7 @@
         <converter:VisibleWhenPositiveConverter x:Key="VisibleWhenPositive"/>
     </UserControl.Resources>
     
-    <ListBox ItemsSource="{Binding PoolComponents}">
+    <ListBox ItemsSource="{Binding PoolComponents}" Margin="-12,-12,0,0">
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
                 <tool:WrapPanel />
@@ -42,9 +42,9 @@
                 <Button
                     Style="{StaticResource DicePickButton}"
                     Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
-                    Height="200"
-                    Width="200"
-                    Margin="15,0,0,15"
+                    Height="210"
+                    Width="210"
+                    Margin="12,12,0,0"
                     >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
