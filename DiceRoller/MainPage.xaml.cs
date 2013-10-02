@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using DiceRoller.ViewModels;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+using System;
+using System.Windows.Navigation;
 
 namespace DiceRoller
 {
-    using Resources;
-
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
@@ -20,7 +13,7 @@ namespace DiceRoller
             InitializeComponent();
 
             // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
+            DataContext = new MainViewModel();
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();

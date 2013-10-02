@@ -34,7 +34,7 @@
     <ListBox ItemsSource="{Binding Path=Pool.Dice}" Margin="-12,-12,0,0">
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
-                <tool:WrapPanel />
+                <tool:WrapPanel Margin="0,0,0,24" />
             </ItemsPanelTemplate>
         </ListBox.ItemsPanel>
         <ListBox.ItemTemplate>
