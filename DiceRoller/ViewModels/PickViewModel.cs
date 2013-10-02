@@ -1,8 +1,6 @@
 ﻿using DiceRoller.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -10,21 +8,18 @@ namespace DiceRoller.ViewModels
 {
     public class PickViewModel : ViewModelBase
     {
-        private ObservableCollection<PoolComponent> poolComponents;
+        private Pool pool;
         private ICommand holdCommand;
         private ICommand tapCommand;
 
-        public PickViewModel()
+        public Pool Pool
         {
-            foreach (DiceType type in Enum.GetValues(typeof(DiceType)))
+            get { return pool ?? (pool = new Pool()); }
+            set
             {
-                PoolComponents.Add(new PoolComponent(type));
+                pool = value;
+                RaisePropertyChanged("Pool");
             }
-        }
-
-        public ObservableCollection<PoolComponent> PoolComponents
-        {
-            get { return poolComponents ?? (poolComponents = new ObservableCollection<PoolComponent>()); }
         }
 
         public ICommand HoldCommand
@@ -39,7 +34,7 @@ namespace DiceRoller.ViewModels
 
         private void OnHold(DiceType type)
         {
-            var component = PoolComponents.SingleOrDefault(x => x.Type == type);
+            var component = Pool.Dice.SingleOrDefault(x => x.Type == type);
             if (component != null)
             {
                 component.Count += 5;
@@ -48,7 +43,7 @@ namespace DiceRoller.ViewModels
 
         private void OnTap(DiceType type)
         {
-            var component = PoolComponents.SingleOrDefault(x => x.Type == type);
+            var component = Pool.Dice.SingleOrDefault(x => x.Type == type);
             if (component != null)
             {
                 component.Count += 1;

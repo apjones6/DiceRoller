@@ -31,7 +31,7 @@
         <converter:VisibleWhenPositiveConverter x:Key="VisibleWhenPositive"/>
     </UserControl.Resources>
     
-    <ListBox ItemsSource="{Binding PoolComponents}" Margin="-12,-12,0,0">
+    <ListBox ItemsSource="{Binding Path=Pool.Dice}" Margin="-12,-12,0,0">
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
                 <tool:WrapPanel />

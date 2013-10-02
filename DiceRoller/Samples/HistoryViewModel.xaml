@@ -12,26 +12,4 @@
         <m:PoolResult Name="Attack" Sum="2" Time="09:56:00" />
     </vm:HistoryViewModel.Results>
     
-    <!--<vm:MainViewModel.PhoneAccentBrush>
-        <SolidColorBrush Color="#FF008A00" />
-    </vm:MainViewModel.PhoneAccentBrush>
-
-    <vm:MainViewModel.PhoneDisabledBrush>
-        <SolidColorBrush Color="Gray" />
-    </vm:MainViewModel.PhoneDisabledBrush>
-
-    <vm:MainViewModel.Favorites>
-        <vm:PoolViewModel PoolName="Attack" PoolDescription="d20 + d4" BorderBrush="#FF008A00" />
-        <vm:PoolViewModel PoolName="d20" PoolDescription="d20" BorderBrush="{x:Null}" />
-        <vm:PoolViewModel PoolName="Flame Blast" PoolDescription="11d4 + 2d6" BorderBrush="{x:Null}" />
-    </vm:MainViewModel.Favorites>
-
-    <vm:MainViewModel.History>
-        <vm:RollViewModel Sum="17" PoolName="Attack" ConciseCreatedDate="12:17" BorderBrush="{x:Null}" />
-        <vm:RollViewModel Sum="25" PoolName="4d10 + d4" ConciseCreatedDate="12:16" BorderBrush="{x:Null}" />
-        <vm:RollViewModel Sum="8" PoolName="Reflex" ConciseCreatedDate="12:09" BorderBrush="#FF008A00" />
-        <vm:RollViewModel Sum="12" PoolName="d20" ConciseCreatedDate="11:59" BorderBrush="{x:Null}" />
-        <vm:RollViewModel Sum="2" PoolName="d6" ConciseCreatedDate="11:59" BorderBrush="{x:Null}" />
-    </vm:MainViewModel.History>-->
-
 </vm:HistoryViewModel>

@@ -3,15 +3,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:m="clr-namespace:DiceRoller.Models"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels">
-
-    <vm:PickViewModel.PoolComponents>
-        <m:PoolComponent Type="D4" Count="4" />
-        <m:PoolComponent Type="D6" Count="7" />
-        <m:PoolComponent Type="D8" Count="0" />
-        <m:PoolComponent Type="D10" Count="0" />
-        <m:PoolComponent Type="D12" Count="1" />
-        <m:PoolComponent Type="D20" Count="0" />
-        <m:PoolComponent Type="D100" Count="0" />
-    </vm:PickViewModel.PoolComponents>
+    
+    <vm:PickViewModel.Pool>
+        <m:Pool>
+            <m:Pool.Dice>
+                <m:PoolComponent Type="D4" Count="4" />
+                <m:PoolComponent Type="D6" Count="7" />
+                <m:PoolComponent Type="D8" Count="0" />
+                <m:PoolComponent Type="D10" Count="0" />
+                <m:PoolComponent Type="D12" Count="1" />
+                <m:PoolComponent Type="D20" Count="0" />
+                <m:PoolComponent Type="D100" Count="0" />
+            </m:Pool.Dice>
+        </m:Pool>
+    </vm:PickViewModel.Pool>
     
 </vm:PickViewModel>
