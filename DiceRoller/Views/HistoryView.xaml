@@ -12,7 +12,6 @@
     d:DataContext="{d:DesignData Source=/Samples/HistoryViewModel.xaml}">
 
     <UserControl.Resources>
-        <converter:StringFormatConverter x:Key="StringFormat"/>
         <Style x:Key="SelectableLongListSelector" TargetType="phone:LongListSelector" >
             <Setter Property="Margin" Value="0,-10,0,0" />
             <Setter Property="ItemTemplate">
@@ -39,7 +38,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Sum}" Style="{StaticResource PhoneTextExtraLargeStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Name}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="2" Text="{Binding Time, Converter={StaticResource StringFormat}, ConverterParameter=HH:mm}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Time, StringFormat=HH:mm}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" VerticalAlignment="Center"/>
                             </Grid>
                         </UserControl>
                     </DataTemplate>
