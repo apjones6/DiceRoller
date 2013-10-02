@@ -4,17 +4,17 @@ namespace DiceRoller.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private PoolEditorViewModel activePool;
         private HistoryViewModel history;
-
-        public PoolEditorViewModel ActivePool
-        {
-            get { return activePool ?? (activePool = new PoolEditorViewModel()); }
-        }
+        private PickViewModel pick;
 
         public HistoryViewModel History
         {
             get { return history ?? (history = new HistoryViewModel()); }
+        }
+
+        public PickViewModel Pick
+        {
+            get { return pick ?? (pick = new PickViewModel()); }
         }
     }
 }

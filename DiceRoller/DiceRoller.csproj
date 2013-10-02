@@ -111,13 +111,13 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\HistoryViewModel.cs" />
-    <Compile Include="ViewModels\PoolEditorViewModel.cs" />
+    <Compile Include="ViewModels\PickViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PoolEditorView.xaml.cs">
-      <DependentUpon>PoolEditorView.xaml</DependentUpon>
+    <Compile Include="Views\PickView.xaml.cs">
+      <DependentUpon>PickView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -132,14 +132,14 @@
     <Page Include="Samples\HistoryViewModel.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Samples\PoolEditorViewModel.xaml">
+    <Page Include="Samples\PickViewModel.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PoolEditorView.xaml">
+    <Page Include="Views\PickView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

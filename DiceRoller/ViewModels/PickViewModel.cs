@@ -8,24 +8,17 @@ using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
 {
-    public class PoolEditorViewModel : ViewModelBase
+    public class PickViewModel : ViewModelBase
     {
         private ObservableCollection<PoolComponent> poolComponents;
         private ICommand holdCommand;
         private ICommand tapCommand;
 
-        public PoolEditorViewModel()
+        public PickViewModel()
         {
             foreach (DiceType type in Enum.GetValues(typeof(DiceType)))
             {
                 PoolComponents.Add(new PoolComponent(type));
-            }
-
-            if (IsInDesignMode)
-            {
-                PoolComponents.Single(x => x.Type == DiceType.D4).Count = 4;
-                PoolComponents.Single(x => x.Type == DiceType.D6).Count = 7;
-                PoolComponents.Single(x => x.Type == DiceType.D12).Count = 1;
             }
         }
 

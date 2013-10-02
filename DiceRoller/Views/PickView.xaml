@@ -9,7 +9,7 @@
     xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:converter="clr-namespace:DiceRoller.Converters"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData /Samples/PoolEditorViewModel.xaml}"
+    d:DataContext="{d:DesignData /Samples/PickViewModel.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
