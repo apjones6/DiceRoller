@@ -37,7 +37,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Sum}" Style="{StaticResource PhoneTextExtraLargeStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Name}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="2" Text="{Binding Time, StringFormat=HH:mm}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" VerticalAlignment="Center"/>
                             </Grid>
                         </UserControl>

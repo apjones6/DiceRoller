@@ -98,6 +98,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\BarItemViewModel.cs" />
     <Compile Include="Models\DiceType.cs" />
     <Compile Include="Models\Pool.cs" />
     <Compile Include="Models\PoolComponent.cs" />
@@ -109,6 +110,7 @@
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Strings.cs" />
+    <Compile Include="ViewModels\BarViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\PickViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -161,6 +163,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="BindableApplicationBar">
+      <HintPath>..\packages\BindableApplicationBar.1.0.0\lib\sl4-windowsphone71\BindableApplicationBar.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8, Version=4.1.27.22645, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
