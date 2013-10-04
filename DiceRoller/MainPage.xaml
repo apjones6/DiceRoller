@@ -83,7 +83,9 @@
     <bar:Bindable.ApplicationBar>
         <bar:BindableApplicationBar
             ButtonsSource="{Binding Path=Bar.Buttons}"
+            IsVisible="{Binding Path=Bar.IsVisible}"
             MenuItemsSource="{Binding Path=Bar.MenuItems}"
+            Mode="{Binding Path=Bar.Mode}"
             >
             <bar:BindableApplicationBar.ButtonTemplate>
                 <DataTemplate>

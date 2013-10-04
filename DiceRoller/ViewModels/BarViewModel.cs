@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
 
 namespace DiceRoller.ViewModels
@@ -26,6 +27,16 @@ namespace DiceRoller.ViewModels
                     Update();
                 }
             }
+        }
+
+        public bool IsVisible
+        {
+            get { return Buttons.Count > 0 || MenuItems.Count > 0; }
+        }
+
+        public ApplicationBarMode Mode
+        {
+            get { return Buttons.Count > 0 ? ApplicationBarMode.Default : ApplicationBarMode.Minimized; }
         }
 
         public ObservableCollection<BarItemViewModel> Buttons
@@ -63,8 +74,13 @@ namespace DiceRoller.ViewModels
                     break;
 
                 case 2:
+                    MenuItems.Add(new BarItemViewModel { Text = "settings" });
                     break;
             }
+
+            // Update properties
+            RaisePropertyChanged("IsVisible");
+            RaisePropertyChanged("Mode");
         }
     }
 }
