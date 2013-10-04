@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{cfe208f3-d048-4401-99a0-fe59a259e62e}" Title="Dice Roller" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Alastair Jones" Description="Sample description" Publisher="Alastair Jones" PublisherID="{30043075-aef7-461b-8b3c-9b26d0198768}">
+  <App xmlns="" ProductID="{cfe208f3-d048-4401-99a0-fe59a259e62e}" Title="Dice Roller" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Alastair Jones" Description="This is a dice roller application for tabletop role playing games, such as Dungeons and Dragons, Exalted, and Legend. It is designed to handle common dice from D4 through to D%." Publisher="Alastair Jones" PublisherID="{30043075-aef7-461b-8b3c-9b26d0198768}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
-      <Capability Name="ID_CAP_NETWORKING" />
-      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
-      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
-      <Capability Name="ID_CAP_SENSORS" />
-      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
