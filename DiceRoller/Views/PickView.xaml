@@ -17,17 +17,6 @@
     Name="Root">
     
     <UserControl.Resources>
-        <Style TargetType="Button" x:Key="DicePickButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <c:ActiveBrushWhenPositiveConverter x:Key="ActiveBrushWhenPositive"/>
         <c:VisibleWhenPositiveConverter x:Key="VisibleWhenPositive"/>
     </UserControl.Resources>
@@ -41,12 +30,18 @@
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <Button
-                    Style="{StaticResource DicePickButton}"
                     Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
                     Height="210"
                     Width="210"
                     Margin="12,12,0,0"
                     >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
                             <cmd:EventToCommand
