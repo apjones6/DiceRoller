@@ -4,34 +4,23 @@ namespace DiceRoller.Models
 {
     public class PoolComponent : ObservableObject
     {
-        private DiceType type;
+        private readonly DiceType type;
         private int count;
 
-        public PoolComponent()
-            : this(DiceType.D6)
-        {
-        }
-
-        public PoolComponent(DiceType type, int count = 0)
+        public PoolComponent(DiceType type = DiceType.D6, int count = 0)
         {
             this.type = type;
             this.count = count;
         }
 
         public PoolComponent(PoolComponent component)
+            : this(component.type, component.count)
         {
-            this.type = component.type;
-            this.count = component.count;
         }
 
         public DiceType Type
         {
             get { return type; }
-            set
-            {
-                type = value;
-                RaisePropertyChanged("Type");
-            }
         }
 
         public int Count

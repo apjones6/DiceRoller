@@ -3,6 +3,7 @@ using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace DiceRoller.ViewModels
 {
@@ -50,7 +51,14 @@ namespace DiceRoller.ViewModels
 
         private void OnPoolMessage(PoolMessage message)
         {
-            Results.Insert(0, message.Result);
+            // NOTE: Results.Insert() seems to cause a cyclic layout exception, but I'm sure it wasn't
+            //       happening every time before (it is now). This implies possibly timing, or something
+            //       not disposed as it should be?
+            //Results.Insert(0, message.Result);
+            var items = Results.ToList();
+            items.Insert(0, message.Result);
+            Results.Clear();
+            foreach (var item in items) Results.Add(item);
         }
     }
 }

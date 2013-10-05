@@ -6,10 +6,10 @@ namespace DiceRoller.Models
 {
     public class PoolResult : Pool
     {
-        private Pool pool;
-        private Dictionary<DiceType, int[]> results;
-        private DateTime time;
-        private int sum;
+        private readonly Pool pool;
+        private readonly Dictionary<DiceType, int[]> results;
+        private readonly DateTime time;
+        private readonly int sum;
 
         public PoolResult(Pool pool)
             : base(pool)
@@ -29,31 +29,16 @@ namespace DiceRoller.Models
         public Dictionary<DiceType, int[]> Results
         {
             get { return results; }
-            set
-            {
-                results = value;
-                RaisePropertyChanged("Results");
-            }
         }
 
         public int Sum
         {
             get { return sum; }
-            set
-            {
-                sum = value;
-                RaisePropertyChanged("Sum");
-            }
         }
 
         public DateTime Time
         {
             get { return time; }
-            set
-            {
-                time = value;
-                RaisePropertyChanged("Time");
-            }
         }
     }
 }
