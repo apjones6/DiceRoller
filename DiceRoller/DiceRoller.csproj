@@ -167,7 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ApplicationBar.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationBar.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Common.resx">

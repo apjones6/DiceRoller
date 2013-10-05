@@ -22,7 +22,7 @@ namespace DiceRoller.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ApplicationBar {
+    public class ApplicationBar {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DiceRoller.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DiceRoller.Resources.ApplicationBar", typeof(ApplicationBar).Assembly);
@@ -51,7 +51,7 @@ namespace DiceRoller.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to clear history.
         /// </summary>
-        internal static string ClearHistory {
+        public static string ClearHistory {
             get {
                 return ResourceManager.GetString("ClearHistory", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to favorite.
         /// </summary>
-        internal static string Favorite {
+        public static string Favorite {
             get {
                 return ResourceManager.GetString("Favorite", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/favs.addto.png.
         /// </summary>
-        internal static string Favorite_IconUri {
+        public static string Favorite_IconUri {
             get {
                 return ResourceManager.GetString("Favorite_IconUri", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to reset.
         /// </summary>
-        internal static string Reset {
+        public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/delete.png.
         /// </summary>
-        internal static string Reset_IconUri {
+        public static string Reset_IconUri {
             get {
                 return ResourceManager.GetString("Reset_IconUri", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to roll.
         /// </summary>
-        internal static string Roll {
+        public static string Roll {
             get {
                 return ResourceManager.GetString("Roll", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/check.png.
         /// </summary>
-        internal static string Roll_IconUri {
+        public static string Roll_IconUri {
             get {
                 return ResourceManager.GetString("Roll_IconUri", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to select.
         /// </summary>
-        internal static string Select {
+        public static string Select {
             get {
                 return ResourceManager.GetString("Select", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/list.png.
         /// </summary>
-        internal static string Select_IconUri {
+        public static string Select_IconUri {
             get {
                 return ResourceManager.GetString("Select_IconUri", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to settings.
         /// </summary>
-        internal static string Settings {
+        public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to unfavorite.
         /// </summary>
-        internal static string Unfavorite {
+        public static string Unfavorite {
             get {
                 return ResourceManager.GetString("Unfavorite", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace DiceRoller.Resources {
         /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/favs.removefrom.png.
         /// </summary>
-        internal static string Unfavorite_IconUri {
+        public static string Unfavorite_IconUri {
             get {
                 return ResourceManager.GetString("Unfavorite_IconUri", resourceCulture);
             }
