@@ -4,12 +4,12 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converter="clr-namespace:DiceRoller.Converters"
+    xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=vm:HistoryViewModel, IsDesignTimeCreatable=True}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DataContext="{d:DesignData Source=/Samples/HistoryViewModel.xaml}">
+    Foreground="{StaticResource PhoneForegroundBrush}">
 
     <UserControl.Resources>
         <Style x:Key="SelectableLongListSelector" TargetType="phone:LongListSelector" >

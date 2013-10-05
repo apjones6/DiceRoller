@@ -14,6 +14,15 @@ namespace DiceRoller.ViewModels
         {
             Messenger.Default.Register<ApplicationBarMessage>(this, OnApplicationBarMessage);
             Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
+
+            if (IsInDesignMode)
+            {
+                Results.Add(new PoolResult(new Pool { Name = "Attack", Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D4, 6) } }));
+                Results.Add(new PoolResult(new Pool { Name = "Firestorm", Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D4, 18) } }));
+                Results.Add(new PoolResult(new Pool { Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D20, 1) } }));
+                Results.Add(new PoolResult(new Pool { Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D20, 1), new PoolComponent(DiceType.D6, 2) } }));
+                Results.Add(new PoolResult(new Pool { Name = "Attack", Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D4, 1) } }));
+            }
         }
 
         public ObservableCollection<PoolResult> Results

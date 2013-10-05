@@ -7,9 +7,10 @@
     xmlns:tool="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
-    xmlns:converter="clr-namespace:DiceRoller.Converters"
+    xmlns:c="clr-namespace:DiceRoller.Converters"
+    xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData /Samples/PickViewModel.xaml}"
+    d:DataContext="{d:DesignInstance Type=vm:PickViewModel, IsDesignTimeCreatable=True}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -27,8 +28,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <converter:ActiveBrushWhenPositiveConverter x:Key="ActiveBrushWhenPositive"/>
-        <converter:VisibleWhenPositiveConverter x:Key="VisibleWhenPositive"/>
+        <c:ActiveBrushWhenPositiveConverter x:Key="ActiveBrushWhenPositive"/>
+        <c:VisibleWhenPositiveConverter x:Key="VisibleWhenPositive"/>
     </UserControl.Resources>
     
     <ListBox ItemsSource="{Binding Path=Pool.Dice}" Margin="-12,-12,0,0">

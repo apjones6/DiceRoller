@@ -17,6 +17,13 @@ namespace DiceRoller.ViewModels
         public PickViewModel()
         {
             Messenger.Default.Register<ApplicationBarMessage>(this, OnApplicationBarMessage);
+
+            if (IsInDesignMode)
+            {
+                Pool.Dice.Single(x => x.Type == DiceType.D4).Count = 4;
+                Pool.Dice.Single(x => x.Type == DiceType.D6).Count = 7;
+                Pool.Dice.Single(x => x.Type == DiceType.D12).Count = 1;
+            }
         }
 
         public Pool Pool

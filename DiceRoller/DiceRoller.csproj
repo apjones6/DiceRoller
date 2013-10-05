@@ -139,12 +139,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\PickViewModel.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Samples\HistoryViewModel.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

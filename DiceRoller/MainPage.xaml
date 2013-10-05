@@ -10,6 +10,7 @@
     xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
     xmlns:r="clr-namespace:DiceRoller.Resources"
     xmlns:v="clr-namespace:DiceRoller.Views"
+    xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -46,11 +47,11 @@
             Padding="14,7,0,0"
             >
             <phone:PivotItem Header="pick">
-                <v:PoolEditorView DataContext="{Binding Pick}" d:DataContext="{d:DesignData /Samples/PickViewModel.xaml}" />
+                <v:PoolEditorView DataContext="{Binding Pick}" d:DataContext="{d:DesignInstance Type=vm:PickViewModel, IsDesignTimeCreatable=True}" />
             </phone:PivotItem>
 
             <phone:PivotItem Header="history">
-                <v:HistoryView DataContext="{Binding History}" d:DataContext="{d:DesignData /Samples/HistoryViewModel.xaml}" />
+                <v:HistoryView DataContext="{Binding History}" d:DataContext="{d:DesignInstance Type=vm:HistoryViewModel, IsDesignTimeCreatable=True}" />
             </phone:PivotItem>
 
             <phone:PivotItem Header="favorites">
