@@ -18,6 +18,12 @@ namespace DiceRoller.Models
             this.count = count;
         }
 
+        public PoolComponent(PoolComponent component)
+        {
+            this.type = component.type;
+            this.count = component.count;
+        }
+
         public DiceType Type
         {
             get { return type; }

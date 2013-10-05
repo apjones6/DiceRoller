@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace DiceRoller.Models
 {
@@ -15,6 +16,12 @@ namespace DiceRoller.Models
             {
                 Dice.Add(new PoolComponent(type));
             }
+        }
+
+        public Pool(Pool pool)
+        {
+            Dice = new ObservableCollection<PoolComponent>(pool.Dice.Select(x => new PoolComponent(x)));
+            Name = pool.Name;
         }
 
         public ObservableCollection<PoolComponent> Dice
@@ -35,6 +42,24 @@ namespace DiceRoller.Models
                 name = value;
                 RaisePropertyChanged("Name");
             }
+        }
+
+        public string DiceExpression
+        {
+            get
+            {
+                var components = Dice
+                    .Where(x => x.Count > 0)
+                    .OrderByDescending(x => (int)x.Type)
+                    .Select(x => string.Concat(x.Count != 1 ? x.Count.ToString() : string.Empty, x.Type))
+                    .ToArray();
+                return string.Join(" + ", components);
+            }
+        }
+
+        public string DisplayName
+        {
+            get { return Name ?? DiceExpression; }
         }
     }
 }

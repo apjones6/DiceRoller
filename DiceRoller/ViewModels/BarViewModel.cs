@@ -1,6 +1,10 @@
-﻿using GalaSoft.MvvmLight;
+﻿using DiceRoller.ViewModels.Messages;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
 {
@@ -9,9 +13,11 @@ namespace DiceRoller.ViewModels
         private int index;
         private ObservableCollection<BarItemViewModel> buttons;
         private ObservableCollection<BarItemViewModel> items;
+        private ICommand command;
 
         public BarViewModel()
         {
+            command = new RelayCommand<BarItem>(OnClick);
             Update();
         }
 
@@ -58,29 +64,46 @@ namespace DiceRoller.ViewModels
             //Buttons.Clear();
             //MenuItems.Clear();
 
-            switch (SelectedIndex)
+            var item = (PivotItem)SelectedIndex;
+            switch (item)
             {
-                case 0:
-                    Buttons.Add(new BarItemViewModel { Text = "roll", IconUri = "/Assets/Images/check.png" });
-                    Buttons.Add(new BarItemViewModel { Text = "favorite", IconUri = "/Assets/Images/favs.png" });
-                    Buttons.Add(new BarItemViewModel { Text = "reset", IconUri = "/Assets/Images/delete.png" });
-                    MenuItems.Add(new BarItemViewModel { Text = "settings" });
+                case PivotItem.Pick:
+                    Buttons.Add(Item(BarItem.Roll));
+                    Buttons.Add(Item(BarItem.Favorite));
+                    Buttons.Add(Item(BarItem.Reset));
+                    MenuItems.Add(Item(BarItem.Settings));
                     break;
 
-                case 1:
-                    Buttons.Add(new BarItemViewModel { Text = "select", IconUri = "/Assets/Images/list.png" });
-                    MenuItems.Add(new BarItemViewModel { Text = "clear history" });
-                    MenuItems.Add(new BarItemViewModel { Text = "settings" });
+                case PivotItem.History:
+                    Buttons.Add(Item(BarItem.Select));
+                    MenuItems.Add(Item(BarItem.ClearHistory));
+                    MenuItems.Add(Item(BarItem.Settings));
                     break;
 
-                case 2:
-                    MenuItems.Add(new BarItemViewModel { Text = "settings" });
+                case PivotItem.Favorites:
+                    MenuItems.Add(Item(BarItem.Settings));
                     break;
             }
 
             // Update properties
             RaisePropertyChanged("IsVisible");
             RaisePropertyChanged("Mode");
+        }
+
+        private void OnClick(BarItem item)
+        {
+            Messenger.Default.Send<ApplicationBarMessage>(new ApplicationBarMessage(item));
+        }
+
+        private BarItemViewModel Item(BarItem item)
+        {
+            return new BarItemViewModel
+                {
+                    Command = command,
+                    CommandParameter = item,
+                    IconUri = Resources.ApplicationBar.ResourceManager.GetString(string.Format("{0}_IconUri", item)),
+                    Text = Resources.ApplicationBar.ResourceManager.GetString(item.ToString())
+                };
         }
     }
 }
