@@ -12,6 +12,9 @@ namespace DiceRoller.ViewModels
 
         public HistoryViewModel()
         {
+            results = new ObservableCollection<PoolResult>();
+            results.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
+
             Messenger.Default.Register<ApplicationBarMessage>(this, OnApplicationBarMessage);
             Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
 
@@ -25,9 +28,14 @@ namespace DiceRoller.ViewModels
             }
         }
 
+        public bool IsEmpty
+        {
+            get { return Results.Count == 0; }
+        }
+
         public ObservableCollection<PoolResult> Results
         {
-            get { return results ?? (results = new ObservableCollection<PoolResult>()); }
+            get { return results; }
         }
 
         private void OnApplicationBarMessage(ApplicationBarMessage message)

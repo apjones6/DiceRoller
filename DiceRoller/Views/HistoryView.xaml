@@ -4,6 +4,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c="clr-namespace:DiceRoller.Converters"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=vm:HistoryViewModel, IsDesignTimeCreatable=True}"
@@ -12,6 +13,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}">
 
     <UserControl.Resources>
+        <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
         <Style x:Key="SelectableLongListSelector" TargetType="phone:LongListSelector" >
             <Setter Property="Margin" Value="0,-10,0,0" />
             <Setter Property="ItemTemplate">
@@ -47,5 +49,14 @@
         </Style>
     </UserControl.Resources>
 
-    <phone:LongListSelector ItemsSource="{Binding Results}" Style="{StaticResource SelectableLongListSelector}"/>
+    <StackPanel>
+        <TextBlock
+            FontSize="{StaticResource PhoneFontSizeLarge}"
+            HorizontalAlignment="Center"
+            Style="{StaticResource PhoneTextSmallStyle}"
+            Text="No results"
+            Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}}"
+            />
+        <phone:LongListSelector ItemsSource="{Binding Results}" Style="{StaticResource SelectableLongListSelector}"/>
+    </StackPanel>
 </UserControl>
