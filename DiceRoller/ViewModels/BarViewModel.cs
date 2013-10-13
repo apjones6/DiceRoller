@@ -69,19 +69,19 @@ namespace DiceRoller.ViewModels
             {
                 case PivotItem.Pick:
                     Buttons.Add(new BarCommand(BarItem.Roll, false));
-                    Buttons.Add(new BarCommand(BarItem.Favorite, false));
+                    //Buttons.Add(new BarCommand(BarItem.Favorite, false));
                     Buttons.Add(new BarCommand(BarItem.Reset, false));
-                    MenuItems.Add(new BarCommand(BarItem.Settings));
+                    //MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
 
                 case PivotItem.History:
-                    Buttons.Add(new BarCommand(BarItem.Select, false));
+                    //Buttons.Add(new BarCommand(BarItem.Select, false));
                     MenuItems.Add(new BarCommand(BarItem.ClearHistory, false));
-                    MenuItems.Add(new BarCommand(BarItem.Settings));
+                    //MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
 
                 case PivotItem.Favorites:
-                    MenuItems.Add(new BarCommand(BarItem.Settings));
+                    //MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
             }
 
