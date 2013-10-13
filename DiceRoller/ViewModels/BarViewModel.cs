@@ -1,6 +1,5 @@
 ﻿using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
@@ -11,13 +10,14 @@ namespace DiceRoller.ViewModels
     public class BarViewModel : ViewModelBase
     {
         private int index;
-        private ObservableCollection<BarItemViewModel> buttons;
-        private ObservableCollection<BarItemViewModel> items;
-        private ICommand command;
+        private readonly ObservableCollection<BarCommand> buttons;
+        private readonly ObservableCollection<BarCommand> items;
+        private readonly ICommand command;
 
         public BarViewModel()
         {
-            command = new RelayCommand<BarItem>(OnClick);
+            buttons = new ObservableCollection<BarCommand>();
+            items = new ObservableCollection<BarCommand>();
             Update();
         }
 
@@ -45,14 +45,14 @@ namespace DiceRoller.ViewModels
             get { return Buttons.Count > 0 ? ApplicationBarMode.Default : ApplicationBarMode.Minimized; }
         }
 
-        public ObservableCollection<BarItemViewModel> Buttons
+        public ObservableCollection<BarCommand> Buttons
         {
-            get { return buttons ?? (buttons = new ObservableCollection<BarItemViewModel>()); }
+            get { return buttons; }
         }
 
-        public ObservableCollection<BarItemViewModel> MenuItems
+        public ObservableCollection<BarCommand> MenuItems
         {
-            get { return items ?? (items = new ObservableCollection<BarItemViewModel>()); }
+            get { return items; }
         }
 
         private void Update()
@@ -68,42 +68,29 @@ namespace DiceRoller.ViewModels
             switch (item)
             {
                 case PivotItem.Pick:
-                    Buttons.Add(Item(BarItem.Roll));
-                    Buttons.Add(Item(BarItem.Favorite));
-                    Buttons.Add(Item(BarItem.Reset));
-                    MenuItems.Add(Item(BarItem.Settings));
+                    Buttons.Add(new BarCommand(BarItem.Roll, false));
+                    Buttons.Add(new BarCommand(BarItem.Favorite, false));
+                    Buttons.Add(new BarCommand(BarItem.Reset, false));
+                    MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
 
                 case PivotItem.History:
-                    Buttons.Add(Item(BarItem.Select));
-                    MenuItems.Add(Item(BarItem.ClearHistory));
-                    MenuItems.Add(Item(BarItem.Settings));
+                    Buttons.Add(new BarCommand(BarItem.Select, false));
+                    MenuItems.Add(new BarCommand(BarItem.ClearHistory, false));
+                    MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
 
                 case PivotItem.Favorites:
-                    MenuItems.Add(Item(BarItem.Settings));
+                    MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
             }
+
+            // Message for other view models to act accordingly
+            Messenger.Default.Send(new PivotMessage(item));
 
             // Update properties
             RaisePropertyChanged("IsVisible");
             RaisePropertyChanged("Mode");
-        }
-
-        private void OnClick(BarItem item)
-        {
-            Messenger.Default.Send<ApplicationBarMessage>(new ApplicationBarMessage(item));
-        }
-
-        private BarItemViewModel Item(BarItem item)
-        {
-            return new BarItemViewModel
-                {
-                    Command = command,
-                    CommandParameter = item,
-                    IconUri = Resources.ApplicationBar.ResourceManager.GetString(string.Format("{0}_IconUri", item)),
-                    Text = Resources.ApplicationBar.ResourceManager.GetString(item.ToString())
-                };
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace DiceRoller.Models
@@ -7,16 +7,23 @@ namespace DiceRoller.Models
     public class PoolResult : Pool
     {
         private readonly Pool pool;
-        private readonly Dictionary<DiceType, int[]> results;
+        private readonly ReadOnlyDictionary<DiceType, int[]> results;
         private readonly DateTime time;
         private readonly int sum;
 
-        public PoolResult(Pool pool)
+        public PoolResult(string expression, string name = null, Random random = null)
+            : this(new Pool(expression, name), random)
+        {
+        }
+
+        public PoolResult(Pool pool, Random random = null)
             : base(pool)
         {
-            var random = new Random();
+            // Ensure a random instance is available to use
+            random = random ?? new Random();
+
             this.pool = pool;
-            this.results = pool.Dice.ToDictionary(x => x.Type, x => Enumerable.Repeat(0, x.Count).Select(y => random.Next(1, (int)x.Type + 1)).ToArray());
+            this.results = new ReadOnlyDictionary<DiceType, int[]>(pool.Dice.ToDictionary(x => x.Type, x => Enumerable.Repeat(0, x.Count).Select(y => random.Next(1, (int)x.Type + 1)).ToArray()));
             this.sum = results.SelectMany(x => x.Value).Sum();
             this.time = DateTime.Now;
         }
@@ -26,7 +33,7 @@ namespace DiceRoller.Models
             get { return pool; }
         }
 
-        public Dictionary<DiceType, int[]> Results
+        public ReadOnlyDictionary<DiceType, int[]> Results
         {
             get { return results; }
         }

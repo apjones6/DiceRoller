@@ -91,10 +91,8 @@
             <bar:BindableApplicationBar.ButtonTemplate>
                 <DataTemplate>
                     <bar:BindableApplicationBarButton
-                        Command="{Binding Command}"
-                        CommandParameter="{Binding CommandParameter}"
+                        Command="{Binding}"
                         IconUri="{Binding IconUri, FallbackValue=/Assets/Images/check.png}"
-                        IsEnabled="{Binding IsEnabled}"
                         Text="{Binding Text}"
                         />
                 </DataTemplate>
@@ -102,9 +100,7 @@
             <bar:BindableApplicationBar.MenuItemTemplate>
                 <DataTemplate>
                     <bar:BindableApplicationBarMenuItem
-                        Command="{Binding Command}"
-                        CommandParameter="{Binding CommandParameter}"
-                        IsEnabled="{Binding IsEnabled}"
+                        Command="{Binding}"
                         Text="{Binding Text}"
                         />
                 </DataTemplate>

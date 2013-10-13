@@ -1,37 +1,79 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace DiceRoller.Models
 {
     public class Pool : ObservableObject
     {
-        private ObservableCollection<PoolComponent> dice = new ObservableCollection<PoolComponent>();
+        private static readonly DiceType[] DEFAULT_DICE = Enum.GetValues(typeof(DiceType)).Cast<DiceType>().ToArray();
+        private PoolComponent[] dice;
         private string name;
 
         public Pool()
         {
-            foreach (DiceType type in Enum.GetValues(typeof(DiceType)))
-            {
-                Dice.Add(new PoolComponent(type));
-            }
+            Dice = DEFAULT_DICE.Select(x => new PoolComponent(x)).ToArray();
+        }
+
+        public Pool(string expression, string name = null)
+        {
+            var components = expression
+                .Split('+')
+                .Select(x => new PoolComponent(x.Trim()))
+                .ToArray();
+            Dice = DEFAULT_DICE
+                .Select(x => components.SingleOrDefault(c => c.Type == x) ?? new PoolComponent(x))
+                .ToArray();
+            Name = name;
         }
 
         public Pool(Pool pool)
         {
-            Dice = new ObservableCollection<PoolComponent>(pool.Dice.Select(x => new PoolComponent(x)));
+            Dice = pool.Dice.Select(x => new PoolComponent(x)).ToArray();
             Name = pool.Name;
         }
 
-        public ObservableCollection<PoolComponent> Dice
+        public int this[DiceType type]
+        {
+            get { return Dice.Single(x => x.Type == type).Count; }
+            set { Dice.Single(x => x.Type == type).Count = value; }
+        }
+
+        public PoolComponent[] Dice
         {
             get { return dice; }
-            set
+            private set
             {
                 dice = value;
-                RaisePropertyChanged("Dice");
+                foreach (var d in dice)
+                {
+                    d.PropertyChanged += OnPoolComponentPropertyChanged;
+                }
             }
+        }
+
+        public int DiceCount
+        {
+            get { return Dice.Sum(x => x.Count); }
+        }
+
+        public string DiceExpression
+        {
+            get
+            {
+                var components = Dice
+                    .Where(x => x.Count > 0)
+                    .OrderByDescending(x => (int)x.Type)
+                    .Select(x => x.ToString())
+                    .ToArray();
+                return string.Join(" + ", components);
+            }
+        }
+
+        public string DisplayName
+        {
+            get { return Name ?? DiceExpression; }
         }
 
         public string Name
@@ -44,22 +86,11 @@ namespace DiceRoller.Models
             }
         }
 
-        public string DiceExpression
+        private void OnPoolComponentPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            get
-            {
-                var components = Dice
-                    .Where(x => x.Count > 0)
-                    .OrderByDescending(x => (int)x.Type)
-                    .Select(x => string.Concat(x.Count != 1 ? x.Count.ToString() : string.Empty, x.Type))
-                    .ToArray();
-                return string.Join(" + ", components);
-            }
-        }
-
-        public string DisplayName
-        {
-            get { return Name ?? DiceExpression; }
+            RaisePropertyChanged("DiceCount");
+            RaisePropertyChanged("DiceExpression");
+            RaisePropertyChanged("DisplayName");
         }
     }
 }

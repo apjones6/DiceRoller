@@ -16,16 +16,17 @@ namespace DiceRoller.ViewModels
             results = new ObservableCollection<PoolResult>();
             results.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
 
-            Messenger.Default.Register<ApplicationBarMessage>(this, OnApplicationBarMessage);
+            Messenger.Default.Register<BarMessage>(this, OnBarMessage);
+            Messenger.Default.Register<PivotMessage>(this, OnPivotMessage);
             Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
 
             if (IsInDesignMode)
             {
-                Results.Add(new PoolResult(new Pool { Name = "Attack", Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D4, 6) } }));
-                Results.Add(new PoolResult(new Pool { Name = "Firestorm", Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D4, 18) } }));
-                Results.Add(new PoolResult(new Pool { Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D20, 1) } }));
-                Results.Add(new PoolResult(new Pool { Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D20, 1), new PoolComponent(DiceType.D6, 2) } }));
-                Results.Add(new PoolResult(new Pool { Name = "Attack", Dice = new ObservableCollection<PoolComponent> { new PoolComponent(DiceType.D4, 1) } }));
+                Results.Add(new PoolResult("6D4", "Attack"));
+                Results.Add(new PoolResult("18D4", "Firestorm"));
+                Results.Add(new PoolResult("D20"));
+                Results.Add(new PoolResult("D20 + 2D6"));
+                Results.Add(new PoolResult("D4", "Attack"));
             }
         }
 
@@ -39,13 +40,22 @@ namespace DiceRoller.ViewModels
             get { return results; }
         }
 
-        private void OnApplicationBarMessage(ApplicationBarMessage message)
+        private void OnBarMessage(BarMessage message)
         {
             switch (message.BarItem)
             {
                 case BarItem.ClearHistory:
                     Results.Clear();
+                    Messenger.Default.Send(new ModifyBarMessage(BarItem.ClearHistory, false));
                     break;
+            }
+        }
+
+        private void OnPivotMessage(PivotMessage message)
+        {
+            if (message.Item == PivotItem.History)
+            {
+                Messenger.Default.Send(new ModifyBarMessage(BarItem.ClearHistory, !IsEmpty));
             }
         }
 

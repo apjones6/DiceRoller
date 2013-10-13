@@ -99,15 +99,17 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\BarCommand.cs" />
+    <Compile Include="ViewModels\Messages\PivotMessage.cs" />
+    <Compile Include="ViewModels\Messages\ModifyBarMessage.cs" />
     <Compile Include="ViewModels\PivotItem.cs" />
-    <Compile Include="ViewModels\Messages\ApplicationBarMessage.cs" />
+    <Compile Include="ViewModels\Messages\BarMessage.cs" />
     <Compile Include="Resources\ApplicationBar.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationBar.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BarItem.cs" />
-    <Compile Include="ViewModels\BarItemViewModel.cs" />
     <Compile Include="Models\DiceType.cs" />
     <Compile Include="Models\Pool.cs" />
     <Compile Include="Models\PoolComponent.cs" />
