@@ -17,15 +17,15 @@
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
     </UserControl.Resources>
 
-    <ScrollViewer>
-        <StackPanel>
-            <TextBlock
-                FontSize="{StaticResource PhoneFontSizeLarge}"
-                HorizontalAlignment="Center"
-                Style="{StaticResource PhoneTextSmallStyle}"
-                Text="No results"
-                Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}}"
-                />
+    <Grid>
+        <TextBlock
+            FontSize="{StaticResource PhoneFontSizeLarge}"
+            HorizontalAlignment="Center"
+            Style="{StaticResource PhoneTextSmallStyle}"
+            Text="No results"
+            Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}}"
+            />
+        <ScrollViewer>
             <phone:LongListSelector ItemsSource="{Binding Results}" Margin="0,-10,0,0">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
@@ -44,6 +44,6 @@
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
             </phone:LongListSelector>
-        </StackPanel>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Grid>
 </UserControl>
