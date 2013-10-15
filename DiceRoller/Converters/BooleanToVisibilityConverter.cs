@@ -9,7 +9,7 @@ namespace DiceRoller.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var input = (bool)value;
+            var input = System.Convert.ToBoolean(value);
 
             if (ParseMode(parameter) == Mode.Invert)
             {

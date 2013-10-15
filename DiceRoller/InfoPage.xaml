@@ -19,7 +19,7 @@
     shell:SystemTray.IsVisible="True">
 
     <UserControl.Resources>
-        <c:VisibleWhenPositiveConverter x:Key="VisibleWhenPositive"/>
+        <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
     </UserControl.Resources>
     
     <Grid Background="Transparent">
@@ -61,7 +61,7 @@
                 <DataTemplate>
                     <StackPanel
                         Orientation="Vertical"
-                        Visibility="{Binding Value.Length, Converter={StaticResource VisibleWhenPositive}}"
+                        Visibility="{Binding Value.Length, Converter={StaticResource BooleanToVisibility}}"
                         >
                         <TextBlock
                             Text="{Binding Key}"
