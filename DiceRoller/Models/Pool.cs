@@ -7,7 +7,7 @@ namespace DiceRoller.Models
 {
     public class Pool : ObservableObject
     {
-        private static readonly DiceType[] DEFAULT_DICE = Enum.GetValues(typeof(DiceType)).Cast<DiceType>().ToArray();
+        private static readonly DiceType[] DEFAULT_DICE = Enum.GetValues(typeof(DiceType)).Cast<DiceType>().OrderByDescending(x => x).ToArray();
         private PoolComponent[] dice;
         private string name;
 

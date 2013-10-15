@@ -5,13 +5,16 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:c="clr-namespace:DiceRoller.Converters"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=vm:HistoryViewModel, IsDesignTimeCreatable=True}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}">
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Name="Root">
 
     <UserControl.Resources>
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
@@ -34,6 +37,15 @@
                 <DataTemplate>
                     <UserControl>
                         <Grid Margin="0,10,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Tap">
+                                    <cmd:EventToCommand
+                                Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
+                                CommandParameter="{Binding}"
+                                MustToggleIsEnabledValue="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="75"/>
                                 <ColumnDefinition Width="*"/>

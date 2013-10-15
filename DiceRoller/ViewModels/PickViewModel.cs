@@ -64,7 +64,6 @@ namespace DiceRoller.ViewModels
         private void OnHold(DiceType type)
         {
             Messenger.Default.Send(new CountPickerMessage(Pool, type));
-            Messenger.Default.Send(new NavigateMessage("/CountPickerPage.xaml"));
         }
 
         private void OnBarMessage(BarMessage message)

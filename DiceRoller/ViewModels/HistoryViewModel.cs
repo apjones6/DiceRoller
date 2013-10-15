@@ -1,15 +1,18 @@
 ﻿using DiceRoller.Models;
 using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
 {
     public class HistoryViewModel : ViewModelBase
     {
         private ObservableCollection<PoolResult> results;
+        private ICommand tapCommand;
 
         public HistoryViewModel()
         {
@@ -38,6 +41,16 @@ namespace DiceRoller.ViewModels
         public ObservableCollection<PoolResult> Results
         {
             get { return results; }
+        }
+
+        public ICommand TapCommand
+        {
+            get { return tapCommand ?? (tapCommand = new RelayCommand<PoolResult>(OnTap)); }
+        }
+
+        private void OnTap(PoolResult result)
+        {
+            Messenger.Default.Send(new InfoMessage(result));
         }
 
         private void OnBarMessage(BarMessage message)
