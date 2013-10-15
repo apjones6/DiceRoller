@@ -58,12 +58,20 @@ namespace DiceRoller.ViewModels
 
         public ICommand TapCommand
         {
-            get { return tapCommand ?? (tapCommand = new RelayCommand<DiceType>(t => Pool[t] += 1)); }
+            get { return tapCommand ?? (tapCommand = new RelayCommand<DiceType>(OnTap)); }
         }
 
         private void OnHold(DiceType type)
         {
             Messenger.Default.Send(new CountPickerMessage(Pool, type));
+        }
+
+        private void OnTap(DiceType type)
+        {
+            if (Pool[type] < 99)
+            {
+                Pool[type] += 1;
+            }
         }
 
         private void OnBarMessage(BarMessage message)

@@ -48,8 +48,11 @@ namespace DiceRoller.Models
                     throw new ArgumentOutOfRangeException("value", value, "Count must be a non-negative integer.");
                 }
 
-                count = value;
-                RaisePropertyChanged("Count");
+                if (count != value)
+                {
+                    count = value;
+                    RaisePropertyChanged("Count");
+                }
             }
         }
 

@@ -81,8 +81,11 @@ namespace DiceRoller.Models
             get { return name; }
             set
             {
-                name = value;
-                RaisePropertyChanged("Name");
+                if (name != value)
+                {
+                    name = value;
+                    RaisePropertyChanged("Name");
+                }
             }
         }
 
