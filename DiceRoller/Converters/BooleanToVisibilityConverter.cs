@@ -9,24 +9,48 @@ namespace DiceRoller.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool boolean;
-            if (bool.TryParse(value.ToString(), out boolean))
+            var input = (bool)value;
+
+            if (ParseMode(parameter) == Mode.Invert)
             {
-                return boolean ? Visibility.Visible : Visibility.Collapsed;
+                input = !input;
             }
 
-            return DependencyProperty.UnsetValue;
+            return input ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var visibility = value as Visibility?;
-            if (value != null)
+            var input = (Visibility)value == Visibility.Visible;
+
+            if (ParseMode(parameter) == Mode.Invert)
             {
-                return visibility.Value == Visibility.Visible;
+                input = !input;
             }
 
-            return DependencyProperty.UnsetValue;
+            return input;
+        }
+
+        private static Mode ParseMode(object parameter)
+        {
+            if (parameter is Mode)
+            {
+                return (Mode)parameter;
+            }
+            else if (parameter is string)
+            {
+                return (Mode)Enum.Parse(typeof(Mode), (string)parameter);
+            }
+            else
+            {
+                return Mode.Default;
+            }
+        }
+
+        public enum Mode
+        {
+            Default = 0,
+            Invert = 1
         }
     }
 }
