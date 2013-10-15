@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
 {
@@ -12,7 +11,6 @@ namespace DiceRoller.ViewModels
         private int index;
         private readonly ObservableCollection<BarCommand> buttons;
         private readonly ObservableCollection<BarCommand> items;
-        private readonly ICommand command;
 
         public BarViewModel()
         {
