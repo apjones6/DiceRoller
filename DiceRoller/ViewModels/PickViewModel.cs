@@ -53,12 +53,18 @@ namespace DiceRoller.ViewModels
 
         public ICommand HoldCommand
         {
-            get { return holdCommand ?? (holdCommand = new RelayCommand<DiceType>(t => Pool[t] += 5)); }
+            get { return holdCommand ?? (holdCommand = new RelayCommand<DiceType>(OnHold)); }
         }
 
         public ICommand TapCommand
         {
             get { return tapCommand ?? (tapCommand = new RelayCommand<DiceType>(t => Pool[t] += 1)); }
+        }
+
+        private void OnHold(DiceType type)
+        {
+            Messenger.Default.Send(new CountPickerMessage(Pool, type));
+            Messenger.Default.Send(new NavigateMessage("/CountPickerPage.xaml"));
         }
 
         private void OnBarMessage(BarMessage message)

@@ -96,10 +96,17 @@
     <Compile Include="Converters\ActiveBrushWhenPositiveConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\VisibleWhenPositiveConverter.cs" />
+    <Compile Include="CountPickerPage.xaml.cs">
+      <DependentUpon>CountPickerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\IntegerSelectorDataSource.cs" />
     <Compile Include="ViewModels\BarCommand.cs" />
+    <Compile Include="ViewModels\IntegerSelectorViewModel.cs" />
+    <Compile Include="ViewModels\Messages\CountPickerMessage.cs" />
+    <Compile Include="ViewModels\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModels\Messages\PivotMessage.cs" />
     <Compile Include="ViewModels\Messages\ModifyBarMessage.cs" />
     <Compile Include="ViewModels\PivotItem.cs" />
@@ -138,6 +145,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="CountPickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

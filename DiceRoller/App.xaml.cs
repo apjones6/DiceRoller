@@ -1,4 +1,5 @@
 ﻿using DiceRoller.Resources;
+using DiceRoller.ViewModels;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
@@ -18,6 +19,11 @@ namespace DiceRoller
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
         /// <summary>
+        /// Gets the root view model for the application.
+        /// </summary>
+        public static MainViewModel ViewModel { get; private set; }
+
+        /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
@@ -34,11 +40,14 @@ namespace DiceRoller
             // Language display initialization
             InitializeLanguage();
 
+            // View model initialization
+            ViewModel = new MainViewModel();
+
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
             {
                 // Display the current frame rate counters
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                //Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -59,30 +68,28 @@ namespace DiceRoller
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            // TODO: Handle application state
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            // Ensure that application state is restored appropriately
-            //if (!App.ViewModel.IsInitialized)
-            //{
-            //    App.ViewModel.Initialize();
-            //}
+            // TODO: Handle application state
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            // TODO: Handle application state
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            // Ensure that required application state is persisted here.
+            // TODO: Handle application state
         }
 
         // Code to execute if a navigation fails
