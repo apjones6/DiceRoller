@@ -4,19 +4,50 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:tool="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:r="clr-namespace:DiceRoller.Resources"
     mc:Ignorable="d">
+    
     <Application.Resources>
         <r:Strings x:Key="Strings" />
+        <Style x:Key="TransitionPageStyle" TargetType="phone:PhoneApplicationPage">
+            <Setter Property="tool:TransitionService.NavigationInTransition">
+                <Setter.Value>
+                    <tool:NavigationInTransition>
+                        <tool:NavigationInTransition.Backward>
+                            <tool:TurnstileTransition Mode="BackwardIn" />
+                        </tool:NavigationInTransition.Backward>
+                        <tool:NavigationInTransition.Forward>
+                            <tool:TurnstileTransition Mode="ForwardIn" />
+                        </tool:NavigationInTransition.Forward>
+                    </tool:NavigationInTransition>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="tool:TransitionService.NavigationOutTransition">
+                <Setter.Value>
+                    <tool:NavigationOutTransition>
+                        <tool:NavigationOutTransition.Backward>
+                            <tool:TurnstileTransition Mode="BackwardOut" />
+                        </tool:NavigationOutTransition.Backward>
+                        <tool:NavigationOutTransition.Forward>
+                            <tool:TurnstileTransition Mode="ForwardOut" />
+                        </tool:NavigationOutTransition.Forward>
+                    </tool:NavigationOutTransition>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
+    
     <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->
         <shell:PhoneApplicationService
             Activated="Application_Activated"
             Closing="Application_Closing"
             Deactivated="Application_Deactivated"
-            Launching="Application_Launching" />
+            Launching="Application_Launching"
+            />
     </Application.ApplicationLifetimeObjects>
+    
 </Application>

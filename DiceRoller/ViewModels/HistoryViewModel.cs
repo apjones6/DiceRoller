@@ -11,7 +11,7 @@ namespace DiceRoller.ViewModels
 {
     public class HistoryViewModel : ViewModelBase
     {
-        private ObservableCollection<PoolResult> results;
+        private readonly ObservableCollection<PoolResult> results;
         private ICommand tapCommand;
 
         public HistoryViewModel()
