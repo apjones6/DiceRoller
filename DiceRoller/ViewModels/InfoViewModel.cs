@@ -25,8 +25,11 @@ namespace DiceRoller.ViewModels
             get { return result; }
             set
             {
-                result = value;
-                RaisePropertyChanged("Pool");
+                if (result != value)
+                {
+                    result = value;
+                    RaisePropertyChanged("Result");
+                }
             }
         }
 

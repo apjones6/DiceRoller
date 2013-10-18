@@ -31,6 +31,8 @@
             <DataTemplate>
                 <Button
                     Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
+                    Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
+                    CommandParameter="{Binding Type, Mode=OneWay}"
                     Height="210"
                     Width="210"
                     Margin="12,12,0,0">
@@ -42,12 +44,6 @@
                         </ControlTemplate>
                     </Button.Template>
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Tap">
-                            <cmd:EventToCommand
-                                Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
-                                CommandParameter="{Binding Type, Mode=OneWay}"
-                                MustToggleIsEnabledValue="True" />
-                        </i:EventTrigger>
                         <i:EventTrigger EventName="Hold">
                             <cmd:EventToCommand
                                 Command="{Binding Path=DataContext.HoldCommand, ElementName=Root, Mode=OneWay}"
