@@ -34,7 +34,7 @@ namespace DiceRoller.Models
 #endif
 
             this.pool = pool;
-            this.results = new ReadOnlyDictionary<DiceType, int[]>(pool.Dice.ToDictionary(x => x.Type, x => Generate(x.Type, random).Take(x.Count).ToArray()));
+            this.results = new ReadOnlyDictionary<DiceType, int[]>(pool.Dice.ToDictionary(x => x.Type, x => Generate(x.Type, random).Take(x.Count).OrderByDescending(y => y).ToArray()));
             this.sum = results.SelectMany(x => x.Value).Sum();
             this.time = DateTime.Now;
 

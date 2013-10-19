@@ -21,39 +21,60 @@
 
     <Grid Background="Transparent">
         
-        <tool:LoopingSelector
-            Background="AliceBlue"
-            DataSource="{Binding DataSource}"
-            ItemMargin="2"
-            ItemSize="140,140"
-            Width="144">
-            <tool:LoopingSelector.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel
-                        Orientation="Vertical"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
-                        Margin="-5,5">
-                        <TextBlock
-                            Text="{Binding}"
-                            Style="{StaticResource PhoneTextExtraLargeStyle}"
-                            FontSize="64"
-                            FontWeight="ExtraBlack"
-                            Height="75"
+        <Grid Margin="10,0,10,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,17,0,28">
+                <TextBlock
+                    Text="{Binding Path=Common.ApplicationTitle, Source={StaticResource Strings}}"
+                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                    Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock
+                    Text="pick count"
+                    Style="{StaticResource PhoneTextTitle1Style}"
+                    Margin="9,-7,0,0"/>
+            </StackPanel>
+
+            <tool:LoopingSelector
+                Grid.Row="1"
+                Background="AliceBlue"
+                DataSource="{Binding DataSource}"
+                ItemMargin="2"
+                ItemSize="140,140"
+                Width="144">
+                <tool:LoopingSelector.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            Orientation="Vertical"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            />
-                        <TextBlock
-                            Text="dice"
-                            Style="{StaticResource PhoneTextSubtleStyle}"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            />
-                    </StackPanel>
-                </DataTemplate>
-            </tool:LoopingSelector.ItemTemplate>
-        </tool:LoopingSelector>
-        
+                            VerticalAlignment="Bottom"
+                            Margin="-5,5">
+                            <TextBlock
+                                Text="{Binding}"
+                                Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                FontSize="64"
+                                FontWeight="ExtraBlack"
+                                Height="75"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                />
+                            <TextBlock
+                                Text="dice"
+                                Style="{StaticResource PhoneTextSubtleStyle}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                />
+                        </StackPanel>
+                    </DataTemplate>
+                </tool:LoopingSelector.ItemTemplate>
+            </tool:LoopingSelector>
+
+        </Grid>
+
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
             account for the System Tray. Set this to 0 (or remove the margin altogether)
