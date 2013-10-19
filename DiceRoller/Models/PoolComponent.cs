@@ -24,7 +24,7 @@ namespace DiceRoller.Models
                 throw new ArgumentException(string.Format("Could not parse the expression '{0}'.", expression), "expression");
             }
 
-            this.count = match.Groups["count"].Length == 1 ? int.Parse(match.Groups["count"].Value) : 1;
+            this.count = match.Groups["count"].Length > 0 ? int.Parse(match.Groups["count"].Value) : 1;
             this.type = (DiceType)Enum.Parse(typeof(DiceType), match.Groups["type"].Value);
         }
 

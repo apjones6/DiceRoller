@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -28,10 +29,19 @@ namespace DiceRoller.Models
             // Ensure a random instance is available to use
             random = random ?? RANDOM;
 
+#if DEBUG
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+#endif
+
             this.pool = pool;
-            this.results = new ReadOnlyDictionary<DiceType, int[]>(pool.Dice.ToDictionary(x => x.Type, x => Enumerable.Repeat(0, x.Count).Select(y => random.Next(1, (int)x.Type + 1)).ToArray()));
+            this.results = new ReadOnlyDictionary<DiceType, int[]>(pool.Dice.ToDictionary(x => x.Type, x => Generate(x.Type, random).Take(x.Count).ToArray()));
             this.sum = results.SelectMany(x => x.Value).Sum();
             this.time = DateTime.Now;
+
+#if DEBUG
+            stopwatch.Stop();
+            System.Diagnostics.Debug.WriteLine("PoolResult: {0} ticks", stopwatch.ElapsedTicks);
+#endif
         }
 
         public Pool Pool
@@ -52,6 +62,14 @@ namespace DiceRoller.Models
         public DateTime Time
         {
             get { return time; }
+        }
+
+        private static IEnumerable<int> Generate(DiceType type, Random random)
+        {
+            while (true)
+            {
+                yield return random.Next((int)type) + 1;
+            }
         }
     }
 }
