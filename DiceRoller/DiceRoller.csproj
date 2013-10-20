@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Converters\ActiveBrushWhenPositiveConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\JoinArrayConverter.cs" />
     <Compile Include="InfoPage.xaml.cs">
       <DependentUpon>InfoPage.xaml</DependentUpon>
     </Compile>
