@@ -12,12 +12,13 @@
     xmlns:v="clr-namespace:DiceRoller.Views"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=True}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     Style="{StaticResource TransitionPageStyle}"
     SupportedOrientations="PortraitOrLandscape"
-    Orientation="Portrait"
+    Orientation="{Binding Path=Bar.Orientation, Mode=TwoWay, FallbackValue=Portrait}"
     shell:SystemTray.IsVisible="True">
     
     <Grid Background="Transparent">

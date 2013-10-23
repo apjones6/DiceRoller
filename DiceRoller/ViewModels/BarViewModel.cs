@@ -1,6 +1,7 @@
 ﻿using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
 
@@ -11,6 +12,7 @@ namespace DiceRoller.ViewModels
         private int index;
         private readonly ObservableCollection<BarCommand> buttons;
         private readonly ObservableCollection<BarCommand> items;
+        private PageOrientation orientation;
 
         public BarViewModel()
         {
@@ -33,6 +35,11 @@ namespace DiceRoller.ViewModels
             }
         }
 
+        public bool IsLandscape
+        {
+            get { return Orientation == PageOrientation.Landscape || Orientation == PageOrientation.LandscapeLeft || Orientation == PageOrientation.LandscapeRight; }
+        }
+
         public bool IsVisible
         {
             get { return Buttons.Count > 0 || MenuItems.Count > 0; }
@@ -40,7 +47,21 @@ namespace DiceRoller.ViewModels
 
         public ApplicationBarMode Mode
         {
-            get { return Buttons.Count > 0 ? ApplicationBarMode.Default : ApplicationBarMode.Minimized; }
+            get { return Buttons.Count > 0 || IsLandscape ? ApplicationBarMode.Default : ApplicationBarMode.Minimized; }
+        }
+
+        public PageOrientation Orientation
+        {
+            get { return orientation; }
+            set
+            {
+                if (orientation != value)
+                {
+                    orientation = value;
+                    RaisePropertyChanged("Orientation");
+                    RaisePropertyChanged("Mode");
+                }
+            }
         }
 
         public ObservableCollection<BarCommand> Buttons
