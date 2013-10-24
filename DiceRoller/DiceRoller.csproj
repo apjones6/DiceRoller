@@ -112,13 +112,11 @@
     <Compile Include="ViewModels\Messages\InfoMessage.cs" />
     <Compile Include="ViewModels\Messages\CountPickerMessage.cs" />
     <Compile Include="ViewModels\Messages\NavigateMessage.cs" />
-    <Compile Include="ViewModels\PivotItem.cs" />
     <Compile Include="Resources\ApplicationBar.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationBar.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BarItem.cs" />
     <Compile Include="Models\DiceType.cs" />
     <Compile Include="Models\Pool.cs" />
     <Compile Include="Models\PoolComponent.cs" />

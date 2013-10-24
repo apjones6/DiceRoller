@@ -1,4 +1,5 @@
 ﻿using DiceRoller.Models;
+using DiceRoller.Resources;
 using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -11,8 +12,8 @@ namespace DiceRoller.ViewModels
     public class PickViewModel : ViewModelBase
     {
         private readonly ICommand hold;
-        private readonly ApplicationBarCommand reset;
-        private readonly ApplicationBarCommand roll;
+        private readonly RelayCommand reset;
+        private readonly RelayCommand roll;
         private readonly ICommand tap;
 
         private Pool pool;
@@ -20,8 +21,8 @@ namespace DiceRoller.ViewModels
         public PickViewModel()
         {
             hold = new RelayCommand<DiceType>(OnHold);
-            reset = new ApplicationBarCommand(OnReset, () => pool.DiceCount > 0, BarItem.Reset);
-            roll = new ApplicationBarCommand(OnRoll, () => pool.DiceCount > 0, BarItem.Roll);
+            reset = new ApplicationBarCommand(OnReset, () => pool.DiceCount > 0, ApplicationBar.Reset, ApplicationBar.Reset_IconUri);
+            roll = new ApplicationBarCommand(OnRoll, () => pool.DiceCount > 0, ApplicationBar.Roll, ApplicationBar.Roll_IconUri);
             tap = new RelayCommand<DiceType>(OnTap);
 
             if (IsInDesignMode)
@@ -62,12 +63,12 @@ namespace DiceRoller.ViewModels
             }
         }
 
-        public ApplicationBarCommand ResetCommand
+        public RelayCommand ResetCommand
         {
             get { return reset; }
         }
 
-        public ApplicationBarCommand RollCommand
+        public RelayCommand RollCommand
         {
             get { return roll; }
         }

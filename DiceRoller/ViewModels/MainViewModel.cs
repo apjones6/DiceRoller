@@ -1,5 +1,6 @@
 using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -10,10 +11,14 @@ namespace DiceRoller.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<ApplicationBarCommand> buttons;
+        private const int PIVOT_PICK = 0;
+        private const int PIVOT_HISTORY = 1;
+        private const int PIVOT_FAVS = 2;
+
+        private readonly ObservableCollection<RelayCommand> buttons;
         private readonly IntegerSelectorViewModel countPicker;
         private readonly HistoryViewModel history;
-        private readonly ObservableCollection<ApplicationBarCommand> items;
+        private readonly ObservableCollection<RelayCommand> items;
         private readonly InfoViewModel info;
         private readonly PickViewModel pick;
 
@@ -22,15 +27,15 @@ namespace DiceRoller.ViewModels
 
         public MainViewModel()
         {
-            Messenger.Default.Register<CountPickerMessage>(this, OnCountPickerMessage);
-            Messenger.Default.Register<InfoMessage>(this, OnInfoMessage);
-            Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
+            Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/CountPickerPage.xaml"));
+            Messenger.Default.Register<InfoMessage>(this, x => Navigate("/InfoPage.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, x => Navigate("/InfoPage.xaml"));
 
-            buttons = new ObservableCollection<ApplicationBarCommand>();
+            buttons = new ObservableCollection<RelayCommand>();
             countPicker = new IntegerSelectorViewModel();
             history = new HistoryViewModel();
             info = new InfoViewModel();
-            items = new ObservableCollection<ApplicationBarCommand>();
+            items = new ObservableCollection<RelayCommand>();
             pick = new PickViewModel();
 
             orientation = PageOrientation.Portrait;
@@ -39,7 +44,7 @@ namespace DiceRoller.ViewModels
             Update();
         }
 
-        public ObservableCollection<ApplicationBarCommand> Buttons
+        public ObservableCollection<RelayCommand> Buttons
         {
             get { return buttons; }
         }
@@ -74,7 +79,7 @@ namespace DiceRoller.ViewModels
             get { return buttons.Count > 0 || IsLandscape ? ApplicationBarMode.Default : ApplicationBarMode.Minimized; }
         }
 
-        public ObservableCollection<ApplicationBarCommand> MenuItems
+        public ObservableCollection<RelayCommand> MenuItems
         {
             get { return items; }
         }
@@ -112,19 +117,9 @@ namespace DiceRoller.ViewModels
             }
         }
 
-        private void OnCountPickerMessage(CountPickerMessage message)
+        private void Navigate(string uri)
         {
-            Messenger.Default.Send(new NavigateMessage("/CountPickerPage.xaml"));
-        }
-
-        private void OnInfoMessage(InfoMessage message)
-        {
-            Messenger.Default.Send(new NavigateMessage("/InfoPage.xaml"));
-        }
-
-        private void OnPoolMessage(PoolMessage message)
-        {
-            Messenger.Default.Send(new NavigateMessage("/InfoPage.xaml"));
+            Messenger.Default.Send(new NavigateMessage(uri));
         }
 
         private void Update()
@@ -136,22 +131,22 @@ namespace DiceRoller.ViewModels
             //buttons.Clear();
             //items.Clear();
 
-            switch ((PivotItem)selectedIndex)
+            switch (selectedIndex)
             {
-                case PivotItem.Pick:
+                case PIVOT_PICK:
                     buttons.Add(pick.RollCommand);
                     //Buttons.Add(new BarCommand(BarItem.Favorite, false));
                     buttons.Add(pick.ResetCommand);
                     //MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
 
-                case PivotItem.History:
+                case PIVOT_HISTORY:
                     //Buttons.Add(new BarCommand(BarItem.Select, false));
                     items.Add(history.ClearHistoryCommand);
                     //MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
 
-                case PivotItem.Favorites:
+                case PIVOT_FAVS:
                     //MenuItems.Add(new BarCommand(BarItem.Settings));
                     break;
             }

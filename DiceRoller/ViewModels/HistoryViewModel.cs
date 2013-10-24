@@ -1,4 +1,5 @@
 ﻿using DiceRoller.Models;
+using DiceRoller.Resources;
 using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -11,7 +12,7 @@ namespace DiceRoller.ViewModels
 {
     public class HistoryViewModel : ViewModelBase
     {
-        private readonly ApplicationBarCommand clearHistory;
+        private readonly RelayCommand clearHistory;
         private readonly ObservableCollection<PoolResult> results;
         private readonly ICommand tap;
 
@@ -19,7 +20,7 @@ namespace DiceRoller.ViewModels
         {
             Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
 
-            clearHistory = new ApplicationBarCommand(OnClearHistory, () => results.Count > 0, BarItem.ClearHistory);
+            clearHistory = new ApplicationBarCommand(OnClearHistory, () => results.Count > 0, ApplicationBar.ClearHistory);
             results = new ObservableCollection<PoolResult>();
             tap = new RelayCommand<PoolResult>(OnTap);
 
@@ -35,7 +36,7 @@ namespace DiceRoller.ViewModels
             }
         }
 
-        public ApplicationBarCommand ClearHistoryCommand
+        public RelayCommand ClearHistoryCommand
         {
             get { return clearHistory; }
         }

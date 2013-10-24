@@ -1,5 +1,4 @@
-﻿using DiceRoller.Resources;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using System;
 using System.ComponentModel;
 
@@ -7,38 +6,21 @@ namespace DiceRoller.ViewModels
 {
     public class ApplicationBarCommand : RelayCommand, INotifyPropertyChanged
     {
-        private BarItem item;
         private string iconUri;
         private string text;
 
-        public ApplicationBarCommand(Action execute, BarItem item)
+        public ApplicationBarCommand(Action execute, string text, string iconUri = null)
             : base(execute)
         {
-            this.item = item;
-            this.iconUri = ApplicationBar.ResourceManager.GetString(string.Concat(item, "_IconUri"));
-            this.text = ApplicationBar.ResourceManager.GetString(item.ToString());
+            this.iconUri = iconUri;
+            this.text = text;
         }
 
-        public ApplicationBarCommand(Action execute, Func<bool> canExecute, BarItem item)
+        public ApplicationBarCommand(Action execute, Func<bool> canExecute, string text, string iconUri = null)
             : base(execute, canExecute)
         {
-            this.item = item;
-            this.iconUri = ApplicationBar.ResourceManager.GetString(string.Concat(item, "_IconUri"));
-            this.text = ApplicationBar.ResourceManager.GetString(item.ToString());
-        }
-
-        public BarItem Item
-        {
-            get { return item; }
-            set
-            {
-                if (item != value)
-                {
-                    item = value;
-                    IconUri = ApplicationBar.ResourceManager.GetString(string.Concat(item, "_IconUri"));
-                    Text = ApplicationBar.ResourceManager.GetString(item.ToString());
-                }
-            }
+            this.iconUri = iconUri;
+            this.text = text;
         }
 
         public string IconUri
