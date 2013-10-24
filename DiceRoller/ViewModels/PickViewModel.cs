@@ -99,7 +99,9 @@ namespace DiceRoller.ViewModels
 
         private void OnRoll()
         {
-            Messenger.Default.Send(new PoolMessage(pool, new PoolResult(pool)));
+            var message = new PoolMessage(pool, new PoolResult(pool));
+            Messenger.Default.Send(message, PoolMessage.TOKEN_CREATE);
+            Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
         }
 
         private void OnTap(DiceType type)

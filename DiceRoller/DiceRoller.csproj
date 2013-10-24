@@ -109,7 +109,6 @@
     <Compile Include="ViewModels\ApplicationBarCommand.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\IntegerSelectorViewModel.cs" />
-    <Compile Include="ViewModels\Messages\InfoMessage.cs" />
     <Compile Include="ViewModels\Messages\CountPickerMessage.cs" />
     <Compile Include="ViewModels\Messages\NavigateMessage.cs" />
     <Compile Include="Resources\ApplicationBar.Designer.cs">

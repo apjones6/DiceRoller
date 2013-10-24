@@ -4,6 +4,14 @@ namespace DiceRoller.ViewModels.Messages
 {
     public class PoolMessage
     {
+        public const int TOKEN_CREATE = 0;
+        public const int TOKEN_VIEW = 1;
+
+        public PoolMessage(PoolResult result)
+            : this(result.Pool, result)
+        {
+        }
+
         public PoolMessage(Pool pool, PoolResult result = null)
         {
             Pool = pool;

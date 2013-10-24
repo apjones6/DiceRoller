@@ -28,8 +28,8 @@ namespace DiceRoller.ViewModels
         public MainViewModel()
         {
             Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/CountPickerPage.xaml"));
-            Messenger.Default.Register<InfoMessage>(this, x => Navigate("/InfoPage.xaml"));
-            Messenger.Default.Register<PoolMessage>(this, x => Navigate("/InfoPage.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/InfoPage.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/InfoPage.xaml"));
 
             buttons = new ObservableCollection<RelayCommand>();
             countPicker = new IntegerSelectorViewModel();

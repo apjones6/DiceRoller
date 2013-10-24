@@ -11,8 +11,7 @@ namespace DiceRoller.ViewModels
 
         public InfoViewModel()
         {
-            Messenger.Default.Register<InfoMessage>(this, OnInfoMessage);
-            Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, OnPoolMessage);
 
             if (IsInDesignMode)
             {
@@ -31,11 +30,6 @@ namespace DiceRoller.ViewModels
                     RaisePropertyChanged("Result");
                 }
             }
-        }
-
-        private void OnInfoMessage(InfoMessage message)
-        {
-            Result = message.Result;
         }
 
         private void OnPoolMessage(PoolMessage message)

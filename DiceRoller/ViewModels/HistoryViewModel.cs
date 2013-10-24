@@ -18,7 +18,7 @@ namespace DiceRoller.ViewModels
 
         public HistoryViewModel()
         {
-            Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, OnPoolMessage);
 
             clearHistory = new ApplicationBarCommand(OnClearHistory, () => results.Count > 0, ApplicationBar.ClearHistory);
             results = new ObservableCollection<PoolResult>();
@@ -76,7 +76,7 @@ namespace DiceRoller.ViewModels
 
         private void OnTap(PoolResult result)
         {
-            Messenger.Default.Send(new InfoMessage(result));
+            Messenger.Default.Send(new PoolMessage(result), PoolMessage.TOKEN_VIEW);
         }
     }
 }
