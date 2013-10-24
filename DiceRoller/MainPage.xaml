@@ -112,7 +112,7 @@
                 <DataTemplate>
                     <bar:BindableApplicationBarButton
                         Command="{Binding}"
-                        IconUri="{Binding IconUri, FallbackValue=/Assets/Images/check.png}"
+                        IconUri="{Binding IconUri}"
                         Text="{Binding Text}"
                         />
                 </DataTemplate>
