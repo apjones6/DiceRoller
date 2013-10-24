@@ -11,31 +11,38 @@ namespace DiceRoller.ViewModels
 {
     public class HistoryViewModel : ViewModelBase
     {
+        private readonly ApplicationBarCommand clearHistory;
         private readonly ObservableCollection<PoolResult> results;
-        private ICommand tapCommand;
+        private readonly ICommand tap;
 
         public HistoryViewModel()
         {
-            results = new ObservableCollection<PoolResult>();
-            results.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
-
-            Messenger.Default.Register<BarMessage>(this, OnBarMessage);
-            Messenger.Default.Register<PivotMessage>(this, OnPivotMessage);
             Messenger.Default.Register<PoolMessage>(this, OnPoolMessage);
+
+            clearHistory = new ApplicationBarCommand(OnClearHistory, () => results.Count > 0, BarItem.ClearHistory);
+            results = new ObservableCollection<PoolResult>();
+            tap = new RelayCommand<PoolResult>(OnTap);
+
+            results.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
 
             if (IsInDesignMode)
             {
-                Results.Add(new PoolResult("6D4", "Attack"));
-                Results.Add(new PoolResult("18D4", "Firestorm"));
-                Results.Add(new PoolResult("D20"));
-                Results.Add(new PoolResult("D20 + 2D6"));
-                Results.Add(new PoolResult("D4", "Attack"));
+                results.Add(new PoolResult("6D4", "Attack"));
+                results.Add(new PoolResult("18D4", "Firestorm"));
+                results.Add(new PoolResult("D20"));
+                results.Add(new PoolResult("D20 + 2D6"));
+                results.Add(new PoolResult("D4", "Attack"));
             }
+        }
+
+        public ApplicationBarCommand ClearHistoryCommand
+        {
+            get { return clearHistory; }
         }
 
         public bool IsEmpty
         {
-            get { return Results.Count == 0; }
+            get { return results.Count == 0; }
         }
 
         public ObservableCollection<PoolResult> Results
@@ -45,31 +52,13 @@ namespace DiceRoller.ViewModels
 
         public ICommand TapCommand
         {
-            get { return tapCommand ?? (tapCommand = new RelayCommand<PoolResult>(OnTap)); }
+            get { return tap; }
         }
 
-        private void OnTap(PoolResult result)
+        private void OnClearHistory()
         {
-            Messenger.Default.Send(new InfoMessage(result));
-        }
-
-        private void OnBarMessage(BarMessage message)
-        {
-            switch (message.BarItem)
-            {
-                case BarItem.ClearHistory:
-                    Results.Clear();
-                    Messenger.Default.Send(new ModifyBarMessage(BarItem.ClearHistory, false));
-                    break;
-            }
-        }
-
-        private void OnPivotMessage(PivotMessage message)
-        {
-            if (message.Item == PivotItem.History)
-            {
-                Messenger.Default.Send(new ModifyBarMessage(BarItem.ClearHistory, !IsEmpty));
-            }
+            results.Clear();
+            clearHistory.RaiseCanExecuteChanged();
         }
 
         private void OnPoolMessage(PoolMessage message)
@@ -78,10 +67,15 @@ namespace DiceRoller.ViewModels
             //       happening every time before (it is now). This implies possibly timing, or something
             //       not disposed as it should be?
             //Results.Insert(0, message.Result);
-            var items = Results.ToList();
+            var items = results.ToList();
             items.Insert(0, message.Result);
-            Results.Clear();
-            foreach (var item in items) Results.Add(item);
+            results.Clear();
+            foreach (var item in items) results.Add(item);
+        }
+
+        private void OnTap(PoolResult result)
+        {
+            Messenger.Default.Send(new InfoMessage(result));
         }
     }
 }

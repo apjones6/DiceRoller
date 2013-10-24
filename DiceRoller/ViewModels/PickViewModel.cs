@@ -10,15 +10,20 @@ namespace DiceRoller.ViewModels
 {
     public class PickViewModel : ViewModelBase
     {
-        private ICommand holdCommand;
-        private ICommand tapCommand;
+        private readonly ICommand hold;
+        private readonly ApplicationBarCommand reset;
+        private readonly ApplicationBarCommand roll;
+        private readonly ICommand tap;
+
         private Pool pool;
 
         public PickViewModel()
         {
-            Messenger.Default.Register<BarMessage>(this, OnBarMessage);
-            Messenger.Default.Register<PivotMessage>(this, OnPivotMessage);
-            
+            hold = new RelayCommand<DiceType>(OnHold);
+            reset = new ApplicationBarCommand(OnReset, () => pool.DiceCount > 0, BarItem.Reset);
+            roll = new ApplicationBarCommand(OnRoll, () => pool.DiceCount > 0, BarItem.Roll);
+            tap = new RelayCommand<DiceType>(OnTap);
+
             if (IsInDesignMode)
             {
                 Pool = new Pool("D12 + 7D6 + 4D4");
@@ -27,6 +32,11 @@ namespace DiceRoller.ViewModels
             {
                 Pool = new Pool();
             }
+        }
+
+        public ICommand HoldCommand
+        {
+            get { return hold; }
         }
 
         public Pool Pool
@@ -47,67 +57,53 @@ namespace DiceRoller.ViewModels
                 }
 
                 RaisePropertyChanged("Pool");
-                UpdateApplicationBar();
+                reset.RaiseCanExecuteChanged();
+                roll.RaiseCanExecuteChanged();
             }
         }
 
-        public ICommand HoldCommand
+        public ApplicationBarCommand ResetCommand
         {
-            get { return holdCommand ?? (holdCommand = new RelayCommand<DiceType>(OnHold)); }
+            get { return reset; }
+        }
+
+        public ApplicationBarCommand RollCommand
+        {
+            get { return roll; }
         }
 
         public ICommand TapCommand
         {
-            get { return tapCommand ?? (tapCommand = new RelayCommand<DiceType>(OnTap)); }
+            get { return tap; }
         }
 
         private void OnHold(DiceType type)
         {
-            Messenger.Default.Send(new CountPickerMessage(Pool, type));
-        }
-
-        private void OnTap(DiceType type)
-        {
-            if (Pool[type] < 99)
-            {
-                Pool[type] += 1;
-            }
-        }
-
-        private void OnBarMessage(BarMessage message)
-        {
-            switch (message.BarItem)
-            {
-                case BarItem.Roll:
-                    Messenger.Default.Send(new PoolMessage(Pool, new PoolResult(Pool)));
-                    break;
-
-                case BarItem.Reset:
-                    Pool = new Pool();
-                    break;
-            }
-        }
-
-        private void OnPivotMessage(PivotMessage message)
-        {
-            if (message.Item == PivotItem.Pick)
-            {
-                UpdateApplicationBar();
-            }
+            Messenger.Default.Send(new CountPickerMessage(pool, type));
         }
 
         private void OnPoolPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "DiceCount")
             {
-                UpdateApplicationBar();
+                reset.RaiseCanExecuteChanged();
+                roll.RaiseCanExecuteChanged();
             }
         }
 
-        private void UpdateApplicationBar()
+        private void OnReset()
         {
-            Messenger.Default.Send(new ModifyBarMessage(BarItem.Roll, Pool.DiceCount > 0));
-            Messenger.Default.Send(new ModifyBarMessage(BarItem.Reset, Pool.DiceCount > 0));
+            Pool = new Pool();
+        }
+
+        private void OnRoll()
+        {
+            Messenger.Default.Send(new PoolMessage(pool, new PoolResult(pool)));
+        }
+
+        private void OnTap(DiceType type)
+        {
+            if (pool[type] < 99) pool[type] += 1;
         }
     }
 }

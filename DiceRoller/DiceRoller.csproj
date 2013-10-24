@@ -106,16 +106,13 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\IntegerSelectorDataSource.cs" />
-    <Compile Include="ViewModels\BarCommand.cs" />
+    <Compile Include="ViewModels\ApplicationBarCommand.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\IntegerSelectorViewModel.cs" />
     <Compile Include="ViewModels\Messages\InfoMessage.cs" />
     <Compile Include="ViewModels\Messages\CountPickerMessage.cs" />
     <Compile Include="ViewModels\Messages\NavigateMessage.cs" />
-    <Compile Include="ViewModels\Messages\PivotMessage.cs" />
-    <Compile Include="ViewModels\Messages\ModifyBarMessage.cs" />
     <Compile Include="ViewModels\PivotItem.cs" />
-    <Compile Include="ViewModels\Messages\BarMessage.cs" />
     <Compile Include="Resources\ApplicationBar.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,7 +130,6 @@
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Strings.cs" />
-    <Compile Include="ViewModels\BarViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\Messages\PoolMessage.cs" />
     <Compile Include="ViewModels\PickViewModel.cs" />

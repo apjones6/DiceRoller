@@ -11,13 +11,20 @@ namespace DiceRoller.ViewModels
 {
     public class IntegerSelectorViewModel : ViewModelBase
     {
-        private IntegerSelectorDataSource dataSource;
+        private readonly ICommand cancel;
+        private readonly IntegerSelectorDataSource dataSource;
+        private readonly ICommand done;
+
         private Pool pool;
         private DiceType type;
 
         public IntegerSelectorViewModel()
         {
             Messenger.Default.Register<CountPickerMessage>(this, OnCountPickerMessage);
+
+            cancel = new RelayCommand(GoBack);
+            dataSource = new IntegerSelectorDataSource();
+            done = new RelayCommand(OnDone);
 
             if (IsInDesignMode)
             {
@@ -27,17 +34,17 @@ namespace DiceRoller.ViewModels
 
         public ILoopingSelectorDataSource DataSource
         {
-            get { return dataSource ?? (dataSource = new IntegerSelectorDataSource()); }
+            get { return dataSource; }
         }
 
         public ICommand CancelCommand
         {
-            get { return new RelayCommand(GoBack); }
+            get { return cancel; }
         }
 
         public ICommand DoneCommand
         {
-            get { return new RelayCommand(OnDone); }
+            get { return done; }
         }
 
         private void GoBack()
@@ -52,13 +59,13 @@ namespace DiceRoller.ViewModels
 
             if (pool != null)
             {
-                DataSource.SelectedItem = pool[type];
+                dataSource.SelectedItem = pool[type];
             }
         }
 
         private void OnDone()
         {
-            pool[type] = (int)DataSource.SelectedItem;
+            pool[type] = (int)dataSource.SelectedItem;
             GoBack();
         }
     }

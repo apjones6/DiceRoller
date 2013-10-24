@@ -18,7 +18,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     Style="{StaticResource TransitionPageStyle}"
     SupportedOrientations="PortraitOrLandscape"
-    Orientation="{Binding Path=Bar.Orientation, Mode=TwoWay, FallbackValue=Portrait}"
+    Orientation="{Binding Path=Orientation, Mode=TwoWay}"
     shell:SystemTray.IsVisible="True">
     
     <Grid Background="Transparent">
@@ -44,7 +44,7 @@
 
         <!--Pivot Control-->
         <phone:Pivot
-            SelectedIndex="{Binding Path=Bar.SelectedIndex, Mode=TwoWay}"
+            SelectedIndex="{Binding Path=SelectedIndex, Mode=TwoWay}"
             Title="{Binding Path=Common.ApplicationTitle, Source={StaticResource Strings}}"
             Margin="-2,0,0,0"
             Padding="14,7,0,0">
@@ -103,10 +103,10 @@
 
     <bar:Bindable.ApplicationBar>
         <bar:BindableApplicationBar
-            ButtonsSource="{Binding Path=Bar.Buttons}"
-            IsVisible="{Binding Path=Bar.IsVisible}"
-            MenuItemsSource="{Binding Path=Bar.MenuItems}"
-            Mode="{Binding Path=Bar.Mode}"
+            ButtonsSource="{Binding Buttons}"
+            IsVisible="{Binding IsVisible}"
+            MenuItemsSource="{Binding MenuItems}"
+            Mode="{Binding Mode}"
             >
             <bar:BindableApplicationBar.ButtonTemplate>
                 <DataTemplate>
