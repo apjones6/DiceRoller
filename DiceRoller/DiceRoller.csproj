@@ -19,7 +19,7 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>PivotApp1_$(Configuration)_$(Platform).xap</XapFilename>
+    <XapFilename>DiceRoller_$(Configuration)_$(Platform).xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>DiceRoller.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
