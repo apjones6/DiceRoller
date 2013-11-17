@@ -9,7 +9,7 @@
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="PivotApp1Token" TaskName="_default">
+      <PrimaryToken TokenID="DiceRollerToken" TaskName="_default">
         <TemplateIconic>
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicTileSmall.png</SmallImageURI>
           <Count>0</Count>
