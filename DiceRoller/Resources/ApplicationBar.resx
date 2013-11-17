@@ -130,7 +130,7 @@
     <value>reset</value>
   </data>
   <data name="Reset_IconUri" xml:space="preserve">
-    <value>/Assets/Images/delete.png</value>
+    <value>/Assets/Images/cancel.png</value>
   </data>
   <data name="Roll" xml:space="preserve">
     <value>roll</value>
