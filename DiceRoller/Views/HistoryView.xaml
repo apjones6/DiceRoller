@@ -30,8 +30,10 @@
             />
         <phone:LongListSelector
             ItemsSource="{Binding Results}"
-            Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
+            Loaded="OnLoaded"
             Margin="0,-10,0,0"
+            Name="LongListSelector"
+            Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
             >
             <phone:LongListSelector.ItemTemplate>
                 <DataTemplate>
