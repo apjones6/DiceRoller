@@ -12,3 +12,7 @@ This is a dice roller application for tabletop role playing games, such as _Dung
 ## NuGet Packages ##
 
 Currently this project uses NuGet packages which are not included in the GIT repository. Building the solution in Visual Studio should automatically install any missing packages. Note: At this moment I have an issue installing **WPtoolkit**, both automatically and using package manager directly; I surmise this may be an external issue, but going to note it here in the case issues persist.
+
+## Git Flow ##
+
+This project uses the development model set out in http://nvie.com/posts/a-successful-git-branching-model. The conventions set out in this article, such as develop and master branches, and naming release-*, and so on are followed exactly.
