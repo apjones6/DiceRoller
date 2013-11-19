@@ -171,7 +171,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\**\*.png">
+    <Content Include="Assets\ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\*\*.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

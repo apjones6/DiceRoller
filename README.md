@@ -3,12 +3,23 @@
 This is a dice roller application for tabletop role playing games, such as _Dungeons and Dragons_, _Exalted_, and _Legend_. It is designed to handle common dice from D4 through to D%. Which dice are available should be made configurable in due course.
 
 ### Features ###
-* Customize which dice are displayed and used (avoiding clutter)
-* History
-* Favourites
-* Consistent UI with Windows Phone 8
-* Rapid familiarization and use
+ - Customize which dice are displayed and used (avoiding clutter)
+ - History
+ - Favourites
+ - Consistent UI with Windows Phone 8
+ - Rapid familiarization and use
 
 ## NuGet Packages ##
 
 Currently this project uses NuGet packages which are not included in the GIT repository. Building the solution in Visual Studio should automatically install any missing packages. Note: At this moment I have an issue installing **WPtoolkit**, both automatically and using package manager directly; I surmise this may be an external issue, but going to note it here in the case issues persist.
+
+## Git Flow ##
+
+This project uses the development model set out in http://nvie.com/posts/a-successful-git-branching-model. The conventions set out in this article, such as develop and master branches, and naming release-*, and so on are followed exactly.
+
+## Version History ##
+
+### **Version 1.0** - 18 November 2013
+
+ - Pick and History pivot tabs, supporting click and hold-to-picker to set pool
+ - Info page show on roll, and from History with individual results
