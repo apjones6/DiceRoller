@@ -15,6 +15,8 @@ namespace DiceRoller.ViewModels
         private const int PIVOT_HISTORY = 1;
         private const int PIVOT_FAVS = 2;
 
+        private readonly RelayCommand settings;
+
         private readonly ObservableCollection<RelayCommand> buttons;
         private readonly IntegerSelectorViewModel countPicker;
         private readonly HistoryViewModel history;
@@ -30,6 +32,8 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/CountPickerPage.xaml"));
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/InfoPage.xaml"));
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/InfoPage.xaml"));
+
+            settings = new ApplicationBarCommand(OnSettings, Resources.ApplicationBar.Settings);
 
             buttons = new ObservableCollection<RelayCommand>();
             countPicker = new IntegerSelectorViewModel();
@@ -117,9 +121,19 @@ namespace DiceRoller.ViewModels
             }
         }
 
+        public RelayCommand SettingsCommand
+        {
+            get { return settings; }
+        }
+
         private void Navigate(string uri)
         {
             Messenger.Default.Send(new NavigateMessage(uri));
+        }
+
+        private void OnSettings()
+        {
+            Navigate("/SettingsPage.xaml");
         }
 
         private void Update()
@@ -137,17 +151,17 @@ namespace DiceRoller.ViewModels
                     buttons.Add(pick.RollCommand);
                     //Buttons.Add(new BarCommand(BarItem.Favorite, false));
                     buttons.Add(pick.ResetCommand);
-                    //MenuItems.Add(new BarCommand(BarItem.Settings));
+                    items.Add(SettingsCommand);
                     break;
 
                 case PIVOT_HISTORY:
                     //Buttons.Add(new BarCommand(BarItem.Select, false));
                     items.Add(history.ClearHistoryCommand);
-                    //MenuItems.Add(new BarCommand(BarItem.Settings));
+                    items.Add(SettingsCommand);
                     break;
 
                 case PIVOT_FAVS:
-                    //MenuItems.Add(new BarCommand(BarItem.Settings));
+                    //items.Add(SettingsCommand);
                     break;
             }
 
