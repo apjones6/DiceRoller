@@ -11,6 +11,7 @@ namespace DiceRoller.ViewModels
 
         public InfoViewModel()
         {
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, OnPoolMessage);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, OnPoolMessage);
 
             if (IsInDesignMode)

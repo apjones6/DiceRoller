@@ -138,6 +138,9 @@
     <Compile Include="Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InfoPopupView.xaml.cs">
+      <DependentUpon>InfoPopupView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PickView.xaml.cs">
       <DependentUpon>PickView.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InfoPopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

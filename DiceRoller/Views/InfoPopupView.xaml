@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="DiceRoller.Views.InfoPopupView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:DiceRoller.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=vm:InfoViewModel, IsDesignTimeCreatable=True}">
+    <Grid Name="Root">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.Projection>
+            <PlaneProjection CenterOfRotationX="0" RotationY="-90" />
+        </Grid.Projection>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames
+                            Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)"
+                            Storyboard.TargetName="Root">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="-90" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0" />
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames
+                            Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)"
+                            Storyboard.TargetName="Root">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0" />
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="{Binding ElementName=Root, Path=ActualWidth}" />
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Border
+            Background="Transparent"
+            Grid.ColumnSpan="5"
+            Grid.RowSpan="5"
+            />
+
+        <Border
+            Background="{StaticResource PhoneAccentBrush}"
+            Grid.Column="1"
+            Grid.Row="1"
+            MinHeight="200"
+            MinWidth="200">
+            <TextBlock
+                Text="{Binding Result.Sum}"
+                Style="{StaticResource PhoneTextHugeStyle}"
+                FontSize="108"
+                FontWeight="Bold"
+                TextWrapping="NoWrap"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                />
+        </Border>
+    </Grid>
+</UserControl>

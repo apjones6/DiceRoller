@@ -17,10 +17,6 @@
     Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <phone:PhoneApplicationPage.Resources>
-        <m:Settings x:Key="Settings" />
-    </phone:PhoneApplicationPage.Resources>
-
     <Grid Background="Transparent">
 
         <Grid Margin="10,0,10,0">
@@ -46,7 +42,7 @@
             <tool:ToggleSwitch
                 Grid.Row="2"
                 Header="Show info page when rolling dice"
-                IsChecked="{Binding Source={StaticResource Settings}, Path=ShowFullResults, Mode=TwoWay}"
+                IsChecked="{Binding Path=ShowFullResults, Mode=TwoWay}"
                 />
 
         </Grid>

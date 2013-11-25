@@ -8,6 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tool="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:r="clr-namespace:DiceRoller.Resources"
     xmlns:v="clr-namespace:DiceRoller.Views"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
@@ -20,7 +22,15 @@
     SupportedOrientations="PortraitOrLandscape"
     Orientation="{Binding Path=Orientation, Mode=TwoWay}"
     shell:SystemTray.IsVisible="True">
-    
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="BackKeyPress">
+            <cmd:EventToCommand
+                Command="{Binding Path=BackCommand}"
+                PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid Background="Transparent">
 
         <!-- LOCALIZATION NOTE:
@@ -103,10 +113,10 @@
 
     <bar:Bindable.ApplicationBar>
         <bar:BindableApplicationBar
-            ButtonsSource="{Binding Buttons}"
-            IsVisible="{Binding IsVisible}"
-            MenuItemsSource="{Binding MenuItems}"
-            Mode="{Binding Mode}"
+            ButtonsSource="{Binding BarButtons}"
+            IsVisible="{Binding IsBarVisible}"
+            MenuItemsSource="{Binding BarMenuItems}"
+            Mode="{Binding BarMode}"
             >
             <bar:BindableApplicationBar.ButtonTemplate>
                 <DataTemplate>

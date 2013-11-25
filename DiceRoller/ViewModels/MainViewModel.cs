@@ -1,11 +1,18 @@
+using DiceRoller.Models;
 using DiceRoller.ViewModels.Messages;
+using DiceRoller.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
 {
@@ -15,40 +22,49 @@ namespace DiceRoller.ViewModels
         private const int PIVOT_HISTORY = 1;
         private const int PIVOT_FAVS = 2;
 
-        private readonly RelayCommand settings;
-
+        private readonly Settings appSettings;
+        private readonly RelayCommand<CancelEventArgs> back;
         private readonly ObservableCollection<RelayCommand> buttons;
         private readonly IntegerSelectorViewModel countPicker;
         private readonly HistoryViewModel history;
         private readonly ObservableCollection<RelayCommand> items;
         private readonly InfoViewModel info;
         private readonly PickViewModel pick;
+        private readonly RelayCommand settings;
 
         private PageOrientation orientation;
+        private Popup popup;
         private int selectedIndex;
 
         public MainViewModel()
         {
             Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/CountPickerPage.xaml"));
-            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/InfoPage.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, OnPoolMessageCreate);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/InfoPage.xaml"));
 
-            settings = new ApplicationBarCommand(OnSettings, Resources.ApplicationBar.Settings);
-
+            appSettings = new Settings();
+            back = new RelayCommand<CancelEventArgs>(OnBackKeyPress);
             buttons = new ObservableCollection<RelayCommand>();
             countPicker = new IntegerSelectorViewModel();
             history = new HistoryViewModel();
             info = new InfoViewModel();
             items = new ObservableCollection<RelayCommand>();
             pick = new PickViewModel();
+            settings = new ApplicationBarCommand(OnSettings, Resources.ApplicationBar.Settings);
 
             orientation = PageOrientation.Portrait;
+            popup = new Popup();
             selectedIndex = 0;
 
             Update();
         }
 
-        public ObservableCollection<RelayCommand> Buttons
+        public ICommand BackCommand
+        {
+            get { return back; }
+        }
+
+        public ObservableCollection<RelayCommand> BarButtons
         {
             get { return buttons; }
         }
@@ -73,17 +89,17 @@ namespace DiceRoller.ViewModels
             get { return orientation == PageOrientation.Landscape || orientation == PageOrientation.LandscapeLeft || orientation == PageOrientation.LandscapeRight; }
         }
 
-        public bool IsVisible
+        public bool IsBarVisible
         {
             get { return buttons.Count > 0 || items.Count > 0; }
         }
 
-        public ApplicationBarMode Mode
+        public ApplicationBarMode BarMode
         {
             get { return buttons.Count > 0 || IsLandscape ? ApplicationBarMode.Default : ApplicationBarMode.Minimized; }
         }
 
-        public ObservableCollection<RelayCommand> MenuItems
+        public ObservableCollection<RelayCommand> BarMenuItems
         {
             get { return items; }
         }
@@ -96,8 +112,8 @@ namespace DiceRoller.ViewModels
                 if (orientation != value)
                 {
                     orientation = value;
+                    RaisePropertyChanged("BarMode");
                     RaisePropertyChanged("Orientation");
-                    RaisePropertyChanged("Mode");
                 }
             }
         }
@@ -121,6 +137,11 @@ namespace DiceRoller.ViewModels
             }
         }
 
+        public Settings Settings
+        {
+            get { return appSettings; }
+        }
+
         public RelayCommand SettingsCommand
         {
             get { return settings; }
@@ -129,6 +150,38 @@ namespace DiceRoller.ViewModels
         private void Navigate(string uri)
         {
             Messenger.Default.Send(new NavigateMessage(uri));
+        }
+
+        private void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (popup.IsOpen)
+            {
+                popup.IsOpen = false;
+                e.Cancel = true;
+            }
+        }
+
+        private void OnPoolMessageCreate(PoolMessage message)
+        {
+            if (appSettings.ShowFullResults)
+            {
+                Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
+            }
+            else
+            {
+                // Dispose previous popup
+                if (popup.IsOpen)
+                {
+                    popup.IsOpen = false;
+                }
+
+                // Open popup to close after 1 second, and clean up
+                TimerCallback callback = x => popup.Dispatcher.BeginInvoke(() => popup.IsOpen = false);
+                var timer = new Timer(callback, popup, 1000, Timeout.Infinite);
+                popup.Closed += (s, e) => timer.Dispose();
+                popup.Child = new InfoPopupView();
+                popup.IsOpen = true;
+            }
         }
 
         private void OnSettings()
@@ -169,8 +222,8 @@ namespace DiceRoller.ViewModels
             foreach (var i in buttons.Union(items)) i.RaiseCanExecuteChanged();
 
             // Update properties
-            RaisePropertyChanged("IsVisible");
-            RaisePropertyChanged("Mode");
+            RaisePropertyChanged("BarMode");
+            RaisePropertyChanged("IsBarVisible");
         }
     }
 }

@@ -7,6 +7,7 @@ namespace DiceRoller
         public SettingsPage()
         {
             InitializeComponent();
+            DataContext = App.ViewModel.Settings;
         }
     }
 }
