@@ -41,7 +41,6 @@
 
             <tool:LoopingSelector
                 Grid.Row="1"
-                Background="AliceBlue"
                 DataSource="{Binding DataSource}"
                 ItemMargin="2"
                 ItemSize="140,140"
