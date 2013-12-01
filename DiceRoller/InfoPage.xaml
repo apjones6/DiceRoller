@@ -63,9 +63,10 @@
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <TextBlock
                             Text="{Binding Result.Sum}"
-                            Style="{StaticResource PhoneTextTitle1Style}"
+                            Style="{StaticResource PhoneTextHugeStyle}"
+                            Foreground="{StaticResource PhoneAccentBrush}"
                             FontSize="96"
-                            FontWeight="ExtraBlack"
+                            FontWeight="Medium"
                             TextWrapping="NoWrap"
                             />
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
