@@ -9,6 +9,7 @@
     xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:c="clr-namespace:DiceRoller.Converters"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
+    xmlns:v="clr-namespace:DiceRoller.Views"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=vm:PickViewModel, IsDesignTimeCreatable=True}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -35,6 +36,7 @@
                     CommandParameter="{Binding Type, Mode=OneWay}"
                     Height="210"
                     Width="210"
+                    v:TiltEffect.IsTiltEnabled="True"
                     Margin="12,12,0,0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
