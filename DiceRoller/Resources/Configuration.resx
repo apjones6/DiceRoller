@@ -125,5 +125,6 @@
   </data>
   <data name="TimeFormat" xml:space="preserve">
     <value>HH:mm</value>
+    <comment>Unused; needs custom StringFormatConverter for binding to work</comment>
   </data>
 </root>
