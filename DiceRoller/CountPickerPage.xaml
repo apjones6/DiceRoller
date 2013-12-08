@@ -31,11 +31,11 @@
 
             <StackPanel Grid.Row="0" Margin="0,17,0,28">
                 <TextBlock
-                    Text="{Binding Path=Common.ApplicationTitle, Source={StaticResource Strings}}"
+                    Text="{Binding Path=Text.ApplicationTitle, Source={StaticResource Strings}}"
                     FontFamily="{StaticResource PhoneFontFamilySemiBold}"
                     Style="{StaticResource PhoneTextNormalStyle}"/>
                 <TextBlock
-                    Text="pick count"
+                    Text="{Binding Path=Text.PickCount, Source={StaticResource Strings}}"
                     Style="{StaticResource PhoneTextTitle1Style}"
                     Margin="9,-7,0,0"/>
             </StackPanel>
@@ -88,13 +88,13 @@
         <bar:BindableApplicationBar>
             <bar:BindableApplicationBarButton
                 Command="{Binding DoneCommand}"
-                IconUri="/Assets/Images/check.png"
-                Text="done"
+                IconUri="{Binding Path=IconUri.Done, Source={StaticResource Strings}}"
+                Text="{Binding Path=Text.Done, Source={StaticResource Strings}}"
                 />
             <bar:BindableApplicationBarButton
                 Command="{Binding CancelCommand}"
-                IconUri="/Assets/Images/cancel.png"
-                Text="cancel"
+                IconUri="{Binding Path=IconUri.Cancel, Source={StaticResource Strings}}"
+                Text="{Binding Path=Text.Cancel, Source={StaticResource Strings}}"
                 />
         </bar:BindableApplicationBar>
     </bar:Bindable.ApplicationBar>

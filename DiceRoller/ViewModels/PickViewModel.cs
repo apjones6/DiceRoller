@@ -21,8 +21,8 @@ namespace DiceRoller.ViewModels
         public PickViewModel()
         {
             hold = new RelayCommand<DiceType>(OnHold);
-            reset = new ApplicationBarCommand(OnReset, () => pool.DiceCount > 0, ApplicationBar.Reset, ApplicationBar.Reset_IconUri);
-            roll = new ApplicationBarCommand(OnRoll, () => pool.DiceCount > 0, ApplicationBar.Roll, ApplicationBar.Roll_IconUri);
+            reset = new ApplicationBarCommand(OnReset, () => pool.DiceCount > 0, Text.Reset, IconUri.Reset);
+            roll = new ApplicationBarCommand(OnRoll, () => pool.DiceCount > 0, Text.Roll, IconUri.Roll);
             tap = new RelayCommand<DiceType>(OnTap);
 
             if (IsInDesignMode)

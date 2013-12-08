@@ -26,7 +26,7 @@
     
     <Grid Background="Transparent">
 
-        <Grid Margin="10,0,10,0">
+        <Grid Margin="10,0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -35,12 +35,12 @@
 
             <StackPanel Margin="0,17,0,28">
                 <TextBlock
-                    Text="{Binding Path=Common.ApplicationTitle, Source={StaticResource Strings}}"
+                    Text="{Binding Path=Text.ApplicationTitle, Source={StaticResource Strings}}"
                     FontFamily="{StaticResource PhoneFontFamilySemiBold}"
                     Style="{StaticResource PhoneTextNormalStyle}"
                     />
                 <TextBlock
-                    Text="results"
+                    Text="{Binding Path=Text.Results, Source={StaticResource Strings}}"
                     Style="{StaticResource PhoneTextTitle1Style}"
                     Margin="9,-7,0,0"/>
             </StackPanel>
@@ -56,7 +56,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock
-                        Text="Summary"
+                        Text="{Binding Path=Text.Summary, Source={StaticResource Strings}}"
                         Style="{StaticResource PhoneTextGroupHeaderStyle}"
                         />
 
@@ -85,7 +85,7 @@
 
                     <TextBlock
                         Grid.Row="2"
-                        Text="Details"
+                        Text="{Binding Path=Text.Details, Source={StaticResource Strings}}"
                         Style="{StaticResource PhoneTextGroupHeaderStyle}"
                         Margin="10,14"
                         />

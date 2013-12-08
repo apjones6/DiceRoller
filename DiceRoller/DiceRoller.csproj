@@ -106,25 +106,30 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\IntegerSelectorDataSource.cs" />
+    <Compile Include="Resources\Text.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Text.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\IconUri.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IconUri.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ApplicationBarCommand.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\IntegerSelectorViewModel.cs" />
     <Compile Include="ViewModels\Messages\CountPickerMessage.cs" />
     <Compile Include="ViewModels\Messages\NavigateMessage.cs" />
-    <Compile Include="Resources\ApplicationBar.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ApplicationBar.resx</DependentUpon>
-    </Compile>
     <Compile Include="Models\DiceType.cs" />
     <Compile Include="Models\Pool.cs" />
     <Compile Include="Models\PoolComponent.cs" />
     <Compile Include="Models\PoolResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Common.Designer.cs">
+    <Compile Include="Resources\Configuration.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Common.resx</DependentUpon>
+      <DependentUpon>Configuration.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Strings.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
@@ -179,13 +184,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ApplicationBar.resx">
+    <EmbeddedResource Include="Resources\Configuration.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationBar.Designer.cs</LastGenOutput>
+      <LastGenOutput>Configuration.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Common.resx">
+    <EmbeddedResource Include="Resources\Text.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+      <LastGenOutput>Text.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IconUri.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IconUri.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

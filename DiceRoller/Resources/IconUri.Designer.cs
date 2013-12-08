@@ -22,14 +22,14 @@ namespace DiceRoller.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ApplicationBar {
+    public class IconUri {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ApplicationBar() {
+        internal IconUri() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DiceRoller.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DiceRoller.Resources.ApplicationBar", typeof(ApplicationBar).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DiceRoller.Resources.IconUri", typeof(IconUri).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,34 +61,25 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to clear history.
+        ///   Looks up a localized string similar to /Assets/Images/cancel.png.
         /// </summary>
-        public static string ClearHistory {
+        public static string Cancel {
             get {
-                return ResourceManager.GetString("ClearHistory", resourceCulture);
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to favorite.
+        ///   Looks up a localized string similar to /Assets/Images/check.png.
         /// </summary>
-        public static string Favorite {
+        public static string Done {
             get {
-                return ResourceManager.GetString("Favorite", resourceCulture);
+                return ResourceManager.GetString("Done", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/favs.addto.png.
-        /// </summary>
-        public static string Favorite_IconUri {
-            get {
-                return ResourceManager.GetString("Favorite_IconUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to reset.
+        ///   Looks up a localized string similar to /Assets/Images/cancel.png.
         /// </summary>
         public static string Reset {
             get {
@@ -97,74 +88,11 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/cancel.png.
-        /// </summary>
-        public static string Reset_IconUri {
-            get {
-                return ResourceManager.GetString("Reset_IconUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to roll.
+        ///   Looks up a localized string similar to /Assets/Images/check.png.
         /// </summary>
         public static string Roll {
             get {
                 return ResourceManager.GetString("Roll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/check.png.
-        /// </summary>
-        public static string Roll_IconUri {
-            get {
-                return ResourceManager.GetString("Roll_IconUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to select.
-        /// </summary>
-        public static string Select {
-            get {
-                return ResourceManager.GetString("Select", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/list.png.
-        /// </summary>
-        public static string Select_IconUri {
-            get {
-                return ResourceManager.GetString("Select_IconUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to settings.
-        /// </summary>
-        public static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to unfavorite.
-        /// </summary>
-        public static string Unfavorite {
-            get {
-                return ResourceManager.GetString("Unfavorite", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/favs.removefrom.png.
-        /// </summary>
-        public static string Unfavorite_IconUri {
-            get {
-                return ResourceManager.GetString("Unfavorite_IconUri", resourceCulture);
             }
         }
     }
