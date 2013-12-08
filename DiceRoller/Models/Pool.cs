@@ -73,7 +73,12 @@ namespace DiceRoller.Models
 
         public string DisplayName
         {
-            get { return Name ?? DiceExpression; }
+            get { return IsDefaultName ? DiceExpression : Name; }
+        }
+
+        public bool IsDefaultName
+        {
+            get { return string.IsNullOrWhiteSpace(Name); }
         }
 
         public string Name
@@ -84,16 +89,26 @@ namespace DiceRoller.Models
                 if (name != value)
                 {
                     name = value;
+                    RaisePropertyChanged("DisplayName");
+                    RaisePropertyChanged("IsDefaultName");
                     RaisePropertyChanged("Name");
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return DisplayName;
         }
 
         private void OnPoolComponentPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             RaisePropertyChanged("DiceCount");
             RaisePropertyChanged("DiceExpression");
-            RaisePropertyChanged("DisplayName");
+            if (IsDefaultName)
+            {
+                RaisePropertyChanged("DisplayName");
+            }
         }
     }
 }
