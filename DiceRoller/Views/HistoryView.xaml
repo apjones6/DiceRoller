@@ -22,7 +22,7 @@
 
     <Grid>
         <TextBlock
-            Text="No results"
+            Text="{Binding Path=Text.NoResults, Source={StaticResource Strings}}"
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}}"
             Style="{StaticResource PhoneTextSmallStyle}"
             FontSize="{StaticResource PhoneFontSizeLarge}"

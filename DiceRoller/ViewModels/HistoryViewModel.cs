@@ -20,7 +20,7 @@ namespace DiceRoller.ViewModels
         {
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, OnPoolMessage);
 
-            clearHistory = new ApplicationBarCommand(OnClearHistory, () => results.Count > 0, ApplicationBar.ClearHistory);
+            clearHistory = new ApplicationBarCommand(OnClearHistory, () => results.Count > 0, Text.ClearHistory);
             results = new ObservableCollection<PoolResult>();
             tap = new RelayCommand<PoolResult>(OnTap);
 

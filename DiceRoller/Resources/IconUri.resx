@@ -117,24 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ResourceFlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-    <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
+  <data name="Cancel" xml:space="preserve">
+    <value>/Assets/Images/cancel.png</value>
   </data>
-  <data name="ResourceLanguage" xml:space="preserve">
-    <value>en-US</value>
-    <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
+  <data name="Done" xml:space="preserve">
+    <value>/Assets/Images/check.png</value>
   </data>
-  <data name="ApplicationTitle" xml:space="preserve">
-    <value>DICE ROLLER</value>
+  <data name="Reset" xml:space="preserve">
+    <value>/Assets/Images/cancel.png</value>
   </data>
-  <data name="SampleProperty" xml:space="preserve">
-    <value>Sample Runtime Property Value</value>
-  </data>
-  <data name="AppBarButtonText" xml:space="preserve">
-    <value>add</value>
-  </data>
-  <data name="AppBarMenuItemText" xml:space="preserve">
-    <value>Menu Item</value>
+  <data name="Roll" xml:space="preserve">
+    <value>/Assets/Images/check.png</value>
   </data>
 </root>

@@ -2,17 +2,23 @@
 {
     public class Strings
     {
-        private static ApplicationBar applicationBar = new ApplicationBar();
-        private static Common common = new Common();
+        private static Configuration configuration = new Configuration();
+        private static IconUri iconUri = new IconUri();
+        private static Text text = new Text();
 
-        public ApplicationBar ApplicationBar
+        public Configuration Configuration
         {
-            get { return applicationBar; }
+            get { return configuration; }
         }
 
-        public Common Common
+        public IconUri IconUri
         {
-            get { return common; }
+            get { return iconUri; }
+        }
+
+        public Text Text
+        {
+            get { return text; }
         }
     }
 }

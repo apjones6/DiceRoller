@@ -117,40 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>DICE ROLLER</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>cancel</value>
+  </data>
   <data name="ClearHistory" xml:space="preserve">
     <value>clear history</value>
   </data>
-  <data name="Favorite" xml:space="preserve">
-    <value>favorite</value>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
   </data>
-  <data name="Favorite_IconUri" xml:space="preserve">
-    <value>/Assets/Images/favs.addto.png</value>
+  <data name="Done" xml:space="preserve">
+    <value>done</value>
+  </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>No results</value>
+  </data>
+  <data name="PickCount" xml:space="preserve">
+    <value>pick count</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>reset</value>
   </data>
-  <data name="Reset_IconUri" xml:space="preserve">
-    <value>/Assets/Images/cancel.png</value>
+  <data name="Results" xml:space="preserve">
+    <value>results</value>
   </data>
   <data name="Roll" xml:space="preserve">
     <value>roll</value>
   </data>
-  <data name="Roll_IconUri" xml:space="preserve">
-    <value>/Assets/Images/check.png</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>select</value>
-  </data>
-  <data name="Select_IconUri" xml:space="preserve">
-    <value>/Assets/Images/list.png</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>settings</value>
-  </data>
-  <data name="Unfavorite" xml:space="preserve">
-    <value>unfavorite</value>
-  </data>
-  <data name="Unfavorite_IconUri" xml:space="preserve">
-    <value>/Assets/Images/favs.removefrom.png</value>
+  <data name="Summary" xml:space="preserve">
+    <value>Summary</value>
   </data>
 </root>

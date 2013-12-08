@@ -204,7 +204,7 @@ namespace DiceRoller
                 //
                 // If a compiler error is hit then ResourceLanguage is missing from
                 // the resource file.
-                RootFrame.Language = XmlLanguage.GetLanguage(Common.ResourceLanguage);
+                RootFrame.Language = XmlLanguage.GetLanguage(Configuration.Language);
 
                 // Set the FlowDirection of all elements under the root frame based
                 // on the ResourceFlowDirection resource string for each
@@ -212,7 +212,7 @@ namespace DiceRoller
                 //
                 // If a compiler error is hit then ResourceFlowDirection is missing from
                 // the resource file.
-                var flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), Common.ResourceFlowDirection);
+                var flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), Configuration.FlowDirection);
                 RootFrame.FlowDirection = flow;
             }
             catch
