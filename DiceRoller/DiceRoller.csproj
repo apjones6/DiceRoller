@@ -142,7 +142,6 @@
     <Compile Include="Views\PickView.xaml.cs">
       <DependentUpon>PickView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TiltEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
