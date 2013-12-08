@@ -29,6 +29,7 @@ namespace DiceRoller.ViewModels
             if (IsInDesignMode)
             {
                 DataSource.SelectedItem = 22;
+                type = DiceType.D6;
             }
         }
 
@@ -45,6 +46,11 @@ namespace DiceRoller.ViewModels
         public ICommand DoneCommand
         {
             get { return done; }
+        }
+
+        public DiceType Type
+        {
+            get { return type; }
         }
 
         private void GoBack()

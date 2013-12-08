@@ -17,7 +17,8 @@
     Style="{StaticResource TransitionPageStyle}"
     SupportedOrientations="PortraitOrLandscape"
     Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Name="Root">
 
     <Grid Background="Transparent">
         
@@ -62,7 +63,7 @@
                                 VerticalAlignment="Center"
                                 />
                             <TextBlock
-                                Text="dice"
+                                Text="{Binding DataContext.Type, ElementName=Root}"
                                 Style="{StaticResource PhoneTextSubtleStyle}"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
