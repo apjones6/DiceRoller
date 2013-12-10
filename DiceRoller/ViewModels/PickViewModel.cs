@@ -88,7 +88,7 @@ namespace DiceRoller.ViewModels
         private void OnFavorite()
         {
             pool.Favorite = !pool.Favorite;
-            Messenger.Default.Send(new PoolMessage(pool), pool.Favorite ? PoolMessage.TOKEN_FAVORITE : PoolMessage.TOKEN_UNFAVORITE);
+            Messenger.Default.Send(new PoolMessage(pool), PoolMessage.TOKEN_FAVORITE);
             Update();
         }
 

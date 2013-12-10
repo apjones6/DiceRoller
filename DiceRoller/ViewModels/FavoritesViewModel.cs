@@ -20,7 +20,6 @@ namespace DiceRoller.ViewModels
         public FavoritesViewModel()
         {
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_FAVORITE, OnPoolMessage);
-            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_UNFAVORITE, OnPoolMessage);
 
             pools = new ObservableCollection<Pool>();
             select = new ApplicationBarCommand(OnSelect, () => pools.Count > 0, Text.Select, IconUri.Select);
