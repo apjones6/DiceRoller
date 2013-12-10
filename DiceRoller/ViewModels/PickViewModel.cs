@@ -11,6 +11,7 @@ namespace DiceRoller.ViewModels
 {
     public class PickViewModel : ViewModelBase
     {
+        private readonly ApplicationBarCommand favorite;
         private readonly ICommand hold;
         private readonly RelayCommand reset;
         private readonly RelayCommand roll;
@@ -20,6 +21,7 @@ namespace DiceRoller.ViewModels
 
         public PickViewModel()
         {
+            favorite = new ApplicationBarCommand(OnFavorite, () => pool.DiceCount > 0, Text.Favorite, IconUri.Favorite);
             hold = new RelayCommand<DiceType>(OnHold);
             reset = new ApplicationBarCommand(OnReset, () => pool.DiceCount > 0, Text.Reset, IconUri.Reset);
             roll = new ApplicationBarCommand(OnRoll, () => pool.DiceCount > 0, Text.Roll, IconUri.Roll);
@@ -27,12 +29,18 @@ namespace DiceRoller.ViewModels
 
             if (IsInDesignMode)
             {
-                Pool = new Pool("D12 + 7D6 + 4D4");
+                Pool = new Pool("D20 + 7D12 + 4D6");
+                Pool.Favorite = true;
             }
             else
             {
                 Pool = new Pool();
             }
+        }
+
+        public RelayCommand FavoriteCommand
+        {
+            get { return favorite; }
         }
 
         public ICommand HoldCommand
@@ -58,8 +66,7 @@ namespace DiceRoller.ViewModels
                 }
 
                 RaisePropertyChanged("Pool");
-                reset.RaiseCanExecuteChanged();
-                roll.RaiseCanExecuteChanged();
+                Update();
             }
         }
 
@@ -78,6 +85,13 @@ namespace DiceRoller.ViewModels
             get { return tap; }
         }
 
+        private void OnFavorite()
+        {
+            pool.Favorite = !pool.Favorite;
+            Messenger.Default.Send(new PoolMessage(pool), pool.Favorite ? PoolMessage.TOKEN_FAVORITE : PoolMessage.TOKEN_UNFAVORITE);
+            Update();
+        }
+
         private void OnHold(DiceType type)
         {
             Messenger.Default.Send(new CountPickerMessage(pool, type));
@@ -87,8 +101,7 @@ namespace DiceRoller.ViewModels
         {
             if (e.PropertyName == "DiceCount")
             {
-                reset.RaiseCanExecuteChanged();
-                roll.RaiseCanExecuteChanged();
+                Update();
             }
         }
 
@@ -107,6 +120,24 @@ namespace DiceRoller.ViewModels
         private void OnTap(DiceType type)
         {
             if (pool[type] < 99) pool[type] += 1;
+        }
+
+        private void Update()
+        {
+            favorite.RaiseCanExecuteChanged();
+            reset.RaiseCanExecuteChanged();
+            roll.RaiseCanExecuteChanged();
+
+            if (pool.Favorite)
+            {
+                favorite.IconUri = IconUri.Unfavorite;
+                favorite.Text = Text.Unfavorite;
+            }
+            else
+            {
+                favorite.IconUri = IconUri.Favorite;
+                favorite.Text = Text.Favorite;
+            }
         }
     }
 }

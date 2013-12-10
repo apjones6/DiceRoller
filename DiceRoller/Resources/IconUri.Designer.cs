@@ -79,6 +79,15 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/favorite.png.
+        /// </summary>
+        public static string Favorite {
+            get {
+                return ResourceManager.GetString("Favorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/cancel.png.
         /// </summary>
         public static string Reset {
@@ -93,6 +102,24 @@ namespace DiceRoller.Resources {
         public static string Roll {
             get {
                 return ResourceManager.GetString("Roll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/select.png.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/unfavorite.png.
+        /// </summary>
+        public static string Unfavorite {
+            get {
+                return ResourceManager.GetString("Unfavorite", resourceCulture);
             }
         }
     }

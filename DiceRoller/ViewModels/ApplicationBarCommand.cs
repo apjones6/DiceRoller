@@ -26,7 +26,7 @@ namespace DiceRoller.ViewModels
         public string IconUri
         {
             get { return iconUri; }
-            private set
+            set
             {
                 iconUri = value;
                 RaisePropertyChanged("IconUri");
@@ -36,7 +36,7 @@ namespace DiceRoller.ViewModels
         public string Text
         {
             get { return text; }
-            private set
+            set
             {
                 text = value;
                 RaisePropertyChanged("Text");

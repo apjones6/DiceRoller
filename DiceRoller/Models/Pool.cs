@@ -9,6 +9,7 @@ namespace DiceRoller.Models
     {
         private static readonly DiceType[] DEFAULT_DICE = Enum.GetValues(typeof(DiceType)).Cast<DiceType>().OrderByDescending(x => x).ToArray();
         private PoolComponent[] dice;
+        private bool favorite;
         private string name;
 
         public Pool()
@@ -74,6 +75,19 @@ namespace DiceRoller.Models
         public string DisplayName
         {
             get { return IsDefaultName ? DiceExpression : Name; }
+        }
+
+        public bool Favorite
+        {
+            get { return favorite; }
+            set
+            {
+                if (favorite != value)
+                {
+                    favorite = value;
+                    RaisePropertyChanged("Favorite");
+                }
+            }
         }
 
         public bool IsDefaultName

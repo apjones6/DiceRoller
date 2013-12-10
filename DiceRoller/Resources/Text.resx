@@ -132,8 +132,23 @@
   <data name="Done" xml:space="preserve">
     <value>done</value>
   </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>favorite</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>favorites</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>history</value>
+  </data>
+  <data name="NoFavorites" xml:space="preserve">
+    <value>No favorites</value>
+  </data>
   <data name="NoResults" xml:space="preserve">
     <value>No results</value>
+  </data>
+  <data name="Pick" xml:space="preserve">
+    <value>pick</value>
   </data>
   <data name="PickCount" xml:space="preserve">
     <value>pick count</value>
@@ -147,7 +162,13 @@
   <data name="Roll" xml:space="preserve">
     <value>roll</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>select</value>
+  </data>
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>
+  </data>
+  <data name="Unfavorite" xml:space="preserve">
+    <value>unfavorite</value>
   </data>
 </root>

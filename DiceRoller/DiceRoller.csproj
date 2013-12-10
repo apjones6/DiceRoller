@@ -117,6 +117,7 @@
       <DependentUpon>IconUri.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ApplicationBarCommand.cs" />
+    <Compile Include="ViewModels\FavoritesViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\IntegerSelectorViewModel.cs" />
     <Compile Include="ViewModels\Messages\CountPickerMessage.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="ViewModels\Messages\PoolMessage.cs" />
     <Compile Include="ViewModels\PickViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\FavoritesView.xaml.cs">
+      <DependentUpon>FavoritesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
@@ -159,6 +163,10 @@
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FavoritesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\HistoryView.xaml">
       <SubType>Designer</SubType>

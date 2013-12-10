@@ -17,6 +17,7 @@ namespace DiceRoller.ViewModels
 
         private readonly ObservableCollection<RelayCommand> buttons;
         private readonly IntegerSelectorViewModel countPicker;
+        private readonly FavoritesViewModel favorites;
         private readonly HistoryViewModel history;
         private readonly ObservableCollection<RelayCommand> items;
         private readonly InfoViewModel info;
@@ -33,6 +34,7 @@ namespace DiceRoller.ViewModels
 
             buttons = new ObservableCollection<RelayCommand>();
             countPicker = new IntegerSelectorViewModel();
+            favorites = new FavoritesViewModel();
             history = new HistoryViewModel();
             info = new InfoViewModel();
             items = new ObservableCollection<RelayCommand>();
@@ -52,6 +54,11 @@ namespace DiceRoller.ViewModels
         public IntegerSelectorViewModel CountPicker
         {
             get { return countPicker; }
+        }
+
+        public FavoritesViewModel Favorites
+        {
+            get { return favorites; }
         }
 
         public HistoryViewModel History
@@ -135,19 +142,20 @@ namespace DiceRoller.ViewModels
             {
                 case PIVOT_PICK:
                     buttons.Add(pick.RollCommand);
-                    //Buttons.Add(new BarCommand(BarItem.Favorite, false));
                     buttons.Add(pick.ResetCommand);
-                    //MenuItems.Add(new BarCommand(BarItem.Settings));
+                    buttons.Add(pick.FavoriteCommand);
+                    //items.Add(new BarCommand(BarItem.Settings));
                     break;
 
                 case PIVOT_HISTORY:
-                    //Buttons.Add(new BarCommand(BarItem.Select, false));
+                    //buttons.Add(new BarCommand(BarItem.Select, false));
                     items.Add(history.ClearHistoryCommand);
-                    //MenuItems.Add(new BarCommand(BarItem.Settings));
+                    //items.Add(new BarCommand(BarItem.Settings));
                     break;
 
                 case PIVOT_FAVS:
-                    //MenuItems.Add(new BarCommand(BarItem.Settings));
+                    //buttons.Add(favorites.SelectCommand);
+                    //items.Add(new BarCommand(BarItem.Settings));
                     break;
             }
 
