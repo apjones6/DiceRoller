@@ -4,14 +4,23 @@ namespace DiceRoller.ViewModels.Messages
 {
     public class CountPickerMessage
     {
+        private readonly Pool pool;
+        private readonly DiceType type;
+
         public CountPickerMessage(Pool pool, DiceType type)
         {
-            Pool = pool;
-            Type = type;
+            this.pool = pool;
+            this.type = type;
         }
 
-        public Pool Pool { get; set; }
+        public Pool Pool
+        {
+            get { return pool; }
+        }
 
-        public DiceType Type { get; set; }
+        public DiceType Type
+        {
+            get { return type; }
+        }
     }
 }

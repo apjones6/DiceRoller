@@ -53,6 +53,7 @@ namespace DiceRoller.ViewModels
                 {
                     isSelectMode = value;
                     RaisePropertyChanged("IsSelectMode");
+                    Update();
                 }
             }
         }
@@ -95,6 +96,11 @@ namespace DiceRoller.ViewModels
             var message = new PoolMessage(pool, new PoolResult(pool));
             Messenger.Default.Send(message, PoolMessage.TOKEN_CREATE);
             Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
+        }
+
+        private void Update()
+        {
+            Messenger.Default.Send(new PivotMessage(isSelectMode));
         }
     }
 }

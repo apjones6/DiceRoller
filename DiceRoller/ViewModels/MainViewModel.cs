@@ -23,12 +23,14 @@ namespace DiceRoller.ViewModels
         private readonly InfoViewModel info;
         private readonly PickViewModel pick;
 
+        private bool isLocked;
         private PageOrientation orientation;
         private int selectedIndex;
 
         public MainViewModel()
         {
             Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/CountPickerPage.xaml"));
+            Messenger.Default.Register<PivotMessage>(this, x => IsLocked = x.IsLocked);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/InfoPage.xaml"));
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/InfoPage.xaml"));
 
@@ -40,6 +42,7 @@ namespace DiceRoller.ViewModels
             items = new ObservableCollection<RelayCommand>();
             pick = new PickViewModel();
 
+            isLocked = false;
             orientation = PageOrientation.Portrait;
             selectedIndex = 0;
 
@@ -74,6 +77,19 @@ namespace DiceRoller.ViewModels
         public bool IsLandscape
         {
             get { return orientation == PageOrientation.Landscape || orientation == PageOrientation.LandscapeLeft || orientation == PageOrientation.LandscapeRight; }
+        }
+
+        public bool IsLocked
+        {
+            get { return isLocked; }
+            set
+            {
+                if (isLocked != value)
+                {
+                    isLocked = value;
+                    RaisePropertyChanged("IsLocked");
+                }
+            }
         }
 
         public bool IsVisible
@@ -154,7 +170,7 @@ namespace DiceRoller.ViewModels
                     break;
 
                 case PIVOT_FAVS:
-                    //buttons.Add(favorites.SelectCommand);
+                    buttons.Add(favorites.SelectCommand);
                     //items.Add(new BarCommand(BarItem.Settings));
                     break;
             }

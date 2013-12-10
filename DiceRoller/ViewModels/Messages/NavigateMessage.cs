@@ -5,18 +5,27 @@ namespace DiceRoller.ViewModels.Messages
 {
     public class NavigateMessage
     {
+        private readonly NavigationMode mode;
+        private readonly Uri uri;
+
         public NavigateMessage(NavigationMode mode)
         {
-            Mode = mode;
+            this.mode = mode;
         }
 
         public NavigateMessage(string uri)
         {
-            Uri = new Uri(uri, UriKind.Relative);
+            this.uri = new Uri(uri, UriKind.Relative);
         }
 
-        public NavigationMode Mode { get; private set; }
+        public NavigationMode Mode
+        {
+            get { return mode; }
+        }
 
-        public Uri Uri { get; private set; }
+        public Uri Uri
+        {
+            get { return uri; }
+        }
     }
 }

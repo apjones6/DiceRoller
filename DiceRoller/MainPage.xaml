@@ -44,6 +44,7 @@
 
         <!--Pivot Control-->
         <phone:Pivot
+            Name="Pivot"
             SelectedIndex="{Binding Path=SelectedIndex, Mode=TwoWay}"
             Title="{Binding Path=Text.ApplicationTitle, Source={StaticResource Strings}}"
             Margin="-2,0,0,0"

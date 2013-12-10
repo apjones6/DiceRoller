@@ -1,6 +1,7 @@
 ﻿using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
+using System.ComponentModel;
 using System.Windows.Navigation;
 
 namespace DiceRoller
@@ -12,6 +13,8 @@ namespace DiceRoller
             InitializeComponent();
             Messenger.Default.Register<NavigateMessage>(this, OnNavigateMessage);
             DataContext = App.ViewModel;
+
+            App.ViewModel.PropertyChanged += OnPropertyChanged;
         }
         
         private void OnNavigateMessage(NavigateMessage message)
@@ -23,6 +26,14 @@ namespace DiceRoller
             else
             {
                 NavigationService.Navigate(message.Uri);
+            }
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLocked")
+            {
+                Pivot.IsLocked = App.ViewModel.IsLocked;
             }
         }
     }

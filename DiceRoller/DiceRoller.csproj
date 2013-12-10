@@ -120,6 +120,7 @@
     <Compile Include="ViewModels\FavoritesViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\IntegerSelectorViewModel.cs" />
+    <Compile Include="ViewModels\Messages\PivotMessage.cs" />
     <Compile Include="ViewModels\Messages\CountPickerMessage.cs" />
     <Compile Include="ViewModels\Messages\NavigateMessage.cs" />
     <Compile Include="Models\DiceType.cs" />
