@@ -26,6 +26,7 @@
             <tool:PhoneTextBox
                 Hint="{Binding Path=Pool.DiceExpression, Mode=OneWay}"
                 HorizontalAlignment="Left"
+                InputScope="Text"
                 KeyUp="OnKeyUp"
                 Margin="0,0,0,-12"
                 Text="{Binding Path=Pool.Name, Mode=TwoWay}"
