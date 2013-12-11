@@ -4,7 +4,10 @@ using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
@@ -13,7 +16,10 @@ namespace DiceRoller.ViewModels
     {
         private readonly ObservableCollection<Pool> pools;
         private readonly RelayCommand select;
+        private readonly List<Pool> selected;
+        private readonly ICommand selectionChanged;
         private readonly ICommand tap;
+        private readonly RelayCommand unfavorite;
 
         private bool isSelectMode;
 
@@ -23,7 +29,10 @@ namespace DiceRoller.ViewModels
 
             pools = new ObservableCollection<Pool>();
             select = new ApplicationBarCommand(OnSelect, () => pools.Count > 0, Text.Select, IconUri.Select);
+            selected = new List<Pool>();
+            selectionChanged = new RelayCommand<SelectionChangedEventArgs>(OnSelectionChanged);
             tap = new RelayCommand<Pool>(OnTap);
+            unfavorite = new ApplicationBarCommand(OnUnfavorite, () => selected.Count > 0, Text.Unfavorite, IconUri.Unfavorite);
 
             pools.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
 
@@ -67,9 +76,23 @@ namespace DiceRoller.ViewModels
             get { return select; }
         }
 
+        public ICommand SelectionChangedCommand
+        {
+            get { return selectionChanged; }
+        }
+
         public ICommand TapCommand
         {
             get { return tap; }
+        }
+
+        public void OnBack(CancelEventArgs e)
+        {
+            if (isSelectMode)
+            {
+                IsSelectMode = false;
+                e.Cancel = true;
+            }
         }
 
         private void OnPoolMessage(PoolMessage message)
@@ -90,6 +113,21 @@ namespace DiceRoller.ViewModels
             IsSelectMode = !isSelectMode;
         }
 
+        private void OnSelectionChanged(SelectionChangedEventArgs e)
+        {
+            foreach (Pool pool in e.RemovedItems)
+            {
+                selected.Remove(pool);
+            }
+
+            foreach (Pool pool in e.AddedItems)
+            {
+                selected.Add(pool);
+            }
+
+            unfavorite.RaiseCanExecuteChanged();
+        }
+
         private void OnTap(Pool pool)
         {
             var message = new PoolMessage(pool, new PoolResult(pool));
@@ -97,9 +135,35 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
         }
 
+        private void OnUnfavorite()
+        {
+            // Copy, as the selected list will update as each pool removes
+            foreach (var pool in selected.ToArray())
+            {
+                pool.Favorite = false;
+                pools.Remove(pool);
+            }
+
+            IsSelectMode = false;
+        }
+
         private void Update()
         {
             Messenger.Default.Send(new PivotMessage(isSelectMode));
+
+            // TODO: This should be accessed through a better mechanism than the singleton property
+            var buttons = App.ViewModel.Buttons;
+            while (buttons.Count > 0) buttons.RemoveAt(0);
+
+            if (isSelectMode)
+            {
+                buttons.Add(unfavorite);
+            }
+            else
+            {
+                buttons.Add(select);
+                selected.Clear();
+            }
         }
     }
 }

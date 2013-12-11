@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace DiceRoller.ViewModels
@@ -145,6 +146,11 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Send(new NavigateMessage(uri));
         }
 
+        public void OnBack(CancelEventArgs e)
+        {
+            favorites.OnBack(e);
+        }
+
         private void Update()
         {
             while (buttons.Count > 0) buttons.RemoveAt(0);
@@ -160,18 +166,18 @@ namespace DiceRoller.ViewModels
                     buttons.Add(pick.RollCommand);
                     buttons.Add(pick.ResetCommand);
                     buttons.Add(pick.FavoriteCommand);
-                    //items.Add(new BarCommand(BarItem.Settings));
+                    //items.Add(settings);
                     break;
 
                 case PIVOT_HISTORY:
-                    //buttons.Add(new BarCommand(BarItem.Select, false));
+                    //buttons.Add(history.SelectCommand);
                     items.Add(history.ClearHistoryCommand);
-                    //items.Add(new BarCommand(BarItem.Settings));
+                    //items.Add(settings);
                     break;
 
                 case PIVOT_FAVS:
                     buttons.Add(favorites.SelectCommand);
-                    //items.Add(new BarCommand(BarItem.Settings));
+                    //items.Add(settings);
                     break;
             }
 

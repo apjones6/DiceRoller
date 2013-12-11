@@ -36,6 +36,15 @@
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
             tool:TiltEffect.IsTiltEnabled="True"
             >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <cmd:EventToCommand
+                        Command="{Binding SelectionChangedCommand}"
+                        MustToggleIsEnabledValue="True"
+                        PassEventArgsToCommand="True"
+                        />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <tool:LongListMultiSelector.ItemTemplate>
                 <DataTemplate>
                     <UserControl>

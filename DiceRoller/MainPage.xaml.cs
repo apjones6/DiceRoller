@@ -16,6 +16,12 @@ namespace DiceRoller
 
             App.ViewModel.PropertyChanged += OnPropertyChanged;
         }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            App.ViewModel.OnBack(e);
+            base.OnBackKeyPress(e);
+        }
         
         private void OnNavigateMessage(NavigateMessage message)
         {
