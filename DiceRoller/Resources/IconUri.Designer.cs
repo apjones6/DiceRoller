@@ -88,7 +88,7 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/cancel.png.
+        ///   Looks up a localized string similar to /Assets/Images/add.png.
         /// </summary>
         public static string Reset {
             get {
@@ -97,7 +97,7 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/check.png.
+        ///   Looks up a localized string similar to /Assets/Images/dice.png.
         /// </summary>
         public static string Roll {
             get {

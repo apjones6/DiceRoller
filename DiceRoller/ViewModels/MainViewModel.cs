@@ -163,8 +163,8 @@ namespace DiceRoller.ViewModels
             switch (selectedIndex)
             {
                 case PIVOT_PICK:
-                    buttons.Add(pick.RollCommand);
                     buttons.Add(pick.ResetCommand);
+                    buttons.Add(pick.RollCommand);
                     buttons.Add(pick.FavoriteCommand);
                     //items.Add(settings);
                     break;

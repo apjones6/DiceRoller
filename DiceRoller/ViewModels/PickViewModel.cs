@@ -5,12 +5,15 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
 {
     public class PickViewModel : ViewModelBase
     {
+        private static readonly string[] WATCH_PROPS = new[] { "DiceCount", "Favorite" };
+
         private readonly ApplicationBarCommand favorite;
         private readonly ICommand hold;
         private readonly RelayCommand reset;
@@ -99,7 +102,7 @@ namespace DiceRoller.ViewModels
 
         private void OnPoolPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "DiceCount")
+            if (WATCH_PROPS.Contains(e.PropertyName))
             {
                 Update();
             }

@@ -169,7 +169,7 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to reset.
+        ///   Looks up a localized string similar to new.
         /// </summary>
         public static string Reset {
             get {
