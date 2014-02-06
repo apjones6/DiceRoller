@@ -56,6 +56,15 @@
                                     MustToggleIsEnabledValue="True" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
+                        <tool:ContextMenuService.ContextMenu>
+                            <tool:ContextMenu>
+                                <tool:MenuItem
+                                    Header="{Binding Path=Text.Rename, Source={StaticResource Strings}}"
+                                    Command="{Binding Path=DataContext.RenameCommand, ElementName=Root, Mode=OneWay}"
+                                    CommandParameter="{Binding}"
+                                    />
+                            </tool:ContextMenu>
+                        </tool:ContextMenuService.ContextMenu>
 
                         <StackPanel Margin="0,-14,0,24">
                             <TextBlock

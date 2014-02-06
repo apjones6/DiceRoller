@@ -90,9 +90,7 @@ namespace DiceRoller.ViewModels
 
         private void OnFavorite()
         {
-            var copy = new Pool(Pool);
-            Messenger.Default.Send(new PoolMessage(copy), PoolMessage.TOKEN_RENAME);
-            Messenger.Default.Send(new NavigateMessage("/RenamePage.xaml"));
+            Messenger.Default.Send(new PoolMessage(new Pool(Pool)), PoolMessage.TOKEN_RENAME);
         }
 
         private void OnHold(DiceType type)

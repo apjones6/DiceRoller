@@ -16,6 +16,7 @@ namespace DiceRoller.ViewModels
     {
         private readonly RelayCommand delete;
         private readonly ObservableCollection<Pool> pools;
+        private readonly ICommand rename;
         private readonly RelayCommand select;
         private readonly List<Pool> selected;
         private readonly ICommand selectionChanged;
@@ -29,6 +30,7 @@ namespace DiceRoller.ViewModels
 
             delete = new ApplicationBarCommand(OnDelete, () => selected.Count > 0, Text.Delete, IconUri.Delete);
             pools = new ObservableCollection<Pool>();
+            rename = new RelayCommand<Pool>(OnRename);
             select = new ApplicationBarCommand(OnSelect, () => pools.Count > 0, Text.Select, IconUri.Select);
             selected = new List<Pool>();
             selectionChanged = new RelayCommand<SelectionChangedEventArgs>(OnSelectionChanged);
@@ -71,6 +73,11 @@ namespace DiceRoller.ViewModels
             get { return pools; }
         }
 
+        public ICommand RenameCommand
+        {
+            get { return rename; }
+        }
+
         public RelayCommand SelectCommand
         {
             get { return select; }
@@ -95,16 +102,37 @@ namespace DiceRoller.ViewModels
             }
         }
 
+        private void OnDelete()
+        {
+            // Copy, as the selected list will update as each pool removes
+            foreach (var pool in selected.ToArray())
+            {
+                pool.Favorite = false;
+                pools.Remove(pool);
+            }
+
+            IsSelectMode = false;
+        }
+
         private void OnPoolMessage(PoolMessage message)
         {
             if (message.Pool.Favorite)
             {
-                pools.Add(message.Pool);
+                // Ensure not duplicate
+                if (pools.IndexOf(message.Pool) == -1)
+                {
+                    pools.Add(message.Pool);
+                }
             }
             else
             {
                 pools.Remove(message.Pool);
             }
+        }
+
+        private void OnRename(Pool pool)
+        {
+            Messenger.Default.Send(new PoolMessage(pool), PoolMessage.TOKEN_RENAME);
         }
 
         private void OnSelect()
@@ -132,18 +160,6 @@ namespace DiceRoller.ViewModels
             var message = new PoolMessage(pool, new PoolResult(pool));
             Messenger.Default.Send(message, PoolMessage.TOKEN_CREATE);
             Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
-        }
-
-        private void OnDelete()
-        {
-            // Copy, as the selected list will update as each pool removes
-            foreach (var pool in selected.ToArray())
-            {
-                pool.Favorite = false;
-                pools.Remove(pool);
-            }
-
-            IsSelectMode = false;
         }
 
         private void Update()
