@@ -120,6 +120,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>/Assets/Images/cancel.png</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>/Assets/Images/delete.png</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>/Assets/Images/check.png</value>
   </data>

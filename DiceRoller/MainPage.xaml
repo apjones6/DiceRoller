@@ -60,7 +60,7 @@
                 </DataTemplate>
             </phone:Pivot.TitleTemplate>
             <phone:PivotItem Header="{Binding Path=Text.Pick, Source={StaticResource Strings}}">
-                <v:PoolEditorView
+                <v:PickView
                     DataContext="{Binding Pick}"
                     d:DataContext="{d:DesignInstance Type=vm:PickViewModel, IsDesignTimeCreatable=True}"
                     Margin="0,4,0,0"

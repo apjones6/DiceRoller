@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="DiceRoller.Views.PoolEditorView"
+    x:Class="DiceRoller.Views.PickView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,20 +19,50 @@
     <UserControl.Resources>
         <c:ActiveBrushWhenPositiveConverter x:Key="ActiveBrushWhenPositive"/>
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+
+        <Storyboard x:Key="ShowNameBox">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.LocalOffsetY)"
+                Storyboard.TargetName="Wrapper">
+                <DiscreteDoubleKeyFrame KeyTime="0" Value="-100" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.500" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideNameBox">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.LocalOffsetY)"
+                Storyboard.TargetName="Wrapper">
+                <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.500" Value="-100">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
     
     <ScrollViewer>
-        <StackPanel Orientation="Vertical" Margin="-12,-12,0,0">
+        <StackPanel x:Name="Wrapper" Orientation="Vertical" Margin="-12,-12,0,0">
+            <!--<StackPanel.Projection>
+                <PlaneProjection LocalOffsetY="0" />
+            </StackPanel.Projection>-->
+            
             <tool:PhoneTextBox
                 Hint="{Binding Path=Pool.DiceExpression, Mode=OneWay}"
                 HorizontalAlignment="Left"
                 InputScope="Text"
+                IsEnabled="{Binding Path=Pool.Favorite}"
                 KeyUp="OnKeyUp"
-                Margin="0,0,0,-12"
+                Margin="0"
+                Name="NameBox"
                 Text="{Binding Path=Pool.Name, Mode=TwoWay}"
-                Visibility="{Binding Path=Pool.Favorite, Converter={StaticResource BooleanToVisibility}}"
-                Width="456"
-                />
+                Width="456">
+            </tool:PhoneTextBox>
             <ListBox
                 ItemsSource="{Binding Path=Pool.Dice}"
                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -50,7 +80,7 @@
                             Height="210"
                             Width="210"
                             tool:TiltEffect.IsTiltEnabled="True"
-                            Margin="12,12,0,0">
+                            Margin="12,0,0,12">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border Background="{TemplateBinding Background}">

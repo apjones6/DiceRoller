@@ -14,12 +14,12 @@ namespace DiceRoller.ViewModels
 {
     public class FavoritesViewModel : ViewModelBase
     {
+        private readonly RelayCommand delete;
         private readonly ObservableCollection<Pool> pools;
         private readonly RelayCommand select;
         private readonly List<Pool> selected;
         private readonly ICommand selectionChanged;
         private readonly ICommand tap;
-        private readonly RelayCommand unfavorite;
 
         private bool isSelectMode;
 
@@ -27,12 +27,12 @@ namespace DiceRoller.ViewModels
         {
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_FAVORITE, OnPoolMessage);
 
+            delete = new ApplicationBarCommand(OnDelete, () => selected.Count > 0, Text.Delete, IconUri.Delete);
             pools = new ObservableCollection<Pool>();
             select = new ApplicationBarCommand(OnSelect, () => pools.Count > 0, Text.Select, IconUri.Select);
             selected = new List<Pool>();
             selectionChanged = new RelayCommand<SelectionChangedEventArgs>(OnSelectionChanged);
             tap = new RelayCommand<Pool>(OnTap);
-            unfavorite = new ApplicationBarCommand(OnUnfavorite, () => selected.Count > 0, Text.Unfavorite, IconUri.Unfavorite);
 
             pools.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
 
@@ -125,7 +125,7 @@ namespace DiceRoller.ViewModels
                 selected.Add(pool);
             }
 
-            unfavorite.RaiseCanExecuteChanged();
+            delete.RaiseCanExecuteChanged();
         }
 
         private void OnTap(Pool pool)
@@ -135,7 +135,7 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
         }
 
-        private void OnUnfavorite()
+        private void OnDelete()
         {
             // Copy, as the selected list will update as each pool removes
             foreach (var pool in selected.ToArray())
@@ -157,7 +157,7 @@ namespace DiceRoller.ViewModels
 
             if (isSelectMode)
             {
-                buttons.Add(unfavorite);
+                buttons.Add(delete);
             }
             else
             {

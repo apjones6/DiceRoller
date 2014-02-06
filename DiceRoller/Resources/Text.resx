@@ -126,6 +126,9 @@
   <data name="ClearHistory" xml:space="preserve">
     <value>clear history</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>delete</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
