@@ -130,15 +130,12 @@
     <value>/Assets/Images/favorite.png</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>/Assets/Images/add.png</value>
+    <value>/Assets/Images/cancel.png</value>
   </data>
   <data name="Roll" xml:space="preserve">
     <value>/Assets/Images/dice.png</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>/Assets/Images/select.png</value>
-  </data>
-  <data name="Unfavorite" xml:space="preserve">
-    <value>/Assets/Images/unfavorite.png</value>
   </data>
 </root>

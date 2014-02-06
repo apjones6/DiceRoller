@@ -39,7 +39,10 @@ namespace DiceRoller
         {
             if (e.PropertyName == "IsLocked")
             {
-                Pivot.IsLocked = App.ViewModel.IsLocked;
+                Dispatcher.BeginInvoke(() =>
+                    {
+                        Pivot.IsLocked = App.ViewModel.IsLocked;
+                    });
             }
         }
     }

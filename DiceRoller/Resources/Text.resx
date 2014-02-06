@@ -156,8 +156,14 @@
   <data name="PickCount" xml:space="preserve">
     <value>pick count</value>
   </data>
+  <data name="PoolName" xml:space="preserve">
+    <value>Pool Name</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>rename</value>
+  </data>
   <data name="Reset" xml:space="preserve">
-    <value>new</value>
+    <value>reset</value>
   </data>
   <data name="Results" xml:space="preserve">
     <value>results</value>

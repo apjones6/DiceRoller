@@ -10,6 +10,7 @@ namespace DiceRoller.ViewModels.Messages
         public const int TOKEN_CREATE = 0;
         public const int TOKEN_VIEW = 1;
         public const int TOKEN_FAVORITE = 2;
+        public const int TOKEN_RENAME = 3;
 
         public PoolMessage(PoolResult result)
             : this(result.Pool, result)

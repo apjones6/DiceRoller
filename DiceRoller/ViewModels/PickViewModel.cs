@@ -12,9 +12,9 @@ namespace DiceRoller.ViewModels
 {
     public class PickViewModel : ViewModelBase
     {
-        private static readonly string[] WATCH_PROPS = new[] { "DiceCount", "Favorite" };
+        private static readonly string[] WATCH_PROPS = new[] { "DiceCount" };
 
-        private readonly ApplicationBarCommand favorite;
+        private readonly RelayCommand favorite;
         private readonly ICommand hold;
         private readonly RelayCommand reset;
         private readonly RelayCommand roll;
@@ -90,9 +90,9 @@ namespace DiceRoller.ViewModels
 
         private void OnFavorite()
         {
-            pool.Favorite = !pool.Favorite;
-            Messenger.Default.Send(new PoolMessage(pool), PoolMessage.TOKEN_FAVORITE);
-            Update();
+            var copy = new Pool(Pool);
+            Messenger.Default.Send(new PoolMessage(copy), PoolMessage.TOKEN_RENAME);
+            Messenger.Default.Send(new NavigateMessage("/RenamePage.xaml"));
         }
 
         private void OnHold(DiceType type)
@@ -130,17 +130,6 @@ namespace DiceRoller.ViewModels
             favorite.RaiseCanExecuteChanged();
             reset.RaiseCanExecuteChanged();
             roll.RaiseCanExecuteChanged();
-
-            if (pool.Favorite)
-            {
-                favorite.IconUri = IconUri.Unfavorite;
-                favorite.Text = Text.Unfavorite;
-            }
-            else
-            {
-                favorite.IconUri = IconUri.Favorite;
-                favorite.Text = Text.Favorite;
-            }
         }
     }
 }

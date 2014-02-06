@@ -12,9 +12,9 @@ namespace DiceRoller.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private const int PIVOT_PICK = 0;
+        private const int PIVOT_FAVORITES = 2;
         private const int PIVOT_HISTORY = 1;
-        private const int PIVOT_FAVS = 2;
+        private const int PIVOT_PICK = 0;
 
         private readonly ObservableCollection<RelayCommand> buttons;
         private readonly IntegerSelectorViewModel countPicker;
@@ -23,6 +23,7 @@ namespace DiceRoller.ViewModels
         private readonly ObservableCollection<RelayCommand> items;
         private readonly InfoViewModel info;
         private readonly PickViewModel pick;
+        private readonly RenameViewModel rename;
 
         private bool isLocked;
         private PageOrientation orientation;
@@ -33,6 +34,7 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/CountPickerPage.xaml"));
             Messenger.Default.Register<PivotMessage>(this, x => IsLocked = x.IsLocked);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/InfoPage.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_FAVORITE, x => SelectedIndex = PIVOT_FAVORITES);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/InfoPage.xaml"));
 
             buttons = new ObservableCollection<RelayCommand>();
@@ -42,6 +44,7 @@ namespace DiceRoller.ViewModels
             info = new InfoViewModel();
             items = new ObservableCollection<RelayCommand>();
             pick = new PickViewModel();
+            rename = new RenameViewModel();
 
             isLocked = false;
             orientation = PageOrientation.Portrait;
@@ -127,6 +130,11 @@ namespace DiceRoller.ViewModels
             get { return pick; }
         }
 
+        public RenameViewModel Rename
+        {
+            get { return rename; }
+        }
+
         public int SelectedIndex
         {
             get { return selectedIndex; }
@@ -163,9 +171,9 @@ namespace DiceRoller.ViewModels
             switch (selectedIndex)
             {
                 case PIVOT_PICK:
-                    buttons.Add(pick.ResetCommand);
-                    buttons.Add(pick.RollCommand);
                     buttons.Add(pick.FavoriteCommand);
+                    buttons.Add(pick.RollCommand);
+                    buttons.Add(pick.ResetCommand);
                     //items.Add(settings);
                     break;
 
@@ -175,7 +183,7 @@ namespace DiceRoller.ViewModels
                     //items.Add(settings);
                     break;
 
-                case PIVOT_FAVS:
+                case PIVOT_FAVORITES:
                     buttons.Add(favorites.SelectCommand);
                     //items.Add(settings);
                     break;

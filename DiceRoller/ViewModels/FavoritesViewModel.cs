@@ -109,7 +109,6 @@ namespace DiceRoller.ViewModels
 
         private void OnSelect()
         {
-            // TODO: Show checkboxes, update application bar, lock pivot
             IsSelectMode = !isSelectMode;
         }
 

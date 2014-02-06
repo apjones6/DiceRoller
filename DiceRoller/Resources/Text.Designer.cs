@@ -178,7 +178,25 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to new.
+        ///   Looks up a localized string similar to Pool Name.
+        /// </summary>
+        public static string PoolName {
+            get {
+                return ResourceManager.GetString("PoolName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rename.
+        /// </summary>
+        public static string Rename {
+            get {
+                return ResourceManager.GetString("Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to reset.
         /// </summary>
         public static string Reset {
             get {
