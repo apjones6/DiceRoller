@@ -57,7 +57,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <tool:ContextMenuService.ContextMenu>
-                            <tool:ContextMenu>
+                            <tool:ContextMenu IsZoomEnabled="False">
                                 <tool:MenuItem
                                     Header="{Binding Path=Text.Rename, Source={StaticResource Strings}}"
                                     Command="{Binding Path=DataContext.RenameCommand, ElementName=Root, Mode=OneWay}"
