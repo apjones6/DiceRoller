@@ -12,8 +12,21 @@ namespace DiceRoller.Views
 
         public HistoryView()
         {
-            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, OnPoolMessage);
             InitializeComponent();
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, OnPoolMessage);
+            Unloaded += OnUnloaded;
+            Loaded -= OnLoaded;
+        }
+
+        private void OnLongListSelectorLoaded(object sender, RoutedEventArgs e)
+        {
+            loaded = true;
+            ScrollTop();
         }
 
         private void OnPoolMessage(PoolMessage message)
@@ -22,10 +35,11 @@ namespace DiceRoller.Views
             ScrollTop();
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            loaded = true;
-            ScrollTop();
+            Messenger.Default.Unregister(this);
+            Unloaded -= OnUnloaded;
+            Loaded += OnLoaded;
         }
 
         private void ScrollTop()

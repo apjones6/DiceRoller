@@ -31,7 +31,7 @@
             />
         <phone:LongListSelector
             ItemsSource="{Binding Results}"
-            Loaded="OnLoaded"
+            Loaded="OnLongListSelectorLoaded"
             Name="HistoryLongListSelector"
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
             tool:TiltEffect.IsTiltEnabled="True"

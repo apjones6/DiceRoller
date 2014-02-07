@@ -1,5 +1,7 @@
 ﻿using DiceRoller.Resources;
 using DiceRoller.ViewModels;
+using DiceRoller.ViewModels.Messages;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
@@ -39,6 +41,9 @@ namespace DiceRoller
 
             // Language display initialization
             InitializeLanguage();
+
+            // Messenger navigation initialization
+            InitializeNavigation();
 
             // View model initialization
             ViewModel = new MainViewModel();
@@ -229,6 +234,27 @@ namespace DiceRoller
 
                 throw;
             }
+        }
+
+        // Initialize the apps navigation system to handle messages and perform appropriate navigation
+        // actions on the root frame.
+        //
+        // To trigger a navigation to a URI send a NavigateMessage to the messenger with the URI you
+        // want to navigate to. To trigger a back navigation do the same with NavigationMode.Back
+        // passed into the message constructor instead.
+        private void InitializeNavigation()
+        {
+            Messenger.Default.Register<NavigateMessage>(this, (message) =>
+                {
+                    if (message.Mode == NavigationMode.Back)
+                    {
+                        RootFrame.GoBack();
+                    }
+                    else
+                    {
+                        RootFrame.Navigate(message.Uri);
+                    }
+                });
         }
     }
 }

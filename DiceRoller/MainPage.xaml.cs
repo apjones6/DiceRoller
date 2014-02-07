@@ -1,6 +1,4 @@
-﻿using DiceRoller.ViewModels.Messages;
-using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.Controls;
 using System.ComponentModel;
 using System.Windows.Navigation;
 
@@ -11,21 +9,8 @@ namespace DiceRoller
         public MainPage()
         {
             InitializeComponent();
-            Messenger.Default.Register<NavigateMessage>(this, OnNavigateMessage);
-            DataContext = App.ViewModel;
-
             App.ViewModel.PropertyChanged += OnPropertyChanged;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            // This is the main page for the application, so back should always exit
-            while (NavigationService.CanGoBack)
-            {
-                NavigationService.RemoveBackEntry();
-            }
+            DataContext = App.ViewModel;
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -34,15 +19,14 @@ namespace DiceRoller
             base.OnBackKeyPress(e);
         }
         
-        private void OnNavigateMessage(NavigateMessage message)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (message.Mode == NavigationMode.Back)
+            base.OnNavigatedTo(e);
+
+            // This is the main page for the application, so back should always exit
+            while (NavigationService.CanGoBack)
             {
-                NavigationService.GoBack();
-            }
-            else
-            {
-                NavigationService.Navigate(message.Uri);
+                NavigationService.RemoveBackEntry();
             }
         }
 
