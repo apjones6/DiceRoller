@@ -158,8 +158,8 @@ namespace DiceRoller.ViewModels
                 original[type] = Pool[type];
             }
 
-            pool.Favorite = true;
-            Messenger.Default.Send(new PoolMessage(pool), PoolMessage.TOKEN_FAVORITE);
+            original.Favorite = true;
+            Messenger.Default.Send(new PoolMessage(original), PoolMessage.TOKEN_FAVORITE);
             Update();
         }
 
