@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace DiceRoller
@@ -9,8 +10,8 @@ namespace DiceRoller
         public MainPage()
         {
             InitializeComponent();
-            App.ViewModel.PropertyChanged += OnPropertyChanged;
             DataContext = App.ViewModel;
+            Loaded += OnLoaded;
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -18,7 +19,14 @@ namespace DiceRoller
             App.ViewModel.OnBack(e);
             base.OnBackKeyPress(e);
         }
-        
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            App.ViewModel.PropertyChanged += OnPropertyChanged;
+            Unloaded += OnUnloaded;
+            Loaded -= OnLoaded;
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -39,6 +47,13 @@ namespace DiceRoller
                         MainPagePivot.IsLocked = App.ViewModel.IsLocked;
                     });
             }
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            App.ViewModel.PropertyChanged -= OnPropertyChanged;
+            Unloaded -= OnUnloaded;
+            Loaded += OnLoaded;
         }
     }
 }
