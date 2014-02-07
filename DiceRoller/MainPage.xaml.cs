@@ -17,6 +17,17 @@ namespace DiceRoller
             App.ViewModel.PropertyChanged += OnPropertyChanged;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            // This is the main page for the application, so back should always exit
+            while (NavigationService.CanGoBack)
+            {
+                NavigationService.RemoveBackEntry();
+            }
+        }
+
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             App.ViewModel.OnBack(e);
