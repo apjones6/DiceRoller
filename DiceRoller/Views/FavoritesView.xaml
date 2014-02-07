@@ -63,6 +63,11 @@
                                     Command="{Binding Path=DataContext.RenameCommand, ElementName=Root, Mode=OneWay}"
                                     CommandParameter="{Binding}"
                                     />
+                                <tool:MenuItem
+                                    Header="{Binding Path=Text.Delete, Source={StaticResource Strings}}"
+                                    Command="{Binding Path=DataContext.DeleteCommand, ElementName=Root, Mode=OneWay}"
+                                    CommandParameter="{Binding}"
+                                    />
                             </tool:ContextMenu>
                         </tool:ContextMenuService.ContextMenu>
 

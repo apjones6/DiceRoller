@@ -14,7 +14,8 @@ namespace DiceRoller.ViewModels
 {
     public class FavoritesViewModel : ViewModelBase
     {
-        private readonly RelayCommand delete;
+        private readonly ICommand delete;
+        private readonly RelayCommand deleteMany;
         private readonly ApplicationBarCommand instant;
         private readonly ObservableCollection<Pool> pools;
         private readonly ICommand rename;
@@ -30,7 +31,8 @@ namespace DiceRoller.ViewModels
         {
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_FAVORITE, OnPoolMessage);
 
-            delete = new ApplicationBarCommand(OnDelete, () => selected.Count > 0, Text.Delete, IconUri.Delete);
+            delete = new RelayCommand<Pool>(OnDelete);
+            deleteMany = new ApplicationBarCommand(OnDelete, () => selected.Count > 0, Text.Delete, IconUri.Delete);
             instant = new ApplicationBarCommand(OnInstant, Text.Instant, IconUri.InstantOff);
             pools = new ObservableCollection<Pool>();
             rename = new RelayCommand<Pool>(OnRename);
@@ -53,6 +55,11 @@ namespace DiceRoller.ViewModels
                 pools.Add(new Pool("D20 + 2D6"));
                 pools.Add(new Pool("D4", "Attack"));
             }
+        }
+
+        public ICommand DeleteCommand
+        {
+            get { return delete; }
         }
 
         public RelayCommand InstantCommand
@@ -138,6 +145,12 @@ namespace DiceRoller.ViewModels
             IsSelectMode = false;
         }
 
+        private void OnDelete(Pool pool)
+        {
+            pool.Favorite = false;
+            pools.Remove(pool);
+        }
+
         private void OnInstant()
         {
             IsInstant = !isInstant;
@@ -181,7 +194,7 @@ namespace DiceRoller.ViewModels
                 selected.Add(pool);
             }
 
-            delete.RaiseCanExecuteChanged();
+            deleteMany.RaiseCanExecuteChanged();
         }
 
         private void OnTap(Pool pool)
@@ -208,7 +221,7 @@ namespace DiceRoller.ViewModels
 
             if (isSelectMode)
             {
-                buttons.Add(delete);
+                buttons.Add(deleteMany);
             }
             else
             {
