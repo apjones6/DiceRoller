@@ -15,6 +15,7 @@ namespace DiceRoller.ViewModels
     public class FavoritesViewModel : ViewModelBase
     {
         private readonly RelayCommand delete;
+        private readonly ApplicationBarCommand instant;
         private readonly ObservableCollection<Pool> pools;
         private readonly ICommand rename;
         private readonly RelayCommand select;
@@ -22,6 +23,7 @@ namespace DiceRoller.ViewModels
         private readonly ICommand selectionChanged;
         private readonly ICommand tap;
 
+        private bool isInstant;
         private bool isSelectMode;
 
         public FavoritesViewModel()
@@ -29,12 +31,16 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_FAVORITE, OnPoolMessage);
 
             delete = new ApplicationBarCommand(OnDelete, () => selected.Count > 0, Text.Delete, IconUri.Delete);
+            instant = new ApplicationBarCommand(OnInstant, Text.Instant, IconUri.InstantOff);
             pools = new ObservableCollection<Pool>();
             rename = new RelayCommand<Pool>(OnRename);
             select = new ApplicationBarCommand(OnSelect, () => pools.Count > 0, Text.Select, IconUri.Select);
             selected = new List<Pool>();
             selectionChanged = new RelayCommand<SelectionChangedEventArgs>(OnSelectionChanged);
             tap = new RelayCommand<Pool>(OnTap);
+
+            isInstant = false;
+            IsSelectMode = false;
 
             pools.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
 
@@ -49,9 +55,27 @@ namespace DiceRoller.ViewModels
             }
         }
 
+        public RelayCommand InstantCommand
+        {
+            get { return instant; }
+        }
+
         public bool IsEmpty
         {
             get { return pools.Count == 0; }
+        }
+
+        public bool IsInstant
+        {
+            get { return isInstant; }
+            set
+            {
+                if (isInstant != value)
+                {
+                    instant.IconUri = value ? IconUri.InstantOn : IconUri.InstantOff;
+                    isInstant = value;
+                }
+            }
         }
 
         public bool IsSelectMode
@@ -114,6 +138,11 @@ namespace DiceRoller.ViewModels
             IsSelectMode = false;
         }
 
+        private void OnInstant()
+        {
+            IsInstant = !isInstant;
+        }
+
         private void OnPoolMessage(PoolMessage message)
         {
             if (message.Pool.Favorite)
@@ -157,9 +186,16 @@ namespace DiceRoller.ViewModels
 
         private void OnTap(Pool pool)
         {
-            var message = new PoolMessage(pool, new PoolResult(pool));
-            Messenger.Default.Send(message, PoolMessage.TOKEN_CREATE);
-            Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
+            if (isInstant)
+            {
+                var message = new PoolMessage(pool, new PoolResult(pool));
+                Messenger.Default.Send(message, PoolMessage.TOKEN_CREATE);
+                Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
+            }
+            else
+            {
+                Messenger.Default.Send(new PoolMessage(pool), PoolMessage.TOKEN_PICK);
+            }
         }
 
         private void Update()
@@ -177,6 +213,7 @@ namespace DiceRoller.ViewModels
             else
             {
                 buttons.Add(select);
+                buttons.Add(instant);
                 selected.Clear();
             }
         }

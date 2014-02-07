@@ -35,6 +35,7 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Register<PivotMessage>(this, x => IsLocked = x.IsLocked);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/InfoPage.xaml"));
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_FAVORITE, x => SelectedIndex = PIVOT_FAVORITES);
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_PICK, x => SelectedIndex = PIVOT_PICK);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_RENAME, x => Navigate("/RenamePage.xaml"));
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/InfoPage.xaml"));
 
@@ -175,6 +176,7 @@ namespace DiceRoller.ViewModels
                     buttons.Add(pick.FavoriteCommand);
                     buttons.Add(pick.RollCommand);
                     buttons.Add(pick.ResetCommand);
+                    items.Add(pick.SaveChangesCommand);
                     //items.Add(settings);
                     break;
 
@@ -186,6 +188,7 @@ namespace DiceRoller.ViewModels
 
                 case PIVOT_FAVORITES:
                     buttons.Add(favorites.SelectCommand);
+                    buttons.Add(favorites.InstantCommand);
                     //items.Add(settings);
                     break;
             }

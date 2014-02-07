@@ -142,6 +142,15 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to instant.
+        /// </summary>
+        public static string Instant {
+            get {
+                return ResourceManager.GetString("Instant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No favorites.
         /// </summary>
         public static string NoFavorites {
@@ -219,6 +228,15 @@ namespace DiceRoller.Resources {
         public static string Roll {
             get {
                 return ResourceManager.GetString("Roll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to save changes.
+        /// </summary>
+        public static string SaveChanges {
+            get {
+                return ResourceManager.GetString("SaveChanges", resourceCulture);
             }
         }
         

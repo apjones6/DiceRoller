@@ -129,6 +129,12 @@
   <data name="Favorite" xml:space="preserve">
     <value>/Assets/Images/favorite.png</value>
   </data>
+  <data name="InstantOff" xml:space="preserve">
+    <value>/Assets/Images/instant_off.png</value>
+  </data>
+  <data name="InstantOn" xml:space="preserve">
+    <value>/Assets/Images/instant_on.png</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>/Assets/Images/cancel.png</value>
   </data>

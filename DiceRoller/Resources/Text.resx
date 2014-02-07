@@ -144,6 +144,9 @@
   <data name="History" xml:space="preserve">
     <value>history</value>
   </data>
+  <data name="Instant" xml:space="preserve">
+    <value>instant</value>
+  </data>
   <data name="NoFavorites" xml:space="preserve">
     <value>No favorites</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Roll" xml:space="preserve">
     <value>roll</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>save changes</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>select</value>

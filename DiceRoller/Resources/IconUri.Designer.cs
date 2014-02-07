@@ -97,6 +97,24 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/instant_off.png.
+        /// </summary>
+        public static string InstantOff {
+            get {
+                return ResourceManager.GetString("InstantOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/instant_on.png.
+        /// </summary>
+        public static string InstantOn {
+            get {
+                return ResourceManager.GetString("InstantOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/cancel.png.
         /// </summary>
         public static string Reset {
