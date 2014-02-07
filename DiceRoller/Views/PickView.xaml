@@ -14,7 +14,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Name="Root">
+    Name="PickRoot">
     
     <UserControl.Resources>
         <c:ActiveBrushWhenPositiveConverter x:Key="ActiveBrushWhenPositive"/>
@@ -22,7 +22,7 @@
     </UserControl.Resources>
     
     <ScrollViewer Margin="0,-14,0,0">
-        <StackPanel x:Name="Wrapper" Orientation="Vertical" Margin="-12,0,0,0">
+        <StackPanel Margin="-12,0,0,0">
             <TextBlock
                 Text="{Binding Path=Original.DisplayName, Mode=OneWay}"
                 Style="{StaticResource PhoneTextSubtleStyle}"
@@ -39,7 +39,7 @@
                     <DataTemplate>
                         <Button
                             Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
-                            Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
+                            Command="{Binding Path=DataContext.TapCommand, ElementName=PickRoot, Mode=OneWay}"
                             CommandParameter="{Binding Type, Mode=OneWay}"
                             Height="210"
                             Width="210"
@@ -55,7 +55,7 @@
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Hold">
                                     <cmd:EventToCommand
-                                        Command="{Binding Path=DataContext.HoldCommand, ElementName=Root, Mode=OneWay}"
+                                        Command="{Binding Path=DataContext.HoldCommand, ElementName=PickRoot, Mode=OneWay}"
                                         CommandParameter="{Binding Type, Mode=OneWay}"
                                         MustToggleIsEnabledValue="True" />
                                 </i:EventTrigger>

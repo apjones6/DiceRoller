@@ -15,7 +15,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Name="Root">
+    Name="HistoryRoot">
 
     <UserControl.Resources>
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
@@ -32,7 +32,7 @@
         <phone:LongListSelector
             ItemsSource="{Binding Results}"
             Loaded="OnLoaded"
-            Name="LongListSelector"
+            Name="HistoryLongListSelector"
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
             tool:TiltEffect.IsTiltEnabled="True"
             >
@@ -43,7 +43,7 @@
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Tap">
                                     <cmd:EventToCommand
-                                        Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
+                                        Command="{Binding Path=DataContext.TapCommand, ElementName=HistoryRoot, Mode=OneWay}"
                                         CommandParameter="{Binding}"
                                         MustToggleIsEnabledValue="True" />
                                 </i:EventTrigger>

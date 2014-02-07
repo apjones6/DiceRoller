@@ -52,7 +52,7 @@ namespace DiceRoller
             {
                 Dispatcher.BeginInvoke(() =>
                     {
-                        Pivot.IsLocked = App.ViewModel.IsLocked;
+                        MainPagePivot.IsLocked = App.ViewModel.IsLocked;
                     });
             }
         }

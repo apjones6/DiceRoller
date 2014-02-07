@@ -18,11 +18,11 @@
     SupportedOrientations="PortraitOrLandscape"
     Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    Name="Root">
+    Name="PickCountRoot">
 
     <Grid Background="Transparent">
         
-        <Grid Margin="10,0,10,0">
+        <Grid Margin="10,0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -63,7 +63,7 @@
                                 VerticalAlignment="Center"
                                 />
                             <TextBlock
-                                Text="{Binding DataContext.Type, ElementName=Root}"
+                                Text="{Binding DataContext.Type, ElementName=PickCountRoot}"
                                 Style="{StaticResource PhoneTextSubtleStyle}"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"

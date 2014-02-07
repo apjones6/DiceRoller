@@ -15,7 +15,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Name="Root">
+    Name="FavoritesRoot">
 
     <UserControl.Resources>
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
@@ -51,7 +51,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Tap">
                                 <cmd:EventToCommand
-                                    Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
+                                    Command="{Binding Path=DataContext.TapCommand, ElementName=FavoritesRoot, Mode=OneWay}"
                                     CommandParameter="{Binding}"
                                     MustToggleIsEnabledValue="True" />
                             </i:EventTrigger>
@@ -60,12 +60,12 @@
                             <tool:ContextMenu IsZoomEnabled="False">
                                 <tool:MenuItem
                                     Header="{Binding Path=Text.Rename, Source={StaticResource Strings}}"
-                                    Command="{Binding Path=DataContext.RenameCommand, ElementName=Root, Mode=OneWay}"
+                                    Command="{Binding Path=DataContext.RenameCommand, ElementName=FavoritesRoot, Mode=OneWay}"
                                     CommandParameter="{Binding}"
                                     />
                                 <tool:MenuItem
                                     Header="{Binding Path=Text.Delete, Source={StaticResource Strings}}"
-                                    Command="{Binding Path=DataContext.DeleteCommand, ElementName=Root, Mode=OneWay}"
+                                    Command="{Binding Path=DataContext.DeleteCommand, ElementName=FavoritesRoot, Mode=OneWay}"
                                     CommandParameter="{Binding}"
                                     />
                             </tool:ContextMenu>

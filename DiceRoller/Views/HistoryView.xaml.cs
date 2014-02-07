@@ -34,7 +34,7 @@ namespace DiceRoller.Views
             {
                 Dispatcher.BeginInvoke(() =>
                     {
-                        LongListSelector.ScrollTo(LongListSelector.ItemsSource[0]);
+                        HistoryLongListSelector.ScrollTo(HistoryLongListSelector.ItemsSource[0]);
                         scrollTop = false;
                     });
             }
