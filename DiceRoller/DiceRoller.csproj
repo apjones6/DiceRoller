@@ -96,17 +96,17 @@
     <Compile Include="Converters\ActiveBrushWhenPositiveConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\JoinArrayConverter.cs" />
-    <Compile Include="RenamePage.xaml.cs">
-      <DependentUpon>RenamePage.xaml</DependentUpon>
+    <Compile Include="Pages\Rename.xaml.cs">
+      <DependentUpon>Rename.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InfoPage.xaml.cs">
-      <DependentUpon>InfoPage.xaml</DependentUpon>
+    <Compile Include="Pages\Info.xaml.cs">
+      <DependentUpon>Info.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CountPickerPage.xaml.cs">
-      <DependentUpon>CountPickerPage.xaml</DependentUpon>
+    <Compile Include="Pages\CountPicker.xaml.cs">
+      <DependentUpon>CountPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Pages\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\IntegerSelectorDataSource.cs" />
     <Compile Include="Resources\Text.Designer.cs">
@@ -157,19 +157,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="RenamePage.xaml">
+    <Page Include="Pages\Rename.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="InfoPage.xaml">
+    <Page Include="Pages\Info.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CountPickerPage.xaml">
+    <Page Include="Pages\CountPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Pages\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

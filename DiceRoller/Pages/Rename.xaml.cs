@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DiceRoller
+namespace DiceRoller.Pages
 {
-    public partial class RenamePage : PhoneApplicationPage
+    public partial class Rename : PhoneApplicationPage
     {
-        public RenamePage()
+        public Rename()
         {
             InitializeComponent();
             DataContext = App.ViewModel.Rename;

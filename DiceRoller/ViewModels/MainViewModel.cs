@@ -31,13 +31,13 @@ namespace DiceRoller.ViewModels
 
         public MainViewModel()
         {
-            Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/CountPickerPage.xaml"));
+            Messenger.Default.Register<CountPickerMessage>(this, x => Navigate("/Pages/CountPicker.xaml"));
             Messenger.Default.Register<PivotMessage>(this, x => IsLocked = x.IsLocked);
-            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/InfoPage.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_CREATE, x => Navigate("/Pages/Info.xaml"));
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_FAVORITE, x => SelectedIndex = PIVOT_FAVORITES);
             Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_PICK, x => SelectedIndex = PIVOT_PICK);
-            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_RENAME, x => Navigate("/RenamePage.xaml"));
-            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/InfoPage.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_RENAME, x => Navigate("/Pages/Rename.xaml"));
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_VIEW, x => Navigate("/Pages/Info.xaml"));
 
             buttons = new ObservableCollection<RelayCommand>();
             countPicker = new IntegerSelectorViewModel();

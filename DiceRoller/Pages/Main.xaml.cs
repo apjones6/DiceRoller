@@ -3,11 +3,11 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Navigation;
 
-namespace DiceRoller
+namespace DiceRoller.Pages
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class Main : PhoneApplicationPage
     {
-        public MainPage()
+        public Main()
         {
             InitializeComponent();
             DataContext = App.ViewModel;

@@ -75,7 +75,7 @@ namespace DiceRoller.ViewModels
             pool.Favorite = true;
             pool.Name = Name;
             Messenger.Default.Send(new PoolMessage(pool), PoolMessage.TOKEN_FAVORITE);
-            Messenger.Default.Send(new NavigateMessage("/MainPage.xaml"));
+            Messenger.Default.Send(new NavigateMessage("/Pages/Main.xaml"));
         }
 
         private void OnPoolMessage(PoolMessage message)

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Phone.Controls;
 
-namespace DiceRoller
+namespace DiceRoller.Pages
 {
-    public partial class InfoPage : PhoneApplicationPage
+    public partial class Info : PhoneApplicationPage
     {
-        public InfoPage()
+        public Info()
         {
             InitializeComponent();
             DataContext = App.ViewModel.Info;

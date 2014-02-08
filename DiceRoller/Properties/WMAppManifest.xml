@@ -6,7 +6,7 @@
     <Capabilities>
     </Capabilities>
     <Tasks>
-      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+      <DefaultTask Name="_default" NavigationPage="Pages/Main.xaml" />
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="DiceRollerToken" TaskName="_default">
