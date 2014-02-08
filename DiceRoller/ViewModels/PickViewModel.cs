@@ -153,11 +153,7 @@ namespace DiceRoller.ViewModels
 
         private void OnSaveChanges()
         {
-            foreach (DiceType type in Enum.GetValues(typeof(DiceType)))
-            {
-                original[type] = Pool[type];
-            }
-
+            original.DiceExpression = Pool.DiceExpression;
             original.Favorite = true;
             Messenger.Default.Send(new PoolMessage(original), PoolMessage.TOKEN_FAVORITE);
             Update();

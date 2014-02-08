@@ -17,7 +17,6 @@ namespace DiceRoller.ViewModels
         private readonly ICommand delete;
         private readonly RelayCommand deleteMany;
         private readonly ApplicationBarCommand instant;
-        private readonly ObservableCollection<Pool> pools;
         private readonly ICommand rename;
         private readonly RelayCommand select;
         private readonly List<Pool> selected;
@@ -34,9 +33,8 @@ namespace DiceRoller.ViewModels
             delete = new RelayCommand<Pool>(OnDelete);
             deleteMany = new ApplicationBarCommand(OnDelete, () => selected.Count > 0, Text.Delete, IconUri.Delete);
             instant = new ApplicationBarCommand(OnInstant, Text.Instant, IconUri.InstantOff);
-            pools = new ObservableCollection<Pool>();
             rename = new RelayCommand<Pool>(OnRename);
-            select = new ApplicationBarCommand(OnSelect, () => pools.Count > 0, Text.Select, IconUri.Select);
+            select = new ApplicationBarCommand(OnSelect, () => !IsEmpty, Text.Select, IconUri.Select);
             selected = new List<Pool>();
             selectionChanged = new RelayCommand<SelectionChangedEventArgs>(OnSelectionChanged);
             tap = new RelayCommand<Pool>(OnTap);
@@ -44,16 +42,16 @@ namespace DiceRoller.ViewModels
             isInstant = false;
             isSelectMode = false;
 
-            pools.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
+            Pools.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
 
             if (IsInDesignMode)
             {
                 isSelectMode = true;
-                pools.Add(new Pool("6D4", "Attack"));
-                pools.Add(new Pool("18D4", "Lightning Storm"));
-                pools.Add(new Pool("D20"));
-                pools.Add(new Pool("D20 + 2D6"));
-                pools.Add(new Pool("D4", "Attack"));
+                Pools.Add(new Pool("6D4", "Attack"));
+                Pools.Add(new Pool("18D4", "Lightning Storm"));
+                Pools.Add(new Pool("D20"));
+                Pools.Add(new Pool("D20 + 2D6"));
+                Pools.Add(new Pool("D4", "Attack"));
             }
         }
 
@@ -69,7 +67,7 @@ namespace DiceRoller.ViewModels
 
         public bool IsEmpty
         {
-            get { return pools.Count == 0; }
+            get { return Pools.Count == 0; }
         }
 
         public bool IsInstant
@@ -101,7 +99,7 @@ namespace DiceRoller.ViewModels
 
         public ObservableCollection<Pool> Pools
         {
-            get { return pools; }
+            get { return State.Favorites; }
         }
 
         public ICommand RenameCommand
@@ -139,7 +137,7 @@ namespace DiceRoller.ViewModels
             foreach (var pool in selected.ToArray())
             {
                 pool.Favorite = false;
-                pools.Remove(pool);
+                Pools.Remove(pool);
             }
 
             IsSelectMode = false;
@@ -148,7 +146,7 @@ namespace DiceRoller.ViewModels
         private void OnDelete(Pool pool)
         {
             pool.Favorite = false;
-            pools.Remove(pool);
+            Pools.Remove(pool);
         }
 
         private void OnInstant()
@@ -161,14 +159,14 @@ namespace DiceRoller.ViewModels
             if (message.Pool.Favorite)
             {
                 // Ensure not duplicate
-                if (!pools.Contains(message.Pool))
+                if (!Pools.Contains(message.Pool))
                 {
-                    pools.Add(message.Pool);
+                    Pools.Add(message.Pool);
                 }
             }
             else
             {
-                pools.Remove(message.Pool);
+                Pools.Remove(message.Pool);
             }
         }
 

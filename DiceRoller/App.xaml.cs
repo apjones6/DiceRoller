@@ -1,4 +1,5 @@
-﻿using DiceRoller.Resources;
+﻿using DiceRoller.Models;
+using DiceRoller.Resources;
 using DiceRoller.ViewModels;
 using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight.Messaging;
@@ -14,6 +15,8 @@ namespace DiceRoller
 {
     public partial class App : Application
     {
+        private static MainViewModel viewModel;
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -23,7 +26,10 @@ namespace DiceRoller
         /// <summary>
         /// Gets the root view model for the application.
         /// </summary>
-        public static MainViewModel ViewModel { get; private set; }
+        public static MainViewModel ViewModel
+        {
+            get { return viewModel ?? (viewModel = new MainViewModel()); }
+        }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -44,9 +50,6 @@ namespace DiceRoller
 
             // Messenger navigation initialization
             InitializeNavigation();
-
-            // View model initialization
-            ViewModel = new MainViewModel();
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
@@ -74,6 +77,7 @@ namespace DiceRoller
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             // TODO: Handle application state
+            State.Load();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -81,6 +85,7 @@ namespace DiceRoller
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
             // TODO: Handle application state
+            State.Load();
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -88,6 +93,7 @@ namespace DiceRoller
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             // TODO: Handle application state
+            State.Save();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -95,6 +101,7 @@ namespace DiceRoller
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             // TODO: Handle application state
+            State.Save();
         }
 
         // Code to execute if a navigation fails

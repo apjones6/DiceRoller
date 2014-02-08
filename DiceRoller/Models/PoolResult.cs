@@ -8,6 +8,7 @@ namespace DiceRoller.Models
     public class PoolResult : Pool
     {
         private static readonly Random RANDOM;
+
         private readonly Pool pool;
         private readonly ReadOnlyDictionary<DiceType, int[]> results;
         private readonly DateTime time;
