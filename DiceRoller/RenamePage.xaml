@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tool="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:tool="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
@@ -45,7 +45,8 @@
                 Text="{Binding Path=Text.PoolName, Source={StaticResource Strings}}"
                 Style="{StaticResource PhoneTextSubtleStyle}"
                 />
-            <TextBox
+            <tool:PhoneTextBox
+                Hint="{Binding Path=Pool.DiceExpression, Mode=OneWay}"
                 Grid.Row="2"
                 Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                 TextChanged="OnTextChanged"
