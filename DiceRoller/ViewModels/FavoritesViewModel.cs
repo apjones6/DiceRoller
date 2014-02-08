@@ -42,7 +42,7 @@ namespace DiceRoller.ViewModels
             tap = new RelayCommand<Pool>(OnTap);
 
             isInstant = false;
-            IsSelectMode = false;
+            isSelectMode = false;
 
             pools.CollectionChanged += (s, e) => RaisePropertyChanged("IsEmpty");
 
@@ -50,7 +50,7 @@ namespace DiceRoller.ViewModels
             {
                 isSelectMode = true;
                 pools.Add(new Pool("6D4", "Attack"));
-                pools.Add(new Pool("18D4", "Firestorm"));
+                pools.Add(new Pool("18D4", "Lightning Storm"));
                 pools.Add(new Pool("D20"));
                 pools.Add(new Pool("D20 + 2D6"));
                 pools.Add(new Pool("D4", "Attack"));
@@ -161,7 +161,7 @@ namespace DiceRoller.ViewModels
             if (message.Pool.Favorite)
             {
                 // Ensure not duplicate
-                if (pools.IndexOf(message.Pool) == -1)
+                if (!pools.Contains(message.Pool))
                 {
                     pools.Add(message.Pool);
                 }

@@ -30,7 +30,7 @@
             HorizontalAlignment="Center"
             />
         <tool:LongListMultiSelector
-            IsSelectionEnabled="{Binding IsSelectMode, Mode=TwoWay}"
+            Name="FavoritesLongListSelector"
             ItemsSource="{Binding Pools}"
             Margin="0,14,-12,0"
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
