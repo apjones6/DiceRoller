@@ -7,9 +7,19 @@ namespace DiceRoller.Models.Updates
     {
         private readonly Version version;
 
-        public DoNothingUpdater(string version)
+        public DoNothingUpdater()
+            : this(State.CurrentVersion)
         {
-            this.version = new Version(version);
+        }
+
+        public DoNothingUpdater(Version version)
+        {
+            if (version == null)
+            {
+                throw new ArgumentNullException("version");
+            }
+
+            this.version = version;
         }
 
         public Version Update(IsolatedStorageSettings storage)

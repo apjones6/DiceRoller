@@ -22,7 +22,7 @@ namespace DiceRoller.Models
 
         private readonly static IDictionary<Version, IUpdater> updaters = new Dictionary<Version, IUpdater>
             {
-                { new Version("1.0.0"), new DoNothingUpdater("2.0.1") }
+                { new Version("1.0.0"), new DoNothingUpdater() }
             };
 
         private static ObservableCollection<Pool> favorites;
@@ -30,6 +30,15 @@ namespace DiceRoller.Models
         private static Modify modify;
         private static IsolatedStorageSettings storage;
         private static Timer timer;
+
+        public static Version CurrentVersion
+        {
+            get
+            {
+                var v = Assembly.GetCallingAssembly().GetName().Version;
+                return new Version(v.Major, v.Minor, v.Build);
+            }
+        }
 
         public static ObservableCollection<Pool> Favorites
         {
@@ -122,26 +131,25 @@ namespace DiceRoller.Models
 
         private static void Update()
         {
-            // Find stored and application version
+            // Find previous run and application version now
             // NOTE: Version 1.0.0 did not store its version, so if not found it must be 1.0.0
-            var version = new Version(storage.Contains(KEY_VERSION) ? (string)storage[KEY_VERSION] : "1.0.0");
-            var appVersion = Assembly.GetCallingAssembly().GetName().Version;
+            var previous = new Version(storage.Contains(KEY_VERSION) ? (string)storage[KEY_VERSION] : "1.0.0");
+            var now = CurrentVersion;
 
             // Up to date
-            if (version == appVersion)
+            if (previous == now)
             {
                 return;
             }
 
             // Perform updates through registered update functions
-            // NOTE: Avoid 2.0.1 != 2.0.1.0 issue
-            while (version.Major < appVersion.Major || version.Minor < appVersion.Minor || version.Build < appVersion.Build)
+            while (previous < now)
             {
-                version = updaters[version].Update(storage);
+                previous = updaters[previous].Update(storage);
             }
 
             // Write the new version
-            storage[KEY_VERSION] = version.ToString(3);
+            storage[KEY_VERSION] = previous.ToString(3);
             storage.Save();
         }
 
