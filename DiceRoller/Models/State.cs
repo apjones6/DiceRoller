@@ -20,9 +20,9 @@ namespace DiceRoller.Models
         private const string KEY_FAVORITES = "KEY_FAVORITES";
         private const string KEY_VERSION = "KEY_VERSION";
 
-        private readonly static IDictionary<Version, IUpdater> updaters = new Dictionary<Version, IUpdater>
+        private readonly static Tuple<Version, Version, IUpdater>[] updaters = new[]
             {
-                { new Version("1.0.0"), new DoNothingUpdater() }
+                new Tuple<Version, Version, IUpdater>(new Version("1.0.0"), CurrentVersion, new DoNothingUpdater(CurrentVersion))
             };
 
         private static ObservableCollection<Pool> favorites;
@@ -145,7 +145,8 @@ namespace DiceRoller.Models
             // Perform updates through registered update functions
             while (previous < now)
             {
-                previous = updaters[previous].Update(storage);
+                var updater = updaters.Single(x => x.Item1 <= previous && x.Item2 >= previous).Item3;
+                previous = updater.Update(storage);
             }
 
             // Write the new version

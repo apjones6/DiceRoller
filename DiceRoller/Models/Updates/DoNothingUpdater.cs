@@ -7,11 +7,6 @@ namespace DiceRoller.Models.Updates
     {
         private readonly Version version;
 
-        public DoNothingUpdater()
-            : this(State.CurrentVersion)
-        {
-        }
-
         public DoNothingUpdater(Version version)
         {
             if (version == null)
