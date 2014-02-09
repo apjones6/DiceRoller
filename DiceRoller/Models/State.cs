@@ -1,11 +1,14 @@
-﻿using System;
+﻿using DiceRoller.Models.Updates;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 
 namespace DiceRoller.Models
@@ -16,6 +19,11 @@ namespace DiceRoller.Models
 
         private const string KEY_FAVORITES = "KEY_FAVORITES";
         private const string KEY_VERSION = "KEY_VERSION";
+
+        private readonly static IDictionary<Version, IUpdater> updaters = new Dictionary<Version, IUpdater>
+            {
+                { new Version("1.0.0"), new DoNothingUpdater("2.0.1") }
+            };
 
         private static ObservableCollection<Pool> favorites;
         private static bool isLoaded;
@@ -43,6 +51,9 @@ namespace DiceRoller.Models
 
             storage = IsolatedStorageSettings.ApplicationSettings;
             timer = new Timer(state => Save(), null, Timeout.Infinite, Timeout.Infinite);
+
+            // Ensure storage is up to date
+            Update();
 
             // Load properties from storage
             favorites = new ObservableCollection<Pool>(storage.Contains(KEY_FAVORITES) ? (Pool[])storage[KEY_FAVORITES] : new Pool[0]);
@@ -107,6 +118,31 @@ namespace DiceRoller.Models
 
             // Start/Restart timer; for repeated updates we save once they stop
             timer.Change(TIMER_DELAY, Timeout.Infinite);
+        }
+
+        private static void Update()
+        {
+            // Find stored and application version
+            // NOTE: Version 1.0.0 did not store its version, so if not found it must be 1.0.0
+            var version = new Version(storage.Contains(KEY_VERSION) ? (string)storage[KEY_VERSION] : "1.0.0");
+            var appVersion = Assembly.GetCallingAssembly().GetName().Version;
+
+            // Up to date
+            if (version == appVersion)
+            {
+                return;
+            }
+
+            // Perform updates through registered update functions
+            // NOTE: Avoid 2.0.1 != 2.0.1.0 issue
+            while (version.Major < appVersion.Major || version.Minor < appVersion.Minor || version.Build < appVersion.Build)
+            {
+                version = updaters[version].Update(storage);
+            }
+
+            // Write the new version
+            storage[KEY_VERSION] = version.ToString(3);
+            storage.Save();
         }
 
         [Flags]
