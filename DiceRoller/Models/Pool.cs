@@ -11,51 +11,48 @@ namespace DiceRoller.Models
         private static readonly DiceType[] DEFAULT_DICE = Enum.GetValues(typeof(DiceType)).Cast<DiceType>().OrderByDescending(x => x).ToArray();
 
         private PoolComponent[] dice;
-        private string expression;
+        private string expression = string.Empty;
         private bool favorite;
         private string name;
 
-        public Pool()
-        {
-            DiceExpression = string.Empty;
-        }
-
         public Pool(string expression, string name = null)
         {
+            if (expression == null)
+            {
+                throw new ArgumentNullException("expression");
+            }
+
+            // NOTE: This setter sets the dice counts; don't directly set the field
             DiceExpression = expression;
             Name = name;
         }
 
         public Pool(Pool pool)
+            : this(pool.DiceExpression, pool.name)
         {
-            Dice = pool.Dice.Select(x => new PoolComponent(x)).ToArray();
-            Name = pool.Name;
+        }
+
+        public Pool()
+            : this(string.Empty)
+        {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int this[DiceType type]
         {
-            get { return Dice.Single(x => x.Type == type).Count; }
-            set { Dice.Single(x => x.Type == type).Count = value; }
+            get { return dice.Single(x => x.Type == type).Count; }
+            set { dice.Single(x => x.Type == type).Count = value; }
         }
 
         public PoolComponent[] Dice
         {
             get { return dice; }
-            private set
-            {
-                dice = value;
-                foreach (var d in dice)
-                {
-                    d.PropertyChanged += OnPoolComponentPropertyChanged;
-                }
-            }
         }
 
         public int DiceCount
         {
-            get { return Dice.Sum(x => x.Count); }
+            get { return dice.Sum(x => x.Count); }
         }
 
         [DataMember]
@@ -63,14 +60,9 @@ namespace DiceRoller.Models
         {
             get
             {
-                if (dice == null)
-                {
-                    return string.Empty;
-                }
-                
                 if (expression == null)
                 {
-                    var components = Dice
+                    var components = dice
                         .Where(x => x.Count > 0)
                         .OrderByDescending(x => (int)x.Type)
                         .Select(x => x.ToString())
@@ -82,12 +74,30 @@ namespace DiceRoller.Models
             }
             set
             {
+                // When deserialized from isolated storage, no constructors apply
+                if (dice == null)
+                {
+                    InitializeDice();
+                }
+
                 if (expression != value)
                 {
-                    var components = value == string.Empty ? new PoolComponent[0] : value.Split('+').Select(x => new PoolComponent(x.Trim())).ToArray();
-                    Dice = DEFAULT_DICE
-                        .Select(x => components.SingleOrDefault(c => c.Type == x) ?? new PoolComponent(x))
-                        .ToArray();
+                    // Update the count for each dice
+                    // NOTE: This will encounter issues if/when we support dynamic dice, where we
+                    //       won't want to include every dice type in every pool
+                    var components = value != string.Empty
+                        ? value.Split('+').Select(x => new PoolComponent(x.Trim())).ToArray()
+                        : new PoolComponent[0];
+                    foreach (var die in dice)
+                    {
+                        var match = components.SingleOrDefault(x => x.Type == die.Type);
+                        die.Count = match != null
+                            ? match.Count
+                            : 0;
+                    }
+
+                    expression = value;
+                    RaisePropertyChanged("DiceExpression");
                 }
             }
         }
@@ -135,6 +145,25 @@ namespace DiceRoller.Models
         public override string ToString()
         {
             return DisplayName;
+        }
+
+        private void InitializeDice()
+        {
+#if DEBUG
+            if (dice != null)
+            {
+                throw new InvalidOperationException("Unexpected call to Pool.InitializeDice()");
+            }
+#endif
+            dice = DEFAULT_DICE
+                .OrderByDescending(x => (int)x)
+                .Select(x => new PoolComponent(x))
+                .ToArray();
+
+            foreach (var die in dice)
+            {
+                die.PropertyChanged += OnPoolComponentPropertyChanged;
+            }
         }
 
         private void OnPoolComponentPropertyChanged(object sender, PropertyChangedEventArgs e)
