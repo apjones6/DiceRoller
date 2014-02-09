@@ -19,6 +19,17 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
 
 ## Version History ##
 
+### **Version 2.0.0** - 9 February 2014
+
+ - Favourites feature (missing some key features such as reordering)
+ - Persistence between application runs
+ - Localization
+   - English (United Kingdom)
+   - English (United States)
+ - Usage of 'Tilt Effect' on expected controls
+ - Styling improvements
+ - Bug fixes
+
 ### **Version 1.0.1** - 8 December 2013
 
  - Improvements to localization strategy and coverage
