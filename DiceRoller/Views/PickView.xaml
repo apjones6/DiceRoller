@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="DiceRoller.Views.PoolEditorView"
+    x:Class="DiceRoller.Views.PickView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,63 +14,74 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Name="Root">
+    Name="PickRoot">
     
     <UserControl.Resources>
         <c:ActiveBrushWhenPositiveConverter x:Key="ActiveBrushWhenPositive"/>
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
     </UserControl.Resources>
     
-    <ListBox ItemsSource="{Binding Path=Pool.Dice}" Margin="-12,-12,0,0">
-        <ListBox.ItemsPanel>
-            <ItemsPanelTemplate>
-                <tool:WrapPanel Margin="0,0,0,24" />
-            </ItemsPanelTemplate>
-        </ListBox.ItemsPanel>
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <Button
-                    Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
-                    Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
-                    CommandParameter="{Binding Type, Mode=OneWay}"
-                    Height="210"
-                    Width="210"
-                    Margin="12,12,0,0">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Hold">
-                            <cmd:EventToCommand
-                                Command="{Binding Path=DataContext.HoldCommand, ElementName=Root, Mode=OneWay}"
-                                CommandParameter="{Binding Type, Mode=OneWay}"
-                                MustToggleIsEnabledValue="True" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <Grid>
-                        <TextBlock
-                            Text="{Binding Type, Mode=OneTime}"
-                            FontSize="72"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Margin="10,-10"
-                            Opacity="0.5"
-                            />
-                        <TextBlock
-                            Text="{Binding Count, Mode=OneWay}"
-                            Visibility="{Binding Count, Converter={StaticResource BooleanToVisibility}}"
-                            FontSize="128"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Margin="5"
-                            />
-                    </Grid>
-                </Button>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+    <ScrollViewer Margin="0,-14,0,0">
+        <StackPanel Margin="-12,0,0,0">
+            <TextBlock
+                Text="{Binding Path=Original.DisplayName, Mode=OneWay}"
+                Style="{StaticResource PhoneTextSubtleStyle}"
+                />
+            <ListBox
+                ItemsSource="{Binding Path=Pool.Dice}"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <tool:WrapPanel Margin="0,0,0,24" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
+                            Command="{Binding Path=DataContext.TapCommand, ElementName=PickRoot, Mode=OneWay}"
+                            CommandParameter="{Binding Type, Mode=OneWay}"
+                            Height="210"
+                            Width="210"
+                            tool:TiltEffect.IsTiltEnabled="True"
+                            Margin="12,0,0,12">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Hold">
+                                    <cmd:EventToCommand
+                                        Command="{Binding Path=DataContext.HoldCommand, ElementName=PickRoot, Mode=OneWay}"
+                                        CommandParameter="{Binding Type, Mode=OneWay}"
+                                        MustToggleIsEnabledValue="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <Grid>
+                                <TextBlock
+                                    Text="{Binding Type, Mode=OneTime}"
+                                    FontSize="72"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Margin="10,-10"
+                                    Opacity="0.5"
+                                    />
+                                <TextBlock
+                                    Text="{Binding Count, Mode=OneWay}"
+                                    Visibility="{Binding Count, Converter={StaticResource BooleanToVisibility}}"
+                                    FontSize="128"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="5"
+                                    />
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

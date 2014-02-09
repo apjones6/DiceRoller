@@ -4,30 +4,43 @@ using DiceRoller.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace DiceRoller.ViewModels
 {
     public class PickViewModel : ViewModelBase
     {
+        private static readonly string[] WATCH_PROPS = new[] { "DiceCount" };
+
+        private readonly RelayCommand favorite;
         private readonly ICommand hold;
         private readonly RelayCommand reset;
         private readonly RelayCommand roll;
+        private readonly RelayCommand saveChanges;
         private readonly ICommand tap;
 
+        private Pool original;
         private Pool pool;
 
         public PickViewModel()
         {
+            Messenger.Default.Register<PoolMessage>(this, PoolMessage.TOKEN_PICK, OnPoolMessage);
+
+            favorite = new ApplicationBarCommand(OnFavorite, () => pool.DiceCount > 0, Text.Favorite, IconUri.Favorite);
             hold = new RelayCommand<DiceType>(OnHold);
             reset = new ApplicationBarCommand(OnReset, () => pool.DiceCount > 0, Text.Reset, IconUri.Reset);
             roll = new ApplicationBarCommand(OnRoll, () => pool.DiceCount > 0, Text.Roll, IconUri.Roll);
+            saveChanges = new ApplicationBarCommand(OnSaveChanges, () => original != null && pool.DiceCount > 0 && original.DiceExpression != pool.DiceExpression, Text.SaveChanges);
             tap = new RelayCommand<DiceType>(OnTap);
 
             if (IsInDesignMode)
             {
-                Pool = new Pool("D12 + 7D6 + 4D4");
+                Original = new Pool("D4", "Basic Attack");
+                Pool = new Pool("D20 + 7D12 + 4D6");
+                Pool.Favorite = true;
             }
             else
             {
@@ -35,9 +48,28 @@ namespace DiceRoller.ViewModels
             }
         }
 
+        public RelayCommand FavoriteCommand
+        {
+            get { return favorite; }
+        }
+
         public ICommand HoldCommand
         {
             get { return hold; }
+        }
+
+        public Pool Original
+        {
+            get { return original; }
+            set
+            {
+                if (original != value)
+                {
+                    original = value;
+                    RaisePropertyChanged("Original");
+                    Update();
+                }
+            }
         }
 
         public Pool Pool
@@ -58,8 +90,7 @@ namespace DiceRoller.ViewModels
                 }
 
                 RaisePropertyChanged("Pool");
-                reset.RaiseCanExecuteChanged();
-                roll.RaiseCanExecuteChanged();
+                Update();
             }
         }
 
@@ -73,9 +104,19 @@ namespace DiceRoller.ViewModels
             get { return roll; }
         }
 
+        public RelayCommand SaveChangesCommand
+        {
+            get { return saveChanges; }
+        }
+
         public ICommand TapCommand
         {
             get { return tap; }
+        }
+
+        private void OnFavorite()
+        {
+            Messenger.Default.Send(new PoolMessage(new Pool(Pool)), PoolMessage.TOKEN_RENAME);
         }
 
         private void OnHold(DiceType type)
@@ -83,18 +124,24 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Send(new CountPickerMessage(pool, type));
         }
 
+        private void OnPoolMessage(PoolMessage message)
+        {
+            Pool = new Pool(message.Pool);
+            Original = message.Pool;
+        }
+
         private void OnPoolPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "DiceCount")
+            if (WATCH_PROPS.Contains(e.PropertyName))
             {
-                reset.RaiseCanExecuteChanged();
-                roll.RaiseCanExecuteChanged();
+                Update();
             }
         }
 
         private void OnReset()
         {
             Pool = new Pool();
+            Original = null;
         }
 
         private void OnRoll()
@@ -104,9 +151,25 @@ namespace DiceRoller.ViewModels
             Messenger.Default.Send(message, PoolMessage.TOKEN_VIEW);
         }
 
+        private void OnSaveChanges()
+        {
+            original.DiceExpression = Pool.DiceExpression;
+            original.Favorite = true;
+            Messenger.Default.Send(new PoolMessage(original), PoolMessage.TOKEN_FAVORITE);
+            Update();
+        }
+
         private void OnTap(DiceType type)
         {
             if (pool[type] < 99) pool[type] += 1;
+        }
+
+        private void Update()
+        {
+            favorite.RaiseCanExecuteChanged();
+            reset.RaiseCanExecuteChanged();
+            roll.RaiseCanExecuteChanged();
+            saveChanges.RaiseCanExecuteChanged();
         }
     }
 }

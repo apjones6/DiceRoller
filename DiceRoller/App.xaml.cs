@@ -1,5 +1,8 @@
-﻿using DiceRoller.Resources;
+﻿using DiceRoller.Models;
+using DiceRoller.Resources;
 using DiceRoller.ViewModels;
+using DiceRoller.ViewModels.Messages;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
@@ -12,6 +15,8 @@ namespace DiceRoller
 {
     public partial class App : Application
     {
+        private static MainViewModel viewModel;
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -21,7 +26,10 @@ namespace DiceRoller
         /// <summary>
         /// Gets the root view model for the application.
         /// </summary>
-        public static MainViewModel ViewModel { get; private set; }
+        public static MainViewModel ViewModel
+        {
+            get { return viewModel ?? (viewModel = new MainViewModel()); }
+        }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -40,8 +48,8 @@ namespace DiceRoller
             // Language display initialization
             InitializeLanguage();
 
-            // View model initialization
-            ViewModel = new MainViewModel();
+            // Messenger navigation initialization
+            InitializeNavigation();
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
@@ -69,6 +77,7 @@ namespace DiceRoller
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             // TODO: Handle application state
+            State.Load();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -76,6 +85,7 @@ namespace DiceRoller
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
             // TODO: Handle application state
+            State.Load();
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -83,6 +93,7 @@ namespace DiceRoller
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             // TODO: Handle application state
+            State.Save();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -90,6 +101,7 @@ namespace DiceRoller
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             // TODO: Handle application state
+            State.Save();
         }
 
         // Code to execute if a navigation fails
@@ -229,6 +241,27 @@ namespace DiceRoller
 
                 throw;
             }
+        }
+
+        // Initialize the apps navigation system to handle messages and perform appropriate navigation
+        // actions on the root frame.
+        //
+        // To trigger a navigation to a URI send a NavigateMessage to the messenger with the URI you
+        // want to navigate to. To trigger a back navigation do the same with NavigationMode.Back
+        // passed into the message constructor instead.
+        private void InitializeNavigation()
+        {
+            Messenger.Default.Register<NavigateMessage>(this, (message) =>
+                {
+                    if (message.Mode == NavigationMode.Back)
+                    {
+                        RootFrame.GoBack();
+                    }
+                    else
+                    {
+                        RootFrame.Navigate(message.Uri);
+                    }
+                });
         }
     }
 }

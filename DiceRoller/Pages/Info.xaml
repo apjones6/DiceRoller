@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="DiceRoller.InfoPage"
+    x:Class="DiceRoller.Pages.Info"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -42,7 +42,8 @@
                 <TextBlock
                     Text="{Binding Path=Text.Results, Source={StaticResource Strings}}"
                     Style="{StaticResource PhoneTextTitle1Style}"
-                    Margin="9,-7,0,0"/>
+                    Margin="9,-7,0,0"
+                    />
             </StackPanel>
             
             <ScrollViewer Grid.Row="2">
@@ -74,11 +75,14 @@
                                 Text="{Binding Result.DisplayName}"
                                 Style="{StaticResource PhoneTextExtraLargeStyle}"
                                 TextWrapping="NoWrap"
+                                Margin="0,0,0,0"
                                 />
                             <TextBlock
                                 Text="{Binding Result.DiceExpression}"
+                                Visibility="{Binding Result.IsDefaultName, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
                                 Style="{StaticResource PhoneTextSubtleStyle}"
                                 TextWrapping="NoWrap"
+                                Margin="1,0,0,0"
                                 />
                         </StackPanel>
                     </StackPanel>
