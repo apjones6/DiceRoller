@@ -19,6 +19,12 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
 
 ## Version History ##
 
+### **Version 2.1.0** - 9 February 2014
+
+ - Application state is saved when changes are made, rather than only on deactivate/close
+ - Mechanism to handle updates which affect stored data
+ - Optimized what data is saved
+
 ### **Version 2.0.1** - 9 February 2014
 
  - Fix for save changes to favourites
