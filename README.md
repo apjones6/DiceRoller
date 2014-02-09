@@ -19,6 +19,10 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
 
 ## Version History ##
 
+### **Version 2.0.1** - 9 February 2014
+
+ - Fix for save changes to favourites
+
 ### **Version 2.0.0** - 9 February 2014
 
  - Favourites feature (missing some key features such as reordering)
