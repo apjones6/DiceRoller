@@ -96,6 +96,8 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\JoinArrayConverter.cs" />
     <Compile Include="Models\State.cs" />
+    <Compile Include="Models\Updates\DoNothingUpdater.cs" />
+    <Compile Include="Models\Updates\IUpdater.cs" />
     <Compile Include="Pages\Rename.xaml.cs">
       <DependentUpon>Rename.xaml</DependentUpon>
     </Compile>
