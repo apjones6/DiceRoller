@@ -257,14 +257,5 @@ namespace DiceRoller.Resources {
                 return ResourceManager.GetString("Summary", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to unfavorite.
-        /// </summary>
-        public static string Unfavorite {
-            get {
-                return ResourceManager.GetString("Unfavorite", resourceCulture);
-            }
-        }
     }
 }

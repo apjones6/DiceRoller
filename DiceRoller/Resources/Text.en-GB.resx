@@ -117,70 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplicationTitle" xml:space="preserve">
-    <value>DICE ROLLER</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>cancel</value>
-  </data>
-  <data name="ClearHistory" xml:space="preserve">
-    <value>clear history</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>delete</value>
-  </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="Done" xml:space="preserve">
-    <value>done</value>
-  </data>
   <data name="Favorite" xml:space="preserve">
-    <value>favorite</value>
+    <value>favourite</value>
   </data>
   <data name="Favorites" xml:space="preserve">
-    <value>favorites</value>
-  </data>
-  <data name="History" xml:space="preserve">
-    <value>history</value>
-  </data>
-  <data name="Instant" xml:space="preserve">
-    <value>instant</value>
+    <value>favourites</value>
   </data>
   <data name="NoFavorites" xml:space="preserve">
-    <value>No favorites</value>
-  </data>
-  <data name="NoResults" xml:space="preserve">
-    <value>No results</value>
-  </data>
-  <data name="Pick" xml:space="preserve">
-    <value>pick</value>
-  </data>
-  <data name="PickCount" xml:space="preserve">
-    <value>pick count</value>
-  </data>
-  <data name="PoolName" xml:space="preserve">
-    <value>Pool Name</value>
-  </data>
-  <data name="Rename" xml:space="preserve">
-    <value>rename</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>reset</value>
-  </data>
-  <data name="Results" xml:space="preserve">
-    <value>results</value>
-  </data>
-  <data name="Roll" xml:space="preserve">
-    <value>roll</value>
-  </data>
-  <data name="SaveChanges" xml:space="preserve">
-    <value>save changes</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>select</value>
-  </data>
-  <data name="Summary" xml:space="preserve">
-    <value>Summary</value>
+    <value>No favourites</value>
   </data>
 </root>
