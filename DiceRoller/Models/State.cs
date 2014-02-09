@@ -12,12 +12,14 @@ namespace DiceRoller.Models
 {
     public class State
     {
+        private const int TIMER_DELAY = 1000;
+
         private const string KEY_FAVORITES = "KEY_FAVORITES";
         private const string KEY_VERSION = "KEY_VERSION";
 
         private static ObservableCollection<Pool> favorites;
         private static bool isLoaded;
-        private static bool isModified;
+        private static Modify modify;
         private static IsolatedStorageSettings storage;
         private static Timer timer;
 
@@ -51,23 +53,30 @@ namespace DiceRoller.Models
             // Attach events to collection items, as they don't bubble
             ListenToCollectionItems(favorites);
 
-            // TODO: Ensure storage is not updated more than once when a number of items are changed in close succession
-
             isLoaded = true;
         }
 
         public static void Save()
         {
-            Debug.WriteLine("State.Save() call - {0}", isModified ? "Has Changes" : "No Changes");
+            Debug.WriteLine("State.Save() - Modify {0}", modify);
 
             // TODO: Handle concurrency
-            if (isModified)
+            if (modify != Modify.None)
             {
-                // Update in storage
-                storage[KEY_FAVORITES] = favorites.ToArray();
-                storage.Save();
+                if (modify.HasFlag(Modify.Favorites))
+                {
+                    storage[KEY_FAVORITES] = favorites.ToArray();
+                }
 
-                isModified = false;
+                // Stop any current timer
+                if (timer != null)
+                {
+                    timer.Change(Timeout.Infinite, Timeout.Infinite);
+                }
+
+                // Update in storage
+                modify = Modify.None;
+                storage.Save();
             }
         }
 
@@ -87,22 +96,36 @@ namespace DiceRoller.Models
             }
             else
             {
-                var collection = (ICollection)sender;
+                var collection = (IEnumerable)sender;
                 foreach (INotifyPropertyChanged item in collection) item.PropertyChanged += QueueSave;
             }
         }
 
         private static void QueueSave(object sender, EventArgs e)
         {
-            isModified = true;
+            // Update favorites
+            if (sender == favorites || favorites.Contains(sender))
+            {
+                modify |= Modify.Favorites;
+            }
+
+            // Start/Restart timer; for repeated updates we save once they stop
             if (timer == null)
             {
-                timer = new Timer(s => Save(), null, 1000, Timeout.Infinite);
+                timer = new Timer(s => Save(), null, TIMER_DELAY, Timeout.Infinite);
             }
             else
             {
-                timer.Change(0, Timeout.Infinite);
+                timer.Change(TIMER_DELAY, Timeout.Infinite);
             }
+        }
+
+        [Flags]
+        private enum Modify
+        {
+            None = 0,
+
+            Favorites = 1
         }
     }
 }
