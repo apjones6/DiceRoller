@@ -7,10 +7,11 @@ namespace DiceRoller.Models
     public class PoolComponent : ObservableObject
     {
         private static readonly Regex EXPRESSION_SPLITTER = new Regex("^(?<count>\\d*)(?<type>D(4|6|8|10|12|20|100))$");
+
         private readonly DiceType type;
         private int count;
 
-        public PoolComponent(DiceType type = DiceType.D6, int count = 0)
+        public PoolComponent(DiceType type, int count = 0)
         {
             this.type = type;
             this.count = count;

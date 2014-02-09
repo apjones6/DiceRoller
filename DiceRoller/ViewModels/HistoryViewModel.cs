@@ -29,7 +29,7 @@ namespace DiceRoller.ViewModels
             if (IsInDesignMode)
             {
                 results.Add(new PoolResult("6D4", "Attack"));
-                results.Add(new PoolResult("18D4", "Firestorm"));
+                results.Add(new PoolResult("18D4", "Lightning Storm"));
                 results.Add(new PoolResult("D20"));
                 results.Add(new PoolResult("D20 + 2D6"));
                 results.Add(new PoolResult("D4", "Attack"));

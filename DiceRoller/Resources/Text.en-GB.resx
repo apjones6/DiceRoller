@@ -117,31 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cancel" xml:space="preserve">
-    <value>/Assets/Images/cancel.png</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>/Assets/Images/delete.png</value>
-  </data>
-  <data name="Done" xml:space="preserve">
-    <value>/Assets/Images/check.png</value>
-  </data>
   <data name="Favorite" xml:space="preserve">
-    <value>/Assets/Images/favorite.png</value>
+    <value>favourite</value>
   </data>
-  <data name="InstantOff" xml:space="preserve">
-    <value>/Assets/Images/instant_off.png</value>
+  <data name="Favorites" xml:space="preserve">
+    <value>favourites</value>
   </data>
-  <data name="InstantOn" xml:space="preserve">
-    <value>/Assets/Images/instant_on.png</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>/Assets/Images/cancel.png</value>
-  </data>
-  <data name="Roll" xml:space="preserve">
-    <value>/Assets/Images/dice.png</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>/Assets/Images/select.png</value>
+  <data name="NoFavorites" xml:space="preserve">
+    <value>No favourites</value>
   </data>
 </root>

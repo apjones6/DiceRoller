@@ -88,6 +88,15 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string Details {
@@ -106,6 +115,51 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to favorite.
+        /// </summary>
+        public static string Favorite {
+            get {
+                return ResourceManager.GetString("Favorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to favorites.
+        /// </summary>
+        public static string Favorites {
+            get {
+                return ResourceManager.GetString("Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to history.
+        /// </summary>
+        public static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to instant.
+        /// </summary>
+        public static string Instant {
+            get {
+                return ResourceManager.GetString("Instant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No favorites.
+        /// </summary>
+        public static string NoFavorites {
+            get {
+                return ResourceManager.GetString("NoFavorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No results.
         /// </summary>
         public static string NoResults {
@@ -115,11 +169,38 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pick.
+        /// </summary>
+        public static string Pick {
+            get {
+                return ResourceManager.GetString("Pick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pick count.
         /// </summary>
         public static string PickCount {
             get {
                 return ResourceManager.GetString("PickCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pool Name.
+        /// </summary>
+        public static string PoolName {
+            get {
+                return ResourceManager.GetString("PoolName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rename.
+        /// </summary>
+        public static string Rename {
+            get {
+                return ResourceManager.GetString("Rename", resourceCulture);
             }
         }
         
@@ -147,6 +228,24 @@ namespace DiceRoller.Resources {
         public static string Roll {
             get {
                 return ResourceManager.GetString("Roll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to save changes.
+        /// </summary>
+        public static string SaveChanges {
+            get {
+                return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
             }
         }
         

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Phone.Controls;
 
-namespace DiceRoller
+namespace DiceRoller.Pages
 {
-    public partial class CountPickerPage : PhoneApplicationPage
+    public partial class CountPicker : PhoneApplicationPage
     {
-        public CountPickerPage()
+        public CountPicker()
         {
             InitializeComponent();
             DataContext = App.ViewModel.CountPicker;

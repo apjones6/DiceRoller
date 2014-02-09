@@ -2,9 +2,9 @@
 
 namespace DiceRoller.Views
 {
-    public partial class PoolEditorView : UserControl
+    public partial class PickView : UserControl
     {
-        public PoolEditorView()
+        public PickView()
         {
             InitializeComponent();
         }

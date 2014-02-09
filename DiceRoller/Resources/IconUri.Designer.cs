@@ -70,11 +70,47 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/delete.png.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Assets/Images/check.png.
         /// </summary>
         public static string Done {
             get {
                 return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/favorite.png.
+        /// </summary>
+        public static string Favorite {
+            get {
+                return ResourceManager.GetString("Favorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/instant_off.png.
+        /// </summary>
+        public static string InstantOff {
+            get {
+                return ResourceManager.GetString("InstantOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/instant_on.png.
+        /// </summary>
+        public static string InstantOn {
+            get {
+                return ResourceManager.GetString("InstantOn", resourceCulture);
             }
         }
         
@@ -88,11 +124,20 @@ namespace DiceRoller.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Assets/Images/check.png.
+        ///   Looks up a localized string similar to /Assets/Images/dice.png.
         /// </summary>
         public static string Roll {
             get {
                 return ResourceManager.GetString("Roll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Assets/Images/select.png.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
             }
         }
     }

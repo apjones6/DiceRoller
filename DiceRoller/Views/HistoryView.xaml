@@ -15,7 +15,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Name="Root">
+    Name="HistoryRoot">
 
     <UserControl.Resources>
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
@@ -31,50 +31,57 @@
             />
         <phone:LongListSelector
             ItemsSource="{Binding Results}"
-            Loaded="OnLoaded"
-            Margin="0,-10,0,0"
-            Name="LongListSelector"
+            Loaded="OnLongListSelectorLoaded"
+            Name="HistoryLongListSelector"
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}, ConverterParameter=Invert}"
             tool:TiltEffect.IsTiltEnabled="True"
             >
             <phone:LongListSelector.ItemTemplate>
                 <DataTemplate>
                     <UserControl>
-                        <Grid Margin="0,10,0,0">
+                        <Grid Margin="0,-10,0,24">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Tap">
                                     <cmd:EventToCommand
-                                        Command="{Binding Path=DataContext.TapCommand, ElementName=Root, Mode=OneWay}"
+                                        Command="{Binding Path=DataContext.TapCommand, ElementName=HistoryRoot, Mode=OneWay}"
                                         CommandParameter="{Binding}"
                                         MustToggleIsEnabledValue="True" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" MinWidth="75"/>
+                                <ColumnDefinition Width="Auto" MinWidth="100"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock
                                 Grid.Column="0"
                                 Text="{Binding Sum}"
+                                FontSize="60"
                                 Style="{StaticResource PhoneTextExtraLargeStyle}"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
+                                Margin="0,-10,0,-10"
                                 />
-                            <TextBlock
-                                Grid.Column="1"
-                                Text="{Binding DisplayName}"
-                                TextWrapping="NoWrap"
-                                Style="{StaticResource PhoneTextLargeStyle}"
-                                VerticalAlignment="Center"
-                                />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock
+                                    Style="{StaticResource PhoneTextLargeStyle}"
+                                    Text="{Binding DisplayName}"
+                                    TextWrapping="NoWrap"
+                                    Margin="0,0,0,-4"
+                                    />
+                                <TextBlock
+                                    Style="{StaticResource PhoneTextSubtleStyle}"
+                                    Text="{Binding DiceExpression}"
+                                    TextWrapping="NoWrap"
+                                    Margin="1,0,0,-6"
+                                    />
+                            </StackPanel>
                             <TextBlock
                                 Grid.Column="2"
+                                Style="{StaticResource PhoneTextSubtleStyle}"
                                 Text="{Binding Time, StringFormat=HH:mm}"
                                 TextWrapping="NoWrap"
-                                Style="{StaticResource PhoneTextSubtleStyle}"
-                                VerticalAlignment="Center"
+                                Margin="0,4,0,0"
                                 />
                         </Grid>
                     </UserControl>
