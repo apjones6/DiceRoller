@@ -42,6 +42,7 @@ namespace DiceRoller.Models
             }
 
             storage = IsolatedStorageSettings.ApplicationSettings;
+            timer = new Timer(state => Save(), null, Timeout.Infinite, Timeout.Infinite);
 
             // Load properties from storage
             favorites = new ObservableCollection<Pool>(storage.Contains(KEY_FAVORITES) ? (Pool[])storage[KEY_FAVORITES] : new Pool[0]);
@@ -60,7 +61,7 @@ namespace DiceRoller.Models
         {
             Debug.WriteLine("State.Save() - Modify {0}", modify);
 
-            // TODO: Handle concurrency
+            // TODO: Handle concurrency if we support multiple threads
             if (modify != Modify.None)
             {
                 if (modify.HasFlag(Modify.Favorites))
@@ -69,12 +70,7 @@ namespace DiceRoller.Models
                 }
 
                 // Stop any current timer
-                if (timer != null)
-                {
-                    timer.Change(Timeout.Infinite, Timeout.Infinite);
-                }
-
-                // Update in storage
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
                 modify = Modify.None;
                 storage.Save();
             }
@@ -110,14 +106,7 @@ namespace DiceRoller.Models
             }
 
             // Start/Restart timer; for repeated updates we save once they stop
-            if (timer == null)
-            {
-                timer = new Timer(s => Save(), null, TIMER_DELAY, Timeout.Infinite);
-            }
-            else
-            {
-                timer.Change(TIMER_DELAY, Timeout.Infinite);
-            }
+            timer.Change(TIMER_DELAY, Timeout.Infinite);
         }
 
         [Flags]
