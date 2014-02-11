@@ -17,6 +17,8 @@ namespace DiceRoller.ViewModels
         private readonly ICommand delete;
         private readonly RelayCommand deleteMany;
         private readonly ApplicationBarCommand instant;
+        private readonly RelayCommand moveDown;
+        private readonly RelayCommand moveUp;
         private readonly ICommand rename;
         private readonly RelayCommand select;
         private readonly List<Pool> selected;
@@ -33,6 +35,8 @@ namespace DiceRoller.ViewModels
             delete = new RelayCommand<Pool>(OnDelete);
             deleteMany = new ApplicationBarCommand(OnDelete, () => selected.Count > 0, Text.Delete, IconUri.Delete);
             instant = new ApplicationBarCommand(OnInstant, Text.Instant, IconUri.InstantOff);
+            moveDown = new ApplicationBarCommand(OnMoveDown, () => selected.Count > 0, Text.MoveDown, IconUri.MoveDown);
+            moveUp = new ApplicationBarCommand(OnMoveUp, () => selected.Count > 0, Text.MoveUp, IconUri.MoveUp);
             rename = new RelayCommand<Pool>(OnRename);
             select = new ApplicationBarCommand(OnSelect, () => !IsEmpty, Text.Select, IconUri.Select);
             selected = new List<Pool>();
@@ -154,6 +158,16 @@ namespace DiceRoller.ViewModels
             IsInstant = !isInstant;
         }
 
+        private void OnMoveDown()
+        {
+            // NOTE: Doesn't update the UI - manually bind to collection changed events in view and trigger redraw? :/
+            Pools.Move(0, 1);
+        }
+
+        private void OnMoveUp()
+        {
+        }
+
         private void OnPoolMessage(PoolMessage message)
         {
             if (message.Pool.Favorite)
@@ -193,6 +207,8 @@ namespace DiceRoller.ViewModels
             }
 
             deleteMany.RaiseCanExecuteChanged();
+            moveDown.RaiseCanExecuteChanged();
+            moveUp.RaiseCanExecuteChanged();
         }
 
         private void OnTap(Pool pool)
@@ -219,6 +235,8 @@ namespace DiceRoller.ViewModels
 
             if (isSelectMode)
             {
+                buttons.Add(moveDown);
+                buttons.Add(moveUp);
                 buttons.Add(deleteMany);
             }
             else

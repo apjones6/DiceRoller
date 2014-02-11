@@ -135,6 +135,12 @@
   <data name="InstantOn" xml:space="preserve">
     <value>/Assets/Images/instant_on.png</value>
   </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>/Assets/Images/move_down.png</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>/Assets/Images/move_up.png</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>/Assets/Images/cancel.png</value>
   </data>

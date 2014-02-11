@@ -147,6 +147,12 @@
   <data name="Instant" xml:space="preserve">
     <value>instant</value>
   </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>move down</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>move up</value>
+  </data>
   <data name="NoFavorites" xml:space="preserve">
     <value>No favorites</value>
   </data>
