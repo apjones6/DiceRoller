@@ -61,6 +61,13 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <Grid>
+                                <Image
+                                    Source="{Binding Type, StringFormat='/Assets/Images/{0}.png'}"
+                                    Stretch="None"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Opacity="0.3"
+                                    />
                                 <TextBlock
                                     Text="{Binding Type, Mode=OneTime}"
                                     FontSize="72"
