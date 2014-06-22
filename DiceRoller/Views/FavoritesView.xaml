@@ -22,6 +22,15 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush
+                ImageSource="/Assets/Images/favorites.png"
+                Opacity="0.15"
+                AlignmentX="Right"
+                AlignmentY="Bottom"
+                Stretch="Uniform"
+                />
+        </Grid.Background>
         <TextBlock
             Text="{Binding Path=Text.NoFavorites, Source={StaticResource Strings}}"
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}}"
