@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
     xmlns:c="clr-namespace:DiceRoller.Converters"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
@@ -22,6 +22,15 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush
+                ImageSource="/Assets/Images/favorites.png"
+                Opacity="0.15"
+                AlignmentX="Right"
+                AlignmentY="Bottom"
+                Stretch="Uniform"
+                />
+        </Grid.Background>
         <TextBlock
             Text="{Binding Path=Text.NoFavorites, Source={StaticResource Strings}}"
             Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibility}}"

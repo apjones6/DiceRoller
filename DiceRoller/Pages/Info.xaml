@@ -23,8 +23,17 @@
         <c:BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
         <c:JoinArrayConverter x:Key="JoinArray"/>
     </UserControl.Resources>
-    
-    <Grid Background="Transparent">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush
+                ImageSource="/Assets/Images/info.png"
+                Opacity="0.15"
+                AlignmentX="Right"
+                AlignmentY="Bottom"
+                Stretch="Uniform"
+                />
+        </Grid.Background>
 
         <Grid Margin="10,0">
 

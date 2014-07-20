@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tool="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
     xmlns:c="clr-namespace:DiceRoller.Converters"
     xmlns:vm="clr-namespace:DiceRoller.ViewModels"
     mc:Ignorable="d"
@@ -41,8 +41,8 @@
                             Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
                             Command="{Binding Path=DataContext.TapCommand, ElementName=PickRoot, Mode=OneWay}"
                             CommandParameter="{Binding Type, Mode=OneWay}"
-                            Height="210"
-                            Width="210"
+                            Height="{Binding Path=TileHeight, ElementName=PickRoot, Mode=OneWay}"
+                            Width="{Binding Path=TileWidth, ElementName=PickRoot, Mode=OneWay}"
                             tool:TiltEffect.IsTiltEnabled="True"
                             Margin="12,0,0,12">
                             <Button.Template>
@@ -61,6 +61,13 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <Grid>
+                                <Image
+                                    Source="{Binding Type, StringFormat='/Assets/Images/{0}.png'}"
+                                    Stretch="None"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Opacity="0.3"
+                                    />
                                 <TextBlock
                                     Text="{Binding Type, Mode=OneTime}"
                                     FontSize="72"
