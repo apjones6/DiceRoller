@@ -24,6 +24,7 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
  - Updated application icon (all locations)
  - Updated dice icons in pick view
  - Added watermarks to Favourites, History and Results views
+ - Fix landscape pick tile size
  - Updated dependencies
 
 ### **Version 2.1.1** - 9 February 2014

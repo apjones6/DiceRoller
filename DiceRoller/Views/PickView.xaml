@@ -41,8 +41,8 @@
                             Background="{Binding Count, Converter={StaticResource ActiveBrushWhenPositive}}"
                             Command="{Binding Path=DataContext.TapCommand, ElementName=PickRoot, Mode=OneWay}"
                             CommandParameter="{Binding Type, Mode=OneWay}"
-                            Height="210"
-                            Width="210"
+                            Height="{Binding Path=TileHeight, ElementName=PickRoot, Mode=OneWay}"
+                            Width="{Binding Path=TileWidth, ElementName=PickRoot, Mode=OneWay}"
                             tool:TiltEffect.IsTiltEnabled="True"
                             Margin="12,0,0,12">
                             <Button.Template>
