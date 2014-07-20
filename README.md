@@ -23,7 +23,7 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
 
  - Updated dice icons in pick view
  - Added watermarks to Favourites, History and Results views
- - Updated MVVM Light version
+ - Updated dependencies
 
 ### **Version 2.1.1** - 9 February 2014
 
