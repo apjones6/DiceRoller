@@ -21,6 +21,7 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
 
 ### In Development
 
+ - Updated application icon (all locations)
  - Updated dice icons in pick view
  - Added watermarks to Favourites, History and Results views
  - Updated dependencies
