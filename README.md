@@ -19,7 +19,7 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
 
 ## Version History ##
 
-### In Development
+### **Version 2.2.0** - 20 July 2014
 
  - Updated application icon (all locations)
  - Updated dice icons in pick view
