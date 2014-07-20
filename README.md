@@ -19,6 +19,10 @@ This project uses the development model set out in http://nvie.com/posts/a-succe
 
 ## Version History ##
 
+### **Version 2.2.1** - 20 July 2014
+
+ - Fix manifest version to correctly match application version
+
 ### **Version 2.2.0** - 20 July 2014
 
  - Updated application icon (all locations)
